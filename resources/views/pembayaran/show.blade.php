@@ -446,7 +446,7 @@
                                 <td class="text-right" style="font-weight: bold">
                                     @if (!empty($jmlmutasi))
                                     <a href="#" class="editmutasi" data-jenisbiaya="{{$d->jenisbayar}} {{$jenjang}} {{$ta}}" data-kodebiaya="{{$d->kodebiaya}}" data-idjenisbayar="{{$d->id_jenisbayar}}" data-jumlahmutasi="
-                                        {{number_format($jmlmutasi,'0','','.')}}" data-norencanaspp="{{ $d->no_rencana_spp }}">{{number_format($jmlmutasi,'0','','.')}}</a>
+                                        {{number_format($jmlmutasi,'0','','.')}}" data-norencanaspp="{{ $d->no_rencana_spp }}" data-norencanaum="{{ $d->no_rencana_um }}">{{number_format($jmlmutasi,'0','','.')}}</a>
                                     @else
                                     <a href=" #" class="btn btn-sm btn-primary inputmutasi" data-jenisbiaya="{{$d->jenisbayar}} {{$jenjang}} {{$ta}}" data-kodebiaya="{{$d->kodebiaya}}" data-idjenisbayar="{{$d->id_jenisbayar}}" data-norencanaspp="{{ $d->no_rencana_spp }}" data-norencanaum="{{ $d->no_rencana_um }}"><i class=" fa fa-book"></i></a>
                                     @endif
@@ -541,91 +541,90 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table table-striped table-hover mb-3" style="font-size:11px">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th colspan="4">SPP BULANAN</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Bulan</th>
+                                        <th>Tagihan</th>
+                                        <th>Bayar</th>
+                                        <th>Tunggakan</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="loadspp"></tbody>
 
-                <div class="col-md-3">
-                    <table class="table table-striped table-hover mb-3" style="font-size:11px">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th colspan="4">SPP BULANAN</th>
-                            </tr>
-                            <tr>
-                                <th>Bulan</th>
-                                <th>Tagihan</th>
-                                <th>Bayar</th>
-                                <th>Tunggakan</th>
-                            </tr>
-                        </thead>
-                        <tbody id="loadspp"></tbody>
+                            </table>
 
-                    </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-striped table-hover mb-3" style="font-size:11px">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th colspan="4">SPP ASRAMA</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Bulan</th>
+                                        <th>Tagihan</th>
+                                        <th>Bayar</th>
+                                        <th>Tunggakan</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="loadsppasrama"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-striped table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th colspan="4">Histori Pembayaran</th>
+                                        <th><a href="#" style="float: right;" class="btn btn-primary bayar"><i class="fa fa-money mr-3"></i>Bayar</a>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th>No. Transaksi</th>
+                                        <th>Tanggal</th>
+                                        <th style="text-align: right">Jumlah</th>
+                                        <th>Petugas</th>
+                                        <th></th>
 
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($historibayar as $d)
+                                    <tr>
+                                        <td>{{$d->no_transaksi}}</td>
+                                        <td>{{ date("d-m-Y", strtotime($d->tgl_transaksi)) }}</td>
+                                        <td style="text-align: right">{{ number_format($d->totalbayar,'0','','.')}}</td>
+                                        <td>{{$d->name}}</td>
+
+                                        <td>
+                                            <a href="/cetakkwitansi/{{$d->no_transaksi}}" target="_blank" class="btn btn-sm btn-primary"><i class="fa fa-print"></i></a>
+                                            <a href="/pembayaran/{{$d->no_transaksi}}/{{$pembayaran->no_pendaftaran}}/hapus" class="btn btn-sm btn-danger" onclick="confirmation(event)"><i class="fa fa-trash-o"></i></a>
+                                            <a href="#" class="btn btn-success btn-sm detail" data-notransaksi="{{$d->no_transaksi}}">Detail</a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-3">
-                    <table class="table table-striped table-hover mb-3" style="font-size:11px">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th colspan="4">SPP ASRAMA</th>
-                            </tr>
-                            <tr>
-                                <th>Bulan</th>
-                                <th>Tagihan</th>
-                                <th>Bayar</th>
-                                <th>Tunggakan</th>
-                            </tr>
-                        </thead>
-                        <tbody id="loadsppasrama"></tbody>
-                    </table>
-                </div>
+
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-striped table-hover">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th colspan="6">Histori Pembayaran</th>
-                                <th><a href="#" style="float: right;" class="btn btn-primary bayar"><i class="fa fa-money mr-3"></i>Bayar</a>
-                                </th>
-                            </tr>
-                            <tr>
-                                <th>No. Transaksi</th>
-                                <th>Tanggal Bayar</th>
-                                <th style="text-align: right">Jumlah Bayar</th>
-                                <th>Petugas</th>
-                                <th>Status</th>
-                                <th>Dibuat</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($historibayar as $d)
-                            <tr>
-                                <td>{{$d->no_transaksi}}</td>
-                                <td>{{ date("d-m-Y", strtotime($d->tgl_transaksi)) }}</td>
-                                <td style="text-align: right">{{ number_format($d->totalbayar,'0','','.')}}</td>
-                                <td>{{$d->name}}</td>
-                                <td>
-                                    @if ($d->status_transaksi==1)
-                                    <span class="badge bg-primary">Mutasi Pindahan Manual</span>
-                                    @endif
-                                </td>
-                                <td>{{$d->created_at}}</td>
-                                <td>
-                                    <a href="/cetakkwitansi/{{$d->no_transaksi}}" class="btn btn-sm btn-primary"><i class="fa fa-print"></i></a>
-                                    <a href="/pembayaran/{{$d->no_transaksi}}/{{$pembayaran->no_pendaftaran}}/hapus" class="btn btn-sm btn-danger" onclick="confirmation(event)"><i class="fa fa-trash-o"></i></a>
-                                    <a href="#" class="btn btn-success btn-sm detail" data-notransaksi="{{$d->no_transaksi}}">Detail</a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
 
 <div class="modal modal-blur fade" id="modal-bayar" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="max-width: 860px">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Bayar</h5>
@@ -1009,7 +1008,7 @@
         function loadbayar() {
             var id_jenisbayar = $("#id_jenisbayar").val();
             //alert(id_jenisbayar);
-            if (id_jenisbayar == "11") {
+            if (id_jenisbayar == "11" || id_jenisbayar == "39") {
                 $("#ppdb").hide();
                 $("#spp").show();
             } else {
@@ -1037,6 +1036,16 @@
             });
         }
 
+
+        $("#bulanspp").change(function() {
+            var id_jenisbayar = $("#id_jenisbayar").val();
+            if (id_jenisbayar == 11) {
+                loadbulanspp();
+            } else {
+                loadbulanum();
+            }
+        });
+
         function loadbulanspp() {
             var mulaispp = $("#mulaispp").val();
             //alert(mulaispp);
@@ -1055,6 +1064,29 @@
                 , success: function(respond) {
                     $("#bulanspp").html(respond);
                     loadrencanaspp();
+                    console.log(respond);
+                }
+            });
+        }
+
+        function loadbulanum() {
+            var mulaispp = $("#mulaispp").val();
+            //alert(mulaispp);
+            var kodebiaya = $("#kodebiaya").val();
+            var no_pendaftaran = "{{$pembayaran->no_pendaftaran}}";
+            $.ajax({
+                type: 'POST'
+                , url: '/loaddata/getoptionbulanum'
+                , data: {
+                    _token: "{{ csrf_token() }}"
+                    , mulaispp: mulaispp
+                    , kodebiaya: kodebiaya
+                    , no_pendaftaran: no_pendaftaran
+                }
+                , cache: false
+                , success: function(respond) {
+                    $("#bulanspp").html(respond);
+                    loadrencanaum();
                     console.log(respond);
                 }
             });
@@ -1144,6 +1176,35 @@
             });
         }
 
+        function loadrencanaum() {
+            var mulaispp = $("#mulaispp").val();
+            //alert(mulaispp);
+            var kodebiaya = $("#kodebiaya").val();
+            var no_pendaftaran = "{{$pembayaran->no_pendaftaran}}";
+            var bulanspp = $("#bulanspp").val();
+            $.ajax({
+                type: 'POST'
+                , url: '/loaddata/getrencanaum'
+                , data: {
+                    _token: "{{ csrf_token() }}"
+                    , mulaispp: mulaispp
+                    , kodebiaya: kodebiaya
+                    , no_pendaftaran: no_pendaftaran
+                    , bulanspp: bulanspp
+                }
+                , cache: false
+                , success: function(respond) {
+                    $("#jumlah_spp").val(respond);
+                    $("#wajib_bayar").val(respond);
+                    $("#sisabayar").text("");
+                    console.log(respond);
+                    if (respond == 0) {
+                        swal("Oops", "Silahkan Generate Uang Makan Terlebih Dahulu !", "warning")
+                    }
+                }
+            });
+        }
+
         $("#id_jenisbayar").change(function(e) {
             e.preventDefault();
             loadbayar();
@@ -1173,6 +1234,10 @@
                         $("#jumlah_spp").focus();
                         loadbulanspp();
 
+                    } else if (id_jenisbayar == 39) {
+                        $("#jumlah_spp").focus();
+                        loadbulanum();
+
                     } else {
                         $("#jumlah_bayar").focus();
                         $("#wajib_bayar").val(respond);
@@ -1201,7 +1266,7 @@
             var bulanspp = $("#bulanspp").val();
             var wajib_bayar = $("#wajib_bayar").val();
             var jumlah = 0;
-            if (id_jenisbayar == "11") {
+            if (id_jenisbayar == "11" || id_jenisbayar == "39") {
                 jumlah = jumlah_spp;
             } else {
                 jumlah = jumlah_bayar;
@@ -1240,6 +1305,8 @@
                         }
                         if (id_jenisbayar == "11") {
                             loadbulanspp();
+                        } else if (id_jenisbayar == "39") {
+                            loadbulanum();
                         }
                         $("#jumlah_bayar").val("");
                         $("#jumlah_bayar").focus();
@@ -1370,6 +1437,7 @@
             var id_jenisbayar = $(this).attr("data-idjenisbayar");
             var jumlah_mutasi = $(this).attr("data-jumlahmutasi");
             var no_rencana_spp = $(this).attr("data-norencanaspp");
+            var no_rencana_um = $(this).attr("data-norencanaum");
             if (id_jenisbayar == 11) {
                 if (no_rencana_spp == "") {
                     alert("Oops", "Silahkan Generate SPP Terlebih Dahulu", "warning");
@@ -1380,6 +1448,24 @@
                         , data: {
                             _token: "{{ csrf_token() }}"
                             , no_rencana_spp: no_rencana_spp
+                        }
+                        , cache: false
+                        , success: function(respond) {
+                            $("#modal-inputmutasispp").modal("show");
+                            $("#loadinputmutasispp").html(respond);
+                        }
+                    });
+                }
+            } else if (id_jenisbayar == 39) {
+                if (no_rencana_um == "") {
+                    alert("Oops", "Silahkan Generate Uang Makan Terlebih Dahulu", "warning");
+                } else {
+                    $.ajax({
+                        type: 'POST'
+                        , url: '/inputmutasium'
+                        , data: {
+                            _token: "{{ csrf_token() }}"
+                            , no_rencana_um: no_rencana_um
                         }
                         , cache: false
                         , success: function(respond) {

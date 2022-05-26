@@ -56,8 +56,9 @@ class LoaddataController extends Controller
             ->join('jenisbayar', 'db.id_jenisbayar', '=', 'jenisbayar.id')
             ->join('rincian_biaya_siswa', 'db.kodebiaya', '=', 'rincian_biaya_siswa.kodebiaya')
             ->where('no_pendaftaran', $no_pendaftaran)
-            ->orderBy('db.id_jenisbayar', 'asc')
-            ->orderBy('tahunakademik', 'asc')
+            // ->orderBy('tahunakademik', 'asc')
+            // ->orderBy('biaya.jenjang', 'asc')
+            ->orderBy('no_urut', 'asc')
             ->get();
         print("<option value=''>Pilih Jenis Biaya</option>");
         foreach ($biaya as $d) {
@@ -74,8 +75,7 @@ class LoaddataController extends Controller
             }
 
 
-
-            if ($d->id_jenisbayar == '11' || $d->id_jenisbayar == '1' || $d->jenisbayar == 'PAS' || $d->jenisbayar == 'PAT' || $d->id_jenisbayar == '25') {
+            if ($d->id_jenisbayar == '11' || $d->id_jenisbayar == '1' || $d->jenisbayar == 'PAS' || $d->jenisbayar == 'PAT' || $d->id_jenisbayar == '25' || $d->id_jenisbayar == '39') {
                 $value = $d->jenisbayar . " " . $jenjang . " " . $d->tahunakademik;
             } else {
                 $value = $d->jenisbayar;
@@ -294,6 +294,94 @@ class LoaddataController extends Controller
         }
     }
 
+
+
+
+    function getoptionbulanum(Request $request)
+    {
+        $namabulan = ["", "Januari", "Februaru", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        $mulaispp = $request->mulaispp;
+        $no_pendaftaran = $request->no_pendaftaran;
+        $kodebiaya = $request->kodebiaya;
+        $cek_bayartemp = DB::table('tmp_bayar')
+            ->select('tmp_bayar.no_pendaftaran', 'tmp_bayar.kodebiaya', 'tmp_bayar.ket', DB::raw('(IFNULL(SUM(jumlah_bayar),0) + IFNULL(totalhb,0)) AS totalbayar'), 'totalrencana', 'totalhb')
+            ->leftjoin(
+                DB::raw('(SELECT no_pendaftaran,kodebiaya,bulan, jumlah as totalrencana
+            FROM rencana_uangmakan_detail
+            INNER JOIN rencana_uangmakan ON rencana_uangmakan_detail.no_rencana_um = rencana_uangmakan.no_rencana_um
+            ) rencanaum'),
+                function ($join) {
+                    $join->on('tmp_bayar.no_pendaftaran', '=', 'rencanaum.no_pendaftaran');
+                    $join->on('tmp_bayar.ket', '=', 'rencanaum.bulan');
+                    $join->on('tmp_bayar.kodebiaya', '=', 'rencanaum.kodebiaya');
+                }
+            )
+
+            ->leftjoin(
+                DB::raw('(SELECT no_pendaftaran,kodebiaya,ket,  SUM( jumlah_bayar ) AS totalhb
+            FROM historibayar_detail
+            INNER JOIN historibayar ON historibayar_detail.no_transaksi = historibayar.no_transaksi
+            GROUP BY no_pendaftaran,kodebiaya,ket
+            ) hb'),
+                function ($join) {
+                    $join->on('tmp_bayar.no_pendaftaran', '=', 'hb.no_pendaftaran');
+                    $join->on('tmp_bayar.ket', '=', 'hb.ket');
+                    $join->on('tmp_bayar.kodebiaya', '=', 'hb.kodebiaya');
+                }
+            )
+
+            ->where('tmp_bayar.no_pendaftaran', $no_pendaftaran)
+            ->where('tmp_bayar.kodebiaya', $kodebiaya)
+            ->where('id_jenisbayar', '39')
+            ->groupBy('tmp_bayar.no_pendaftaran', 'tmp_bayar.kodebiaya', 'tmp_bayar.ket', 'totalrencana', 'totalhb')
+            ->havingRaw('(IFNULL(SUM(jumlah_bayar),0) + IFNULL(totalhb,0)) = totalrencana ')
+            ->get();
+        $cek_historibayar = DB::table('historibayar_detail')
+            ->select('historibayar.no_pendaftaran', 'historibayar_detail.kodebiaya', 'historibayar_detail.ket', DB::raw('SUM(jumlah_bayar) AS totalbayar'), 'totalrencana')
+            ->leftJoin('historibayar', 'historibayar_detail.no_transaksi', '=', 'historibayar.no_transaksi')
+            ->leftjoin(
+                DB::raw('(SELECT no_pendaftaran,kodebiaya,bulan, jumlah as totalrencana
+                FROM rencana_uangmakan_detail
+                INNER JOIN rencana_uangmakan ON rencana_uangmakan_detail.no_rencana_um = rencana_uangmakan.no_rencana_um
+                ) rencanaum'),
+                function ($join) {
+                    $join->on('historibayar.no_pendaftaran', '=', 'rencanaum.no_pendaftaran');
+                    $join->on('historibayar_detail.ket', '=', 'rencanaum.bulan');
+                    $join->on('historibayar_detail.kodebiaya', '=', 'rencanaum.kodebiaya');
+                }
+            )
+            ->where('historibayar.no_pendaftaran', $no_pendaftaran)
+            ->where('historibayar_detail.kodebiaya', $kodebiaya)
+            ->where('id_jenisbayar', '39')
+            ->groupBy('historibayar.no_pendaftaran', 'historibayar_detail.kodebiaya', 'historibayar_detail.ket', 'totalrencana')
+            ->havingRaw('SUM(jumlah_bayar) = totalrencana ')
+            ->get();
+
+
+        $tmpbayar = [];
+        $historibayar = [];
+
+        foreach ($cek_bayartemp as $c) {
+            $tmpbayar[] = $c->ket;
+        }
+
+        foreach ($cek_historibayar as $h) {
+            $historibayar[] = $h->ket;
+        }
+
+        $bulan = array_merge($tmpbayar, $historibayar);
+
+        for ($i = 1; $i <= 12; $i++) {
+            if ($mulaispp > 12) {
+                $mulaispp = 1;
+            }
+            if (!in_array($mulaispp, $bulan)) {
+                echo "<option value='$mulaispp'>$namabulan[$mulaispp]</option>";
+            }
+            $mulaispp++;
+        }
+    }
+
     //Menampilkan Data Temporary Pembayaran
     function gettmpbayar(Request $request)
     {
@@ -424,6 +512,39 @@ class LoaddataController extends Controller
         } else {
             $cekspp = DB::table('rencana_spp_detail')->where('bulan', $bulanspp)->where('no_rencana_spp', $no_rencana_spp)->first();
             echo number_format($cekspp->jumlah - $cekhistoribayar->totalbayar - $cektmpbayar->totalbayar, '0', '', '.');
+        }
+    }
+
+
+    function getrencanaum(Request $request)
+    {
+        $kodebiaya = $request->kodebiaya;
+        $no_pendaftaran = $request->no_pendaftaran;
+        $bulanspp = $request->bulanspp;
+        $cekrencanaum = DB::table('rencana_uangmakan')->where('no_pendaftaran', $no_pendaftaran)->where('kodebiaya', $kodebiaya)->first();
+        $cekhistoribayar = DB::table('historibayar_detail')
+            ->select(DB::raw('SUM(jumlah_bayar) as totalbayar'))
+            ->join('historibayar', 'historibayar_detail.no_transaksi', '=', 'historibayar.no_transaksi')
+            ->where('no_pendaftaran', $no_pendaftaran)
+            ->where('kodebiaya', $kodebiaya)
+            ->where('ket', $bulanspp)
+            ->first();
+        $cektmpbayar = DB::table('tmp_bayar')
+            ->select(DB::raw('SUM(jumlah_bayar) as totalbayar'))
+            ->where('no_pendaftaran', $no_pendaftaran)
+            ->where('kodebiaya', $kodebiaya)
+            ->where('ket', $bulanspp)
+            ->first();
+        if ($cekrencanaum == null) {
+            $no_rencana_um = "";
+        } else {
+            $no_rencana_um = $cekrencanaum->no_rencana_um;
+        }
+        if (empty($no_rencana_um)) {
+            echo "0";
+        } else {
+            $cekum = DB::table('rencana_uangmakan_detail')->where('bulan', $bulanspp)->where('no_rencana_um', $no_rencana_um)->first();
+            echo number_format($cekum->jumlah - $cekhistoribayar->totalbayar - $cektmpbayar->totalbayar, '0', '', '.');
         }
     }
 }

@@ -98,6 +98,7 @@ Route::middleware(['auth:user', 'ceklevel:admin_unit,admin'])->group(function ()
     Route::post('/loaddata/getoptionbiaya', 'LoaddataController@getoptionbiaya');
     Route::post('/loaddata/getspp', 'LoaddataController@getspp');
     Route::post('/loaddata/getoptionbulan', 'LoaddataController@getoptionbulan');
+    Route::post('/loaddata/getoptionbulanum', 'LoaddataController@getoptionbulanum');
     Route::post('/loaddata/gettmpbayar', 'LoaddataController@gettmpbayar');
     Route::post('/loaddata/getjumlahbiaya', 'LoaddataController@getjumlahbiaya');
     Route::post('/loaddata/cektmpbayar', 'LoaddataController@cektmpbayar');
@@ -105,6 +106,7 @@ Route::middleware(['auth:user', 'ceklevel:admin_unit,admin'])->group(function ()
     Route::post('/loaddata/getspptaasrama', 'LoaddataController@getspptaasrama');
     Route::post('/loaddata/getdetailtransaksi', 'LoaddataController@getdetailtransaksi');
     Route::post('/loaddata/getrencanaspp', 'LoaddataController@getrencanaspp');
+    Route::post('/loaddata/getrencanaum', 'LoaddataController@getrencanaum');
     Route::post('/loaddata/showdatasiswa', 'LoaddataController@getdatasiswa');
     Route::post('/loaddata/showdatakeluarga', 'LoaddataController@getdatakeluarga');
     //Siswa

@@ -8,7 +8,7 @@
 <link href="{{asset('assets/dist/css/tabler-payments.min.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/dist/css/tabler-vendors.min.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/dist/css/demo.min.css')}}" rel="stylesheet" />
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.css">
 
 
 
@@ -48,4 +48,5 @@
     .warnaputih {
         color: white;
     }
+
 </style>

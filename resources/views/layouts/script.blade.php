@@ -11,11 +11,9 @@
 
 
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js">
-    </scrip> <
-    script src = "https://cdn.ckeditor.com/4.16.0/basic/ckeditor.js" >
-
-</script>
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.ckeditor.com/4.16.0/basic/ckeditor.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/js/standalone/selectize.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>

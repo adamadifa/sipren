@@ -203,7 +203,7 @@ class PembayaranController extends Controller
             ->where('rincian_biaya_siswa.no_pendaftaran', $no_pendaftaran)
             ->orderBy('tahunakademik', 'asc')
             ->orderBy('biaya.jenjang', 'desc')
-            ->orderBy('db.id_jenisbayar', 'asc')
+            ->orderBy('jenisbayar.no_urut', 'asc')
 
             ->get();
 
@@ -231,7 +231,7 @@ class PembayaranController extends Controller
         $id_jenisbayar = $request->id_jenisbayar;
         $jumlah_bayar = str_replace(".", "", $request->jumlah);
         $bulanspp = $request->bulanspp;
-        if ($id_jenisbayar == "11") {
+        if ($id_jenisbayar == "11" || $id_jenisbayar == "39") {
             $cek = 0;
             $ket = $bulanspp;
         } else {
