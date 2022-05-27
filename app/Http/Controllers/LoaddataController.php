@@ -56,9 +56,9 @@ class LoaddataController extends Controller
             ->join('jenisbayar', 'db.id_jenisbayar', '=', 'jenisbayar.id')
             ->join('rincian_biaya_siswa', 'db.kodebiaya', '=', 'rincian_biaya_siswa.kodebiaya')
             ->where('no_pendaftaran', $no_pendaftaran)
-            // ->orderBy('tahunakademik', 'asc')
             // ->orderBy('biaya.jenjang', 'asc')
             ->orderBy('no_urut', 'asc')
+            ->orderBy('tahunakademik', 'asc')
             ->get();
         print("<option value=''>Pilih Jenis Biaya</option>");
         foreach ($biaya as $d) {
@@ -120,7 +120,7 @@ class LoaddataController extends Controller
         $no_pendaftaran = $request->no_pendaftaran;
         $namabulan = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
         $databiaya = DB::table('rencana_spp_detail')
-            ->select('rencana_spp.no_pendaftaran', 'rencana_spp.kodebiaya', 'bulan', 'jumlah')
+            ->select('rencana_spp.no_pendaftaran', 'rencana_spp.kodebiaya', 'bulan', 'jumlah', 'jumlah_mutasi')
             ->join('rencana_spp', 'rencana_spp_detail.no_rencana_spp', '=', 'rencana_spp.no_rencana_spp')
             ->join('biaya', 'rencana_spp.kodebiaya', 'biaya.kodebiaya')
             ->where('no_pendaftaran', $no_pendaftaran)
@@ -269,10 +269,18 @@ class LoaddataController extends Controller
             ->havingRaw('SUM(jumlah_bayar) = totalrencana ')
             ->get();
 
+        $cekmutasi = DB::table('rencana_spp_detail')
+            ->selectRaw('no_pendaftaran,kodebiaya,bulan, jumlah as totalrencana, jumlah_mutasi')
+            ->join('rencana_spp', 'rencana_spp_detail.no_rencana_spp', '=', 'rencana_spp.no_rencana_spp')
+            ->where('no_pendaftaran', $no_pendaftaran)
+            ->where('kodebiaya', $kodebiaya)
+            ->whereRaw('jumlah_mutasi = jumlah')
+            ->get();
+
 
         $tmpbayar = [];
         $historibayar = [];
-
+        $mutasi = [];
         foreach ($cek_bayartemp as $c) {
             $tmpbayar[] = $c->ket;
         }
@@ -281,7 +289,12 @@ class LoaddataController extends Controller
             $historibayar[] = $h->ket;
         }
 
-        $bulan = array_merge($tmpbayar, $historibayar);
+        foreach ($cekmutasi as $m) {
+            $mutasi[] = $m->bulan;
+        }
+
+
+        $bulan = array_merge($tmpbayar, $historibayar, $mutasi);
 
         for ($i = 1; $i <= 12; $i++) {
             if ($mulaispp > 12) {
@@ -357,9 +370,17 @@ class LoaddataController extends Controller
             ->havingRaw('SUM(jumlah_bayar) = totalrencana ')
             ->get();
 
+        $cekmutasi = DB::table('rencana_uangmakan_detail')
+            ->selectRaw('no_pendaftaran,kodebiaya,bulan, jumlah as totalrencana, jumlah_mutasi')
+            ->join('rencana_uangmakan', 'rencana_uangmakan_detail.no_rencana_um', '=', 'rencana_uangmakan.no_rencana_um')
+            ->where('no_pendaftaran', $no_pendaftaran)
+            ->where('kodebiaya', $kodebiaya)
+            ->whereRaw('jumlah_mutasi = jumlah')
+            ->get();
 
         $tmpbayar = [];
         $historibayar = [];
+        $mutasi = [];
 
         foreach ($cek_bayartemp as $c) {
             $tmpbayar[] = $c->ket;
@@ -369,7 +390,12 @@ class LoaddataController extends Controller
             $historibayar[] = $h->ket;
         }
 
-        $bulan = array_merge($tmpbayar, $historibayar);
+        foreach ($cekmutasi as $m) {
+            $mutasi[] = $m->bulan;
+        }
+
+
+        $bulan = array_merge($tmpbayar, $historibayar, $mutasi);
 
         for ($i = 1; $i <= 12; $i++) {
             if ($mulaispp > 12) {
@@ -502,16 +528,23 @@ class LoaddataController extends Controller
             ->where('kodebiaya', $kodebiaya)
             ->where('ket', $bulanspp)
             ->first();
+
         if ($cekrencanaspp == null) {
             $no_rencana_spp = "";
         } else {
             $no_rencana_spp = $cekrencanaspp->no_rencana_spp;
+            $cekmutasi = DB::table('rencana_spp_detail')
+                ->select(DB::raw('SUM(jumlah_mutasi) as totalbayar'))
+                ->where('no_rencana_spp', $no_rencana_spp)
+                ->where('bulan', $bulanspp)
+                ->first();
         }
         if (empty($no_rencana_spp)) {
-            echo "0";
+            echo "1";
         } else {
             $cekspp = DB::table('rencana_spp_detail')->where('bulan', $bulanspp)->where('no_rencana_spp', $no_rencana_spp)->first();
-            echo number_format($cekspp->jumlah - $cekhistoribayar->totalbayar - $cektmpbayar->totalbayar, '0', '', '.');
+            $sisa = $cekspp->jumlah - $cekhistoribayar->totalbayar - $cektmpbayar->totalbayar - $cekmutasi->totalbayar;
+            echo !empty($sisa) ?  number_format($sisa, '0', '', '.') : '0';
         }
     }
 
@@ -539,12 +572,18 @@ class LoaddataController extends Controller
             $no_rencana_um = "";
         } else {
             $no_rencana_um = $cekrencanaum->no_rencana_um;
+            $cekmutasi = DB::table('rencana_uangmakan_detail')
+                ->select(DB::raw('SUM(jumlah_mutasi) as totalbayar'))
+                ->where('no_rencana_um', $no_rencana_um)
+                ->where('bulan', $bulanspp)
+                ->first();
         }
         if (empty($no_rencana_um)) {
-            echo "0";
+            echo "1";
         } else {
             $cekum = DB::table('rencana_uangmakan_detail')->where('bulan', $bulanspp)->where('no_rencana_um', $no_rencana_um)->first();
-            echo number_format($cekum->jumlah - $cekhistoribayar->totalbayar - $cektmpbayar->totalbayar, '0', '', '.');
+            $sisa = $cekum->jumlah - $cekhistoribayar->totalbayar - $cektmpbayar->totalbayar - $cekmutasi->totalbayar;
+            echo !empty($sisa) ?  number_format($sisa, '0', '', '.') : '0';
         }
     }
 }

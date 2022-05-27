@@ -73,6 +73,7 @@ class PembayaranController extends Controller
     {
 
         $no_pendaftaran = Crypt::decrypt($no_pendaftaran);
+
         $pembayaran = DB::table('pendaftaran')
             ->select(
                 'pendaftaran.*',
@@ -221,7 +222,42 @@ class PembayaranController extends Controller
             ->where('no_pendaftaran', $no_pendaftaran)
             ->get();
 
-        return view('pembayaran.show', compact('pembayaran', 'namabulan', 'tahunakademik', 'ta_aktif', 'databiaya', 'historibayar'));
+        $cektingkat = DB::table('rincian_biaya_siswa')
+            ->join('biaya', 'rincian_biaya_siswa.kodebiaya', '=', 'biaya.kodebiaya')
+            ->where('no_pendaftaran', $no_pendaftaran)
+            ->where('jenjang', '!=', 'ASRAMA')
+            ->orderBy('tingkat', 'desc')
+            ->first();
+
+
+        $tingkat = $cektingkat->tingkat;
+        $jenjang = $cektingkat->jenjang;
+        if ($jenjang == "TK") {
+            if ($tingkat == 1) {
+                $tk = "TK A";
+            } else {
+                $tk = "TK B";
+            }
+        } else if ($jenjang == "SDIT") {
+            $tk = $tingkat;
+        } else if ($jenjang == "MTS") {
+            if ($tingkat == 1) {
+                $tk = "7";
+            } else if ($tingkat == 2) {
+                $tk = "8";
+            } else if ($tingkat == 3) {
+                $tk = "9";
+            }
+        } else if ($jenjang == "MA") {
+            if ($tingkat == 1) {
+                $tk = "10";
+            } else if ($tingkat == 2) {
+                $tk = "11";
+            } else if ($tingkat == 3) {
+                $tk = "12";
+            }
+        }
+        return view('pembayaran.show', compact('pembayaran', 'namabulan', 'tahunakademik', 'ta_aktif', 'databiaya', 'historibayar', 'tk'));
     }
 
     function store_bayartemp(Request $request)

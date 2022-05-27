@@ -12,7 +12,7 @@
                 <h3 class="m-0 mb-1"><a href="#">{{$pembayaran->nama_lengkap}}</a></h3>
                 <div class="text-muted">{{$pembayaran->nisn}}</div>
                 <div class="mt-3">
-                    <span class="badge bg-green-lt">Kelas 7</span>
+                    <span class="badge bg-green-lt">Kelas {{ $tk }}</span>
                 </div>
             </div>
             <div class="d-flex">
@@ -1040,9 +1040,9 @@
         $("#bulanspp").change(function() {
             var id_jenisbayar = $("#id_jenisbayar").val();
             if (id_jenisbayar == 11) {
-                loadbulanspp();
+                loadrencanaspp();
             } else {
-                loadbulanum();
+                loadrencanaum();
             }
         });
 
@@ -1165,12 +1165,14 @@
                 }
                 , cache: false
                 , success: function(respond) {
-                    $("#jumlah_spp").val(respond);
-                    $("#wajib_bayar").val(respond);
-                    $("#sisabayar").text("");
+
                     console.log(respond);
-                    if (respond == 0) {
+                    if (respond == 1) {
                         swal("Oops", "Silahkan Generate SPP Terlebih Dahulu !", "warning")
+                    } else {
+                        $("#jumlah_spp").val(respond);
+                        $("#wajib_bayar").val(respond);
+                        $("#sisabayar").text("");
                     }
                 }
             });
@@ -1194,13 +1196,15 @@
                 }
                 , cache: false
                 , success: function(respond) {
-                    $("#jumlah_spp").val(respond);
-                    $("#wajib_bayar").val(respond);
-                    $("#sisabayar").text("");
-                    console.log(respond);
-                    if (respond == 0) {
+
+                    if (respond == 1) {
                         swal("Oops", "Silahkan Generate Uang Makan Terlebih Dahulu !", "warning")
+                    } else {
+                        $("#jumlah_spp").val(respond);
+                        $("#wajib_bayar").val(respond);
+                        $("#sisabayar").text("");
                     }
+                    console.log(respond);
                 }
             });
         }
