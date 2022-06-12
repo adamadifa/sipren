@@ -1,12 +1,32 @@
-<link rel="stylesheet" href="{{asset('assets/mycss/table.css')}}">
-<div class="page">
-    <div class="subpage">
+<html>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.3.0/paper.css">
+<title>Cetak Absensi Karyawan</title>
+<style>
+    @page {
+        size: F4 landscape;
+        margin: 10mm 5mm 10mm 5mm;
+
+    }
+
+    .sheet {
+        overflow: visible;
+        height: auto !important;
+        width: 100% !important
+    }
+
+    body {
+        font-family: 'Poppins'
+    }
+
+</style>
+<link rel=" stylesheet" href="{{asset('assets/mycss/table.css')}}">
+<body class="A4 landscape">
+    <section class="sheet padding-10mm">
         <table border="0" width="100%" style="text-align: left;">
             <thead>
                 <tr>
-                    <th align="center" width="13%">
-                        <img src="{{asset('assets/static/logopersis.png')}}" alt=""
-                            style="width:auto; height:auto; max-width:70px; max-height:70px; display:block;"></th>
+                    <th align="center" width="5%">
+                        <img src="{{asset('assets/static/logopersis.png')}}" alt="" style="width:auto; height:auto; max-width:70px; max-height:70px; display:block;"></th>
                     <th>
                         <table border="0">
                             <thead>
@@ -29,7 +49,7 @@
                 <td>Nama Karyawan</td>
                 <td>:</td>
                 <td style="font-weight: bold">{{$karyawan->nama_lengkap}}</td>
-            </tr>
+        </tr>
         </table> --}}
         <table class="datatable3" style="margin-top:20px;">
             <thead>
@@ -50,17 +70,21 @@
                 @foreach ($absensi as $d)
                 <tr>
                     <td>{{$d->npp}}</td>
-                    <td>{{$d->nama_lengkap}}</td>
+                    <td>{{ucwords(strtolower($d->nama_lengkap))}}</td>
                     @php
-                         $total = 0;
+                    $total = 0;
                     @endphp
                     @for ($i = 1; $i <= 31; $i++) <td align="center" style="font-weight:bold">
                         @php
                         $tgl= "tgl_".$i;
                         $check = $d->$tgl;
                         if(!empty($check)){
-                        echo "✓";
-                            $total += 1;
+                        // echo $check;
+                        $jam = explode("-",$check);
+                        $jam_masuk = date("H:i",strtotime($jam[0]));
+                        $jam_pulang = date("H:i",strtotime($jam[1]));
+                        echo $jam_masuk."<br>".$jam_pulang;
+                        $total += 1;
                         }
                         @endphp
                         </td>
@@ -75,90 +99,6 @@
 
 
 
-    </div>
-</div>
+    </section>
 </body>
-
 </html>
-
-<style type="text/css">
-    .row {
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-
-    .data {
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-
-    .wrapper-header {
-        width: 100%;
-        font-size: 72%;
-    }
-
-    .left {
-        content: " ";
-        float: left;
-    }
-
-    .right {
-        float: right;
-        width: 50%;
-    }
-
-    .wrapper-header .table {
-        width: 100%;
-    }
-
-    #btm td {
-        border-bottom: 1px solid black;
-    }
-
-    body {
-        font-family: Arial;
-        font-style: bold;
-        margin: 0;
-        background-color: #404040;
-    }
-
-    .page {
-        width: 330mm;
-        min-height: 215mm;
-        padding: 1mm;
-        margin: 5mm auto;
-        background: white;
-    }
-
-    .subpage {
-        margin-left: 5mm;
-        margin-right: 5mm;
-        margin-top: 5mm;
-        margin-bottom: 5mm;
-    }
-
-    table td {
-        vertical-align: top;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-    }
-
-    @page {
-        size: A4 landscape;
-        margin: 0;
-
-    }
-
-    @media print {
-        .page {
-            margin: 0;
-            border: initial;
-            border-radius: initial;
-            width: initial;
-            min-height: initial;
-            box-shadow: initial;
-            background: initial;
-            page-break-after: always;
-        }
-    }
-</style>
