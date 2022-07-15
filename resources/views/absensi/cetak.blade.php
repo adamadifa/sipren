@@ -59,6 +59,7 @@
                     <th colspan="31">Tanggal</th>
                     <th rowspan="2">WH</th>
                     <th rowspan="2">TH</th>
+                    <th rowspan="2" style="background: red">TL</th>
                     <th rowspan="2">%</th>
                 </tr>
                 <tr style="font-size:12px">
@@ -91,6 +92,7 @@
                         @endfor
                         <td></td>
                         <td style="text-align: center; font-weight:bold">{{$total}}</td>
+                        <td></td>
                         <td></td>
                 </tr>
                 @endforeach
