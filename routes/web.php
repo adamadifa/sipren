@@ -41,11 +41,12 @@ Route::post('/kota/getkota', 'KotaController@getkota');
 Route::post('/kecamatan/getkecamatan', 'KecamatanController@getkecamatan');
 Route::post('/kelurahan/getkelurahan', 'KelurahanController@getkelurahan');
 
+Route::get('/absensi/map', 'AbsensiController@map');
+Route::get('/absensi/karyawan', 'AbsensiController@absenkaryawan');
 Route::middleware(['auth:user', 'ceklevel:admin_unit,admin'])->group(function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     //Absensi
-    Route::get('/absensi/map', 'AbsensiController@map');
-    Route::get('/absensi/karyawan', 'AbsensiController@absenkaryawan');
+
     Route::get('/absensi/laporan', 'AbsensiController@laporan');
     Route::post('/absensi/cetak', 'AbsensiController@cetak');
     //Load Data
