@@ -43,6 +43,7 @@ Route::post('/kelurahan/getkelurahan', 'KelurahanController@getkelurahan');
 
 Route::get('/absensi/map', 'AbsensiController@map');
 Route::get('/absensi/karyawan', 'AbsensiController@absenkaryawan');
+Route::post('/loaddata/getabsensiharian', 'LoaddataController@getabsensiharian');
 Route::middleware(['auth:user', 'ceklevel:admin_unit,admin'])->group(function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     //Absensi
@@ -51,7 +52,7 @@ Route::middleware(['auth:user', 'ceklevel:admin_unit,admin'])->group(function ()
     Route::post('/absensi/cetak', 'AbsensiController@cetak');
     //Load Data
     Route::post('/loaddata/getabsensikaryawan', 'LoaddataController@getabsensikaryawan');
-    Route::post('/loaddata/getabsensiharian', 'LoaddataController@getabsensiharian');
+
     Route::post('/loaddata/map_frame', 'LoaddataController@map_frame');
     //Ibadah Harian
     Route::get('/checkingibadah/laporan', 'CheckingibadahController@laporan');
@@ -139,6 +140,7 @@ Route::middleware(['auth:user', 'ceklevel:admin'])->group(function () {
     Route::get('/unit', 'UnitController@index');
 
     Route::get('/karyawan/{npp}/detailabsensi', 'KaryawanController@detailabsensi');
+
     //Jenis Bayar
     Route::get('/jenisbayar', 'JenisbayarController@index');
     Route::get('/jenisbayar/create', 'JenisbayarController@create');
