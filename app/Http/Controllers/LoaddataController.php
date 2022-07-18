@@ -465,6 +465,8 @@ class LoaddataController extends Controller
     {
         $tanggal = $request->tanggal;
         $unit = Auth::guard('user')->user()->id_unit;
+
+        $unit !=  null ? $unit : 9;
         // if($unit == "PST"){
         //     $unit = "PESANTREN";
         // }else{
