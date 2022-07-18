@@ -45,6 +45,7 @@ Route::get('/absensi/map', 'AbsensiController@map');
 Route::get('/absensi/karyawan', 'AbsensiController@absenkaryawan');
 Route::get('/absensi/karyawanlist', 'AbsensiController@absenkaryawanlist');
 Route::post('/loaddata/getabsensiharian', 'LoaddataController@getabsensiharian');
+Route::post('/loaddata/getabsensiharianall', 'LoaddataController@getabsensiharianall');
 Route::middleware(['auth:user', 'ceklevel:admin_unit,admin'])->group(function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     //Absensi
