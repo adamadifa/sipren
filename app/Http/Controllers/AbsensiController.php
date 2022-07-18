@@ -20,6 +20,14 @@ class AbsensiController extends Controller
         return view('absensi.karyawan');
     }
 
+
+
+    function absenkaryawanlist()
+    {
+        return view('absensi.karyawanlist');
+    }
+
+
     function laporan()
     {
         $tahunmulai = 2021;

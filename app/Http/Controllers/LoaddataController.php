@@ -464,9 +464,47 @@ class LoaddataController extends Controller
     function getabsensiharian(Request $request)
     {
         $tanggal = $request->tanggal;
-        $unit = Auth::guard('user')->user()->id_unit != null ? Auth::guard('user')->user()->id_unit  : 9;
+        $unit = Auth::guard('user')->user()->id_unit;
+        // if($unit == "PST"){
+        //     $unit = "PESANTREN";
+        // }else{
+        //     $unit = $unit;
+        // }
+        if ($unit == 9) {
+            $absensi = DB::table('presence')
+                ->select('presence.*', 'nama_lengkap')
+                ->join('karyawan', 'presence.npp', '=', 'karyawan.npp')
+                ->join('unit', 'karyawan.id_unit', '=', 'unit.id')
+                ->where('presence_date', $tanggal)
+                ->get();
+        } else {
+            $absensi = DB::table('presence')
+                ->select('presence.*', 'nama_lengkap')
+                ->join('karyawan', 'presence.npp', '=', 'karyawan.npp')
+                ->join('unit', 'karyawan.id_unit', '=', 'unit.id')
+                ->where('presence_date', $tanggal)
+                ->where('karyawan.id_unit', $unit)
+                ->get();
+        }
 
-        //$unit !=  null ? $unit : 9;
+        $rekap = DB::table('presence')
+            ->select('nama_unit', DB::raw('COUNT(presence_id) as jmlhadir'))
+            ->join('karyawan', 'presence.npp', '=', 'karyawan.npp')
+            ->join('unit', 'karyawan.id_unit', '=', 'unit.id')
+            ->where('presence_date', $tanggal)
+            ->groupBy('nama_unit')
+            ->orderBy('karyawan.id_unit', 'asc')
+            ->get();
+
+
+        //dd($rekap);
+        return view('loaddata.getabsensiharian', compact('absensi', 'rekap'));
+    }
+
+    function getabsensiharianall(Request $request)
+    {
+        $tanggal = $request->tanggal;
+        $unit = 9;
         // if($unit == "PST"){
         //     $unit = "PESANTREN";
         // }else{
