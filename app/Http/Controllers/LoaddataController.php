@@ -513,8 +513,8 @@ class LoaddataController extends Controller
         if ($unit == 9) {
             $absensi = DB::table('presence')
                 ->select('presence.*', 'nama_lengkap')
-                ->join('karyawan', 'presence.npp', '=', 'karyawan.npp')
-                ->join('unit', 'karyawan.id_unit', '=', 'unit.id')
+                ->leftjoin('karyawan', 'presence.npp', '=', 'karyawan.npp')
+                ->leftjoin('unit', 'karyawan.id_unit', '=', 'unit.id')
                 ->where('presence_date', $tanggal)
                 ->get();
         } else {
