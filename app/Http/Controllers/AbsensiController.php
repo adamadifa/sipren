@@ -48,7 +48,7 @@ class AbsensiController extends Controller
         $namabulan = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
         $bln = $namabulan[$bulan];
         if (empty($id_unit)) {
-            $absensi = DB::table("karyawand")
+            $absensi = DB::table("karyawan")
                 ->select(
                     'karyawan.*',
                     'tgl_1',
