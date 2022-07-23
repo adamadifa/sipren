@@ -82,8 +82,8 @@
                         if(!empty($check)){
                         // echo $check;
                         $jam = explode("-",$check);
-                        $jam_masuk = date("H:i",strtotime($jam[0]));
-                        $jam_pulang = date("H:i",strtotime($jam[1]));
+                        $jam_masuk = date("H:i:s",strtotime($jam[0]));
+                        $jam_pulang = date("H:i:s",strtotime($jam[1]));
                         if($jam_masuk == "00:00:00" || $jam_pulang=="00:00:00"){
                         $color = "red";
                         }else{
