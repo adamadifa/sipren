@@ -84,7 +84,13 @@
                         $jam = explode("-",$check);
                         $jam_masuk = date("H:i",strtotime($jam[0]));
                         $jam_pulang = date("H:i",strtotime($jam[1]));
-                        echo $jam_masuk."<br>".$jam_pulang;
+                        if($jam_masuk == "00:00:00" || $jam_pulang=="00:00:00"){
+                        $color = "red";
+                        }else{
+                        $color ="";
+                        }
+
+                        echo "<span style='color:$color'>".$jam_masuk."<br>".$jam_pulang."</span>";
                         $total += 1;
                         }
                         @endphp
