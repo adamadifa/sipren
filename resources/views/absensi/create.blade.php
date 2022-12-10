@@ -138,8 +138,8 @@
             })
 
         Webcam.set('constraints', {
-            width: 590
-            , height: 460
+            width: 530
+            , height: 400
             , image_format: 'jpeg'
             , jpeg_quality: 80
             , sourceId: cameras[0]
