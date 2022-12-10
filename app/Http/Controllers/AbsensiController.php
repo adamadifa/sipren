@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AbsensiController extends Controller
 {
@@ -212,5 +214,78 @@ class AbsensiController extends Controller
 
         //dd($checklist);
         return view("absensi.cetak", compact('absensi', 'unit', 'bln', 'tahun'));
+    }
+
+
+    public function create()
+    {
+        $npp = Auth::user()->npp;
+        $hariini = date("Y-m-d");
+        $cek = DB::table('presence')->where('npp', $npp)->where('presence_date', $hariini)->count();
+        return view('absensi.create', compact('cek'));
+    }
+
+    public function store(Request $request)
+    {
+        $npp = Auth::user()->npp;
+        $hariini = date("Y-m-d");
+
+        $cek = DB::table('presence')->where('npp', $npp)->where('presence_date', $hariini)->count();
+
+        if ($cek > 0) {
+            $inout = "out";
+        } else {
+            $inout = "in";
+        }
+
+        $format = $npp . "-" . $hariini . "-" . $inout;
+        $latitude = $request->latitude;
+        $img = $request->image;
+        $folderPath = "uploads/absensi/karyawan/";
+
+        $image_parts = explode(";base64,", $img);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+
+        $image_base64 = base64_decode($image_parts[1]);
+        $fileName =  $format . '.png';
+
+        $file = $folderPath . $fileName;
+        $time = date("H:i:s");
+
+        $file = $folderPath . $fileName;
+        if ($cek == 0) {
+            $data = [
+                'npp' => $npp,
+                'presence_date' => $hariini,
+                'time_in' => $time,
+                'picture_in' => $fileName,
+                'present_id' => 1,
+                'presence_address' => $latitude
+            ];
+
+            $simpan = DB::table('presence')->insert($data);
+            if ($simpan) {
+                if (Storage::exists($file)) {
+                    Storage::delete($file);
+                }
+                Storage::put($file, $image_base64);
+                echo 'success';
+            }
+        } else {
+            $data = [
+                'time_out' => $time,
+                'picture_out' => $fileName,
+            ];
+
+            $update = DB::table('presence')->where('npp', $npp)->where('presence_date', $hariini)->update($data);
+            if ($update) {
+                if (Storage::exists($file)) {
+                    Storage::delete($file);
+                }
+                Storage::put($file, $image_base64);
+                echo 'success';
+            }
+        }
     }
 }
