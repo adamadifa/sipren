@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\MobileController;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('Auth.login');
+    return view('mobile.login');
 });
 Route::get('/phpinfo', function () {
     phpinfo();
@@ -30,8 +32,13 @@ Route::get('/daftar', function () {
     return view('Auth.register');
 })->name('daftar');
 
+
+Route::get('/mobile', [MobileController::class, 'index']);
+
+
 Route::get('/listisianibadah', 'CheckingibadahController@listpengisianibadahharian');
 Route::post('/postlogin', 'LoginController@postlogin')->name('postlogin');
+Route::post('/loginmobile', 'LoginController@postloginmobile');
 Route::post('/postregister', 'LoginController@postregister')->name('postregister');
 Route::get('/logout', 'LoginController@postlogout')->name('logout');
 Route::get('/form-pendaftaran', 'PendaftaranController@formpsb');
@@ -47,6 +54,7 @@ Route::get('/absensi/karyawanlist', 'AbsensiController@absenkaryawanlist');
 Route::post('/loaddata/getabsensiharian', 'LoaddataController@getabsensiharian');
 Route::post('/loaddata/getabsensiharianall', 'LoaddataController@getabsensiharianall');
 Route::middleware(['auth:user', 'ceklevel:admin_unit,admin'])->group(function () {
+
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     //Absensi
 
@@ -162,6 +170,11 @@ Route::middleware(['auth:karyawan', 'ceklevel:user'])->group(function () {
     Route::post('/loadchecklistibadah', 'CheckingibadahController@loadchecklistibadah');
     Route::post('/simpanchecklistibadah', 'CheckingibadahController@storechecklistibadah');
     Route::post('/hapuschecklistibadah', 'CheckingibadahController@destroychecklistibadah');
+
+    Route::get('/mobile/dashboard', [MobileController::class, 'dashboard']);
+    Route::get('/mobile/{no_akad}/showpembiayaan', [MobileController::class, 'showpembiayaan']);
+    Route::get('/absensi/create', [AbsensiController::class, 'create']);
+    Route::post('/absensi/store', [AbsensiController::class, 'store']);
 });
 
 

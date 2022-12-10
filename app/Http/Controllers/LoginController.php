@@ -28,6 +28,23 @@ class LoginController extends Controller
 
     }
 
+    public function postloginmobile(Request $request)
+    {
+        // /dd(Auth::guard('karyawan')->attempt(['npp' => $request->npp, 'password' => $request->password]));
+
+        if (Auth::guard('karyawan')->attempt(['npp' => $request->npp, 'password' => $request->password])) {
+            //dd(Str::length(Auth::guard('user')->user()));
+            return redirect('/mobile/dashboard');
+        } else {
+            return redirect('/mobile');
+        }
+        // if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        //     return redirect('/karyawan');
+        // }
+
+    }
+
+
     public function postlogout()
     {
         if (Auth::guard('user')->check()) {

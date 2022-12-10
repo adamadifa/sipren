@@ -76,3 +76,50 @@ function terbilang($nilai)
     }
     return $hasil;
 }
+
+
+function DateToIndo2($date2)
+{ // fungsi atau method untuk mengubah tanggal ke format indonesia
+    // variabel BulanIndo merupakan variabel array yang menyimpan nama-nama bulan
+    $BulanIndo2 = array(
+        "Januari", "Februari", "Maret",
+        "April", "Mei", "Juni",
+        "Juli", "Agustus", "September",
+        "Oktober", "November", "Desember"
+    );
+
+    $tahun2 = substr($date2, 0, 4); // memisahkan format tahun menggunakan substring
+    $bulan2 = substr($date2, 5, 2); // memisahkan format bulan menggunakan substring
+    $tgl2   = substr($date2, 8, 2); // memisahkan format tanggal menggunakan substring
+
+    $result = $tgl2 . " " . $BulanIndo2[(int)$bulan2 - 1] . " " . $tahun2;
+    return ($result);
+}
+
+function Gethari($date)
+{
+    $day = date('D', strtotime($date));
+    $dayList = array(
+        'Sun' => 'Minggu',
+        'Mon' => 'Senin',
+        'Tue' => 'Selasa',
+        'Wed' => 'Rabu',
+        'Thu' => 'Kamis',
+        'Fri' => 'Jumat',
+        'Sat' => 'Sabtu'
+    );
+
+    return $dayList[$day];
+}
+
+
+function getExtension($str)
+{
+    $i = strrpos($str, ".");
+    if (!$i) {
+        return "";
+    }
+    $l = strlen($str) - $i;
+    $ext = substr($str, $i + 1, $l);
+    return $ext;
+}
