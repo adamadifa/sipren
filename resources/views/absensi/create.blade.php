@@ -44,7 +44,12 @@
         <div id="map"></div>
     </div>
 </div>
-
+<audio id="myAudio">
+    <source src="{{ asset('thankyou.mp3') }}" type="audio/mpeg">
+</audio>
+<audio id="pulang">
+    <source src="{{ asset('hatihati.mp3') }}" type="audio/mpeg">
+</audio>
 @endsection
 
 @push('myscript')
@@ -53,6 +58,8 @@
     $(document).ready(function() {
         var result = document.getElementById("latitude");
         var lokasi = document.getElementById("lokasi");
+        var x = document.getElementById("myAudio");
+        var y = document.getElementById("pulang");
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
@@ -71,7 +78,7 @@
             var lok = lokasi.value;
             var latlong = lok.split(",");
             var map = L.map('map').setView([latlong[0], latlong[1]], 15);
-            L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+            L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
                 maxZoom: 20
                 , subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
             }).addTo(map);
@@ -154,7 +161,7 @@
             });
             var latitude = $("#latitude").text();
             //alert(latitude);
-
+            $("#takeabsen").hide();
             $.ajax({
                 type: 'POST'
                 , url: '/absensi/store'
@@ -166,10 +173,17 @@
                 , cache: false
                 , success: function(respond) {
                     console.log(respond);
-                    if (respond == 'success') {
+                    var result = respond.split("|");
+                    if (result[0] == 'success') {
+                        if (result[2] == "in") {
+                            x.play();
+                        } else {
+                            y.play();
+                        }
+
                         swal({
                             title: 'Berhasil!'
-                            , text: 'Terimakasih  Telah Melakukan Absen'
+                            , text: result[1]
                             , icon: 'success'
                             , timer: 3500
                         , });

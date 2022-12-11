@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class MobileController extends Controller
 {
@@ -89,5 +91,45 @@ class MobileController extends Controller
             ->orderBy('tgl_transaksi')
             ->get();
         return view('mobile.showpembiayaan', compact('pembiayaan', 'historibayar'));
+    }
+
+
+    public function checklistibadah()
+    {
+        return view('mobile.checklistibadah');
+    }
+
+    public function changepassword()
+    {
+        return view('mobile.changepassword');
+    }
+
+    public function updatepassword($npp, Request $request)
+    {
+        //dd($request->all());
+        $id = Crypt::decrypt($npp);
+        $user = DB::table('karyawan')->where('npp', $id)->first();
+        $password_user = $user->password;
+        $password_lama = $request->password_lama;
+        $password_baru = $request->password_baru;
+
+        $request->validate([
+            'password_lama' => 'required',
+            'password_baru' => 'required'
+        ]);
+        $pas = "12345";
+        //dd(Hash::make($pas));
+        //dd($password_lama);
+        //dd(Hash::check($password_lama, $password_user));
+        if (Hash::check($password_lama, $password_user)) {
+            $update = DB::table('karyawan')->where('npp', $id)->update(['password' => Hash::make($password_baru)]);
+            if ($update) {
+                return Redirect::back()->with(['success' => 'Data User Berhasil Diupdate']);
+            } else {
+                return Redirect::back()->with(['warning' => 'Data User Gagal Diupdate, Hubungi Tim IT']);
+            }
+        } else {
+            return Redirect::back()->with(['warning' => 'Password Lama Salah, Hubungi Tim IT']);
+        }
     }
 }

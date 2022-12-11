@@ -3,6 +3,8 @@
 @section('page-pretitle','Checlist Ibadah Karyawan')
 @section('page-title','Checlist Ibadah Karyawan')
 @section('content')
+
+
 <div class="row">
     <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="card mt-2">
@@ -24,13 +26,10 @@
                             <td>Tanggal</td>
                             <td>
                                 <div class="input-icon mb-2">
-                                    <input class="form-control " placeholder="Tanggal" id="tanggal"
-                                        value="<?php echo date('Y-m-d') ?>">
+                                    <input class="form-control " placeholder="Tanggal" id="tanggal" value="<?php echo date('Y-m-d') ?>">
                                     <span class="input-icon-addon">
                                         <!-- Download SVG icon from http://tabler-icons.io/i/calendar -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                            stroke-linecap="round" stroke-linejoin="round">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                             <rect x="4" y="5" width="16" height="16" rx="2"></rect>
                                             <line x1="16" y1="3" x2="16" y2="7"></line>
@@ -65,34 +64,36 @@
 @endsection
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-  flatpickr(document.getElementById('tanggal'), {});
-});
+        flatpickr(document.getElementById('tanggal'), {});
+    });
+
 </script>
 
 
 @push('myscript')
 <script>
-    $(function(){
-    function loadchecklistibadah(){
-      var tanggal = $("#tanggal").val();
-      $.ajax({
-          type:'POST',
-          url:'/loadchecklistibadah',
-          data:{
-              _token: "{{ csrf_token() }}",
-              tanggal:tanggal
-          },
-          cache:false,
-          success:function(respond){
-              $("#loadchecklistibadah").html(respond);
-          }
-      });
-    }
+    $(function() {
+        function loadchecklistibadah() {
+            var tanggal = $("#tanggal").val();
+            $.ajax({
+                type: 'POST'
+                , url: '/loadchecklistibadah'
+                , data: {
+                    _token: "{{ csrf_token() }}"
+                    , tanggal: tanggal
+                }
+                , cache: false
+                , success: function(respond) {
+                    $("#loadchecklistibadah").html(respond);
+                }
+            });
+        }
 
-   $("#tanggal").change(function(){
-    loadchecklistibadah();
-   });
-    loadchecklistibadah();
-  });
+        $("#tanggal").change(function() {
+            loadchecklistibadah();
+        });
+        loadchecklistibadah();
+    });
+
 </script>
 @endpush

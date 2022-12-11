@@ -32,9 +32,9 @@ Route::get('/daftar', function () {
     return view('Auth.register');
 })->name('daftar');
 
-
-Route::get('/mobile', [MobileController::class, 'index']);
-
+Route::middleware(['guest:karyawan'])->group(function () {
+    Route::get('/mobile', [MobileController::class, 'index']);
+});
 
 Route::get('/listisianibadah', 'CheckingibadahController@listpengisianibadahharian');
 Route::post('/postlogin', 'LoginController@postlogin')->name('postlogin');
@@ -175,6 +175,10 @@ Route::middleware(['auth:karyawan', 'ceklevel:user'])->group(function () {
     Route::get('/mobile/{no_akad}/showpembiayaan', [MobileController::class, 'showpembiayaan']);
     Route::get('/absensi/create', [AbsensiController::class, 'create']);
     Route::post('/absensi/store', [AbsensiController::class, 'store']);
+    Route::get('/mobile/checklistibadah', [MobileController::class, 'checklistibadah']);
+    Route::get('/mobile/checklistibadah', [MobileController::class, 'checklistibadah']);
+    Route::get('/mobile/changepassword', [MobileController::class, 'changepassword']);
+    Route::post('/mobile/{npp}/updatepassword', [MobileController::class, 'updatepassword']);
 });
 
 

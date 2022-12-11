@@ -40,11 +40,27 @@
         <p class="text-muted">{{ number_format($pembiayaan->jumlah + ($pembiayaan->jumlah * ($pembiayaan->persentase/100)),'0','','.') }}</p>
     </div>
 </div>
+<div class="row mb-4 fw-medium">
+    <div class="col">
+        <p class="text-color-theme">Pembayaran</p>
+    </div>
+    <div class="col-auto text-end">
+        <p class="text-muted">{{ number_format($pembiayaan->jmlbayar,'0','','.') }}</p>
+    </div>
+</div>
+<div class="row mb-4 fw-medium">
+    <div class="col">
+        <p class="text-color-theme">Sisa Tagihan</p>
+    </div>
+    <div class="col-auto text-end">
+        <p class="text-muted">{{ number_format($pembiayaan->jumlah + ($pembiayaan->jumlah * ($pembiayaan->persentase/100) - $pembiayaan->jmlbayar),'0','','.') }}</p>
+    </div>
+</div>
 <div class="row mb-3">
     <div class="col">
         <p class="text-color-theme">Keperluan</p>
     </div>
-    <div class="col-auto text-end">
+    <div class="col-auto text-start">
         <p class="text-muted">{{ $pembiayaan->keperluan }}</p>
     </div>
 </div>

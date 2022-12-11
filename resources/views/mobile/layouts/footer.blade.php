@@ -2,21 +2,21 @@
     <div class="container">
         <ul class="nav nav-pills nav-justified">
             <li class="nav-item">
-                <a class="nav-link active" href="index.html">
+                <a class="nav-link active" href="/mobile/dashboard">
                     <span>
                         <i class="nav-icon bi bi-house"></i>
                         <span class="nav-text">Home</span>
                     </span>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="stats.html">
                     <span>
                         <i class="nav-icon bi bi-laptop"></i>
                         <span class="nav-text">Statistics</span>
                     </span>
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item centerbutton">
                 <a class="nav-link" href="/absensi/create">
                     <span class="theme-radial-gradient">
@@ -26,21 +26,21 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="/mobile/checklistibadah">
+                    <span>
+                        <i class="bi bi-clipboard-check"></i>
+                        <span class="nav-text">Ibadah</span>
+                    </span>
+                </a>
+            </li>
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="wallet.html">
                     <span>
                         <i class="nav-icon bi bi-wallet2"></i>
                         <span class="nav-text">Wallet</span>
                     </span>
                 </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="wallet.html">
-                    <span>
-                        <i class="nav-icon bi bi-wallet2"></i>
-                        <span class="nav-text">Wallet</span>
-                    </span>
-                </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
 </footer>

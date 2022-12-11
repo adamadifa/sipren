@@ -8,7 +8,7 @@
         <div class="col align-self-center text-center">
             <div class="logo-small">
                 <img src="{{ asset('assets-mobile/img/logo.png') }}" alt="">
-                <h5>FiMobile</h5>
+                <h5>SIP Al Amin</h5>
             </div>
         </div>
         <div class="col-auto">

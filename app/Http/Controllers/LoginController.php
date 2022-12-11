@@ -31,9 +31,14 @@ class LoginController extends Controller
     public function postloginmobile(Request $request)
     {
         // /dd(Auth::guard('karyawan')->attempt(['npp' => $request->npp, 'password' => $request->password]));
-
-        if (Auth::guard('karyawan')->attempt(['npp' => $request->npp, 'password' => $request->password])) {
+        $credentials = $request->validate([
+            'npp' => 'required',
+            'password' => 'required'
+        ]);
+        $remember = $request->remember_me;
+        if (Auth::guard('karyawan')->attempt($credentials, $remember)) {
             //dd(Str::length(Auth::guard('user')->user()));
+            $request->session()->regenerate();
             return redirect('/mobile/dashboard');
         } else {
             return redirect('/mobile');
@@ -49,10 +54,11 @@ class LoginController extends Controller
     {
         if (Auth::guard('user')->check()) {
             Auth::guard('user')->logout();
+            return redirect('login');
         } else  if (Auth::guard('karyawan')->check()) {
             Auth::guard('karyawan')->logout();
+            return redirect('mobile');
         }
-        return redirect('login');
     }
 
     public function postregister(Request $request)

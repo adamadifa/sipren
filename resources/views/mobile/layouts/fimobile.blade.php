@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="generator" content="">
-    <title>FiMobile V2.0 - Mobile HTML template</title>
+    <title>SIP Al Amin Versi 2.0</title>
 
     <!-- manifest meta -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -44,7 +44,7 @@
                 <div class="loader-cube-wrap loader-cube-animate mx-auto">
                     <img src="{{ asset('assets-mobile/img/logo.png') }}" alt="Logo">
                 </div>
-                <p class="mt-4">It's time for track budget<br><strong>Please wait...</strong></p>
+                <p class="mt-4">SIP Al Amin Versi 2.0<br><strong>Loading..</strong></p>
             </div>
         </div>
     </div>
@@ -104,6 +104,7 @@
     <script src="{{ asset('assets-mobile/js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
     @stack('myscript')
 
 </body>

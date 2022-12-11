@@ -270,7 +270,7 @@ class AbsensiController extends Controller
                     Storage::delete($file);
                 }
                 Storage::put($file, $image_base64);
-                echo 'success';
+                echo 'success|Terimaka Kasih Telah Melakukan Absensi Masuk Tanggal ' . $hariini . 'Pukul : ' . $time . "|in";
             }
         } else {
             $data = [
@@ -284,7 +284,7 @@ class AbsensiController extends Controller
                     Storage::delete($file);
                 }
                 Storage::put($file, $image_base64);
-                echo 'success';
+                echo 'success|Terimaka Kasih Telah Melakukan Absensi Pulang Tanggal ' . $hariini . 'Pukul : ' . $time . "|out";
             }
         }
     }

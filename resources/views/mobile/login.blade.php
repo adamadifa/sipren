@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="generator" content="">
-    <title>FiMobile V2.0 - Mobile HTML template</title>
+    <title>SIP Al Amin Versi 2.0</title>
 
     <!-- manifest meta -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -40,7 +40,7 @@
                 <div class="loader-cube-wrap loader-cube-animate mx-auto">
                     <img src="assets-mobile/img/logo.png" alt="Logo">
                 </div>
-                <p class="mt-4">It's time for track budget<br><strong>Please wait...</strong></p>
+                <p class="mt-4">SIP Al Amin Versi 2.0<br><strong>Please wait...</strong></p>
             </div>
         </div>
     </div>
@@ -56,7 +56,7 @@
                         <div class="col">
                             <div class="logo-small">
                                 <img src="assets-mobile/img/logo.png" alt="">
-                                <h5>FiMobile</h5>
+                                <h5>SIP Al Amin</h5>
                             </div>
                         </div>
                         <div class="col-auto"></div>
@@ -84,7 +84,7 @@
                             Forgot your password?
                         </a>
                     </p>
-
+                    <input type="checkbox" name="remember_me" checked id="remember">
                     <button type="submit" class="btn btn-lg btn-default w-100 mb-4 shadow">
                         Sign in
                     </button>
