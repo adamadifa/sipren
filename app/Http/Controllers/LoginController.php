@@ -39,7 +39,7 @@ class LoginController extends Controller
         if (Auth::guard('karyawan')->attempt($credentials, $remember)) {
             //dd(Str::length(Auth::guard('user')->user()));
             $request->session()->regenerate();
-            return redirect('/mobile/dashboard');
+            return redirect()->intended('/mobile/dashboard');
         } else {
             return redirect('/mobile');
         }

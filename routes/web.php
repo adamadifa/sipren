@@ -16,9 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('mobile.login');
-});
+
 Route::get('/phpinfo', function () {
     phpinfo();
 });
@@ -33,6 +31,9 @@ Route::get('/daftar', function () {
 })->name('daftar');
 
 Route::middleware(['guest:karyawan'])->group(function () {
+    Route::get('/', function () {
+        return view('mobile.login');
+    });
     Route::get('/mobile', [MobileController::class, 'index']);
 });
 
