@@ -1,6 +1,3 @@
-@php
-$url = "https://simpeg.persisalamin.com/content/present/";
-@endphp
 <div class="row">
     <div class="col-md-4">
         <table class="table">
@@ -41,20 +38,23 @@ $url = "https://simpeg.persisalamin.com/content/present/";
         <tbody>
 
             @foreach ($absensi as $d)
-
+            @php
+            $url_in = Storage::url('uploads/absensi/karyawan/'.$d->picture_in);
+            $url_out = Storage::url('uploads/absensi/karyawan/'.$d->picture_out);
+            @endphp
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$d->npp}}</td>
                 <td>{{$d->nama_lengkap}}</td>
                 <td>{{\Carbon\Carbon::parse($d->presence_date)->translatedFormat('l, d F Y')}}</td>
                 <td>
-                    <span class="avatar avatar-sm" style="background-image: url({{$url.$d->picture_in}})"></span>
+                    <span class="avatar avatar-sm" style="background-image: url({{url($url_in)}})"></span>
                 </td>
                 <td>
                     <span class="badge bg-green">{{$d->time_in}}</span>
                 </td>
                 <td>
-                    <span class="avatar avatar-sm" style="background-image: url({{$url.$d->picture_out}})"></span>
+                    <span class="avatar avatar-sm" style="background-image: url({{url($url_out)}})"></span>
                 </td>
                 <td>
                     <span class="badge bg-red">{{$d->time_out}}</span>

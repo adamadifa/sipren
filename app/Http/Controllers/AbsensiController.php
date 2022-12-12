@@ -241,7 +241,7 @@ class AbsensiController extends Controller
         $format = $npp . "-" . $hariini . "-" . $inout;
         $latitude = $request->latitude;
         $img = $request->image;
-        $folderPath = "uploads/absensi/karyawan/";
+        $folderPath = "public/uploads/absensi/karyawan/";
 
         $image_parts = explode(";base64,", $img);
         $image_type_aux = explode("image/", $image_parts[0]);
