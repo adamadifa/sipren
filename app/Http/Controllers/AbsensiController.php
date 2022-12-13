@@ -229,7 +229,9 @@ class AbsensiController extends Controller
     {
         $npp = Auth::user()->npp;
         $hariini = date("Y-m-d");
-
+        $karyawan = DB::table('karyawan')->where('npp', $npp)->first();
+        $nama_karyawan = $karyawan->nama_lengkap;
+        $nohp_karyawan = $karyawan->no_hp;
         $cek = DB::table('presence')->where('npp', $npp)->where('presence_date', $hariini)->count();
 
         if ($cek > 0) {
@@ -270,6 +272,32 @@ class AbsensiController extends Controller
                     Storage::delete($file);
                 }
                 Storage::put($file, $image_base64);
+                $data = [
+                    'api_key' => 'NHoqE4TUf6YLQhJJQAGSUjj4wOMyzh',
+                    'sender' => '6289670444321',
+                    'number' => $nohp_karyawan,
+                    'message' => 'Terimakasih Telah Melakukan Absensi Masuk, NPP : ' . $npp . ' Nama Karyawan : ' . $nama_karyawan . ' Jam Masuk : ' . $time . ' Semangat Bekerja ^_^'
+                ];
+
+                $curl = curl_init();
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => 'https://wa.pedasalami.com/send-message',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => json_encode($data),
+                    CURLOPT_HTTPHEADER => array(
+                        'Content-Type: application/json'
+                    ),
+                ));
+
+                $response = curl_exec($curl);
+
+                curl_close($curl);
                 echo 'success|Terimaka Kasih Telah Melakukan Absensi Masuk Tanggal ' . $hariini . 'Pukul : ' . $time . "|in";
             }
         } else {
@@ -284,6 +312,32 @@ class AbsensiController extends Controller
                     Storage::delete($file);
                 }
                 Storage::put($file, $image_base64);
+                $data = [
+                    'api_key' => 'NHoqE4TUf6YLQhJJQAGSUjj4wOMyzh',
+                    'sender' => '6289670444321',
+                    'number' => $nohp_karyawan,
+                    'message' => 'Terimakasih Telah Melakukan Absensi Pulang, NPP : ' . $npp . ' Nama Karyawan : ' . $nama_karyawan . ' Jam Pulang : ' . $time . ' Hati Hati Dijalan ^_^'
+                ];
+
+                $curl = curl_init();
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => 'https://wa.pedasalami.com/send-message',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => json_encode($data),
+                    CURLOPT_HTTPHEADER => array(
+                        'Content-Type: application/json'
+                    ),
+                ));
+
+                $response = curl_exec($curl);
+
+                curl_close($curl);
                 echo 'success|Terimaka Kasih Telah Melakukan Absensi Pulang Tanggal ' . $hariini . 'Pukul : ' . $time . "|out";
             }
         }

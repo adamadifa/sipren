@@ -32,6 +32,13 @@ class MobileController extends Controller
             ->where('koperasi_anggota.npp', Auth::user()->npp)
             ->where('kode_simpanan', '001')
             ->first();
+        $tabungan = DB::table('koperasi_tabungan')
+            ->selectRaw('koperasi_tabungan.no_rekening,saldo,nama_tabungan')
+            ->join('koperasi_jenistabungan', 'koperasi_tabungan.kode_tabungan', '=', 'koperasi_jenistabungan.kode_tabungan')
+            ->join('koperasi_anggota', 'koperasi_tabungan.no_anggota', '=', 'koperasi_anggota.no_anggota')
+            ->leftJoin('karyawan', 'koperasi_anggota.npp', '=', 'karyawan.npp')
+            ->where('koperasi_anggota.npp', Auth::user()->npp)
+            ->get();
 
         $simpananwajib = DB::table('koperasi_saldo_simpanan')
             ->selectRaw('koperasi_saldo_simpanan.no_anggota,jumlah as saldo')
@@ -78,7 +85,7 @@ class MobileController extends Controller
 
 
 
-        return view('mobile.index', compact('saldo', 'presensi', 'pembiayaan', 'simpananpokok', 'simpananwajib', 'simsuk', 'presensihariini'));
+        return view('mobile.index', compact('saldo', 'presensi', 'pembiayaan', 'simpananpokok', 'simpananwajib', 'simsuk', 'presensihariini', 'tabungan'));
     }
 
     public function showpembiayaan($no_akad)
@@ -131,5 +138,14 @@ class MobileController extends Controller
         } else {
             return Redirect::back()->with(['warning' => 'Password Lama Salah, Hubungi Tim IT']);
         }
+    }
+
+    public function mutasitabungan($no_rekening)
+    {
+        $no_rekening = Crypt::decrypt($no_rekening);
+        $tabungan = DB::table('koperasi_tabungan')
+            ->join('koperasi_jenistabungan', 'koperasi_tabungan.kode_tabungan', '=', 'koperasi_jenistabungan.kode_tabungan')
+            ->where('no_rekening', $no_rekening)->first();
+        return view('mobile.mutasitabungan', compact('tabungan'));
     }
 }

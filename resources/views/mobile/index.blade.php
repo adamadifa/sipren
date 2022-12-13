@@ -114,6 +114,37 @@
                         </div>
                     </div>
                 </div>
+                @foreach ($tabungan as $d)
+                <div class="swiper-slide" role="group" aria-label="3 / 3">
+                    <a href="/mobile/{{ Crypt::encrypt($d->no_rekening) }}/mutasitabungan">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-auto align-self-center">
+                                        <img src="{{ asset('assets-mobile/img/masterocard.png') }}" alt="">
+                                    </div>
+                                    <div class=" col align-self-center text-end">
+                                        <p class="small">
+                                            <span class="text-uppercase size-10">Validity</span><br>
+                                            <span class="text-muted">Unlimited</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h4 class="fw-normal mb-2">
+                                            {{ $d->saldo == null ? 0 : number_format($d->saldo,'0','','.') }}
+                                            <span class="small text-muted">RP</span>
+                                        </h4>
+                                        <p class="mb-0 text-muted size-12">{{$d->no_rekening == null ? '' : $d->no_rekening }}</p>
+                                        <p class="text-muted size-12">{{ $d->nama_tabungan }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                @endforeach
             </div>
             <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
         </div>

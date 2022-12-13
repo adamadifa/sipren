@@ -180,6 +180,7 @@ Route::middleware(['auth:karyawan', 'ceklevel:user'])->group(function () {
     Route::get('/mobile/checklistibadah', [MobileController::class, 'checklistibadah']);
     Route::get('/mobile/changepassword', [MobileController::class, 'changepassword']);
     Route::post('/mobile/{npp}/updatepassword', [MobileController::class, 'updatepassword']);
+    Route::get('/mobile/{no_rekening}/mutasitabungan', [MobileController::class, 'mutasitabungan']);
 });
 
 
