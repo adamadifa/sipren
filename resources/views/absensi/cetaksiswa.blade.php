@@ -70,7 +70,7 @@
             <tbody>
                 @foreach ($absensi as $d)
                 <tr>
-                    <td>{{$d->npp}}</td>
+                    <td>{{$d->id_siswa}}</td>
                     <td>{{ucwords(strtolower($d->nama_lengkap))}}</td>
                     @php
                     $total = 0;
