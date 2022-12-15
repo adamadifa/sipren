@@ -193,7 +193,7 @@
                     </svg>
                 </span>
                 <span class="nav-link-title">
-                    Lap. Penddiikan
+                    Lap. Pendidikan
                 </span>
             </a>
             <div class="dropdown-menu {{ set_show(['absensi/laporansiswa']) }}">
@@ -331,16 +331,20 @@
                     Laporan
                 </span>
             </a>
-            <div class="dropdown-menu {{ set_show(['checkingibadah/laporan','absensi/laporan']) }}">
+            <div class="dropdown-menu {{ set_show(['checkingibadah/laporan','absensi/laporan','absensi/laporansiswa']) }}">
                 <a class="dropdown-item {{ set_active(['checkingibadah/laporan']) }}" href="/checkingibadah/laporan">
                     Amalan Harian
                 </a>
                 <a class="dropdown-item {{ set_active(['absensi/laporan']) }}" href="/absensi/laporan">
-                    Absensi SDM
+                    Presensi SDM
+                </a>
+                <a class="dropdown-item {{ set_active(['absensi/laporansiswa']) }}" href="/absensi/laporansiswa">
+                    Presensi Siswa
                 </a>
             </div>
 
         </li>
+
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle {{ set_show(['tahunakademik','tahunakademik/create']) }}" href="#navbar-extra" data-toggle="dropdown" role="button" aria-expanded="{{ set_true(['tahunakademik','tahunakademik/create']) }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
