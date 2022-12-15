@@ -1,7 +1,7 @@
 @extends('layouts.tabler')
-@section('title','Detail Absesni')
-@section('page-pretitle','Detail Absensi')
-@section('page-title','Detail Absensi')
+@section('title','Data Pengisian Checklist Ibadah')
+@section('page-pretitle','Checklist Ibadah')
+@section('page-title','Checklist Ibadah')
 @section('content')
 <div class="row mt-3">
     <div class="col-md-6">
@@ -33,21 +33,10 @@
 <div class="row mt-3">
     <div class="col-md-12">
         <div class="card">
-            <div class="card-body" id="loaddetailabsensi">
+            <div class="card-body" id="loadlistchecklistibadah">
             </div>
         </div>
     </div>
-</div>
-<div class="modal fade" id="modal-location">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div id="iframe-map"></div>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
 @endsection
@@ -60,38 +49,12 @@
 
 </script>
 <script>
-    $(document).on('click', '.btn-lokasi', function() {
-        $("#modal-location").modal("show");
-        var address = $(this).attr("data-address");
-        var nama = $(this).attr("data-nama");
-        var radar = address.split(",");
-        var latitude = radar[0];
-        var longitude = radar[1];
-        $.ajax({
-            type: 'POST'
-            , url: '/loaddata/map_frame'
-            , data: {
-                _token: "{{ csrf_token() }}"
-                , nama: nama
-                , latitude: latitude
-                , longitude: longitude
-            }
-            , cache: false
-            , success: function(respond) {
-                $("#iframe-map").html(respond);
-            }
-        });
-
-
-    });
     $(function() {
-        function loaddetailabsensi() {
+        function loadlistchecklistibadah() {
             var tanggal = $("#tanggal").val();
-
             $.ajax({
-
                 type: 'POST'
-                , url: '/loaddata/getabsensiharianall'
+                , url: '/loaddata/getchecklistibadahlist'
                 , data: {
                     _token: "{{ csrf_token() }}"
                     , tanggal: tanggal
@@ -99,16 +62,16 @@
                 , cache: false
                 , success: function(respond) {
                     console.log(respond);
-                    $("#loaddetailabsensi").html(respond);
+                    $("#loadlistchecklistibadah").html(respond);
                 }
             });
 
         }
 
-        loaddetailabsensi();
+        loadlistchecklistibadah();
 
         $("#tanggal").change(function() {
-            loaddetailabsensi();
+            loadlistchecklistibadah();
         });
     });
 

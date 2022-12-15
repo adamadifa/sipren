@@ -129,4 +129,17 @@ class CheckingibadahController extends Controller
             ->get();
         return view('checkingibadah.listpengisian', compact('list'));
     }
+
+    public function karyawanlist()
+    {
+        return view('checkingibadah.karyawanlist');
+    }
+
+    function rekap()
+    {
+        $tahunmulai = 2021;
+        $namabulan = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        $unit = DB::table('unit')->orderBy('id', 'asc')->get();
+        return view('checkingibadah.rekap', compact('tahunmulai', 'namabulan', 'unit'));
+    }
 }

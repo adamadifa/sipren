@@ -143,7 +143,7 @@
                 </span>
             </a>
             <div class="dropdown-menu {{ request()->is(['checklistibadah/*']) ? 'show' : '' }}">
-                <a class="dropdown-item {{ request()->is(['checklistibadah/karyawan','checklistibadah/karyawan/*']) ? 'active' : '' }}" href="/checklistibadah/karyawan">
+                <a class="dropdown-item {{ request()->is(['checklistibadah/karyawanlist','checklistibadah/karyawan/*']) ? 'active' : '' }}" href="/checklistibadah/karyawanlist">
                     Karyawan
                 </a>
             </div>
@@ -166,15 +166,41 @@
                     Lap. MSDM
                 </span>
             </a>
-            <div class="dropdown-menu {{ set_show(['checkingibadah/laporan','absensi/laporan']) }}">
+            <div class="dropdown-menu {{ set_show(['checkingibadah/laporan','absensi/laporan','checkingibadah/rekap']) }}">
                 <a class="dropdown-item {{ set_active(['checkingibadah/laporan']) }}" href="/checkingibadah/laporan">
-                    Amalan Harian
+                    Checklist Ibadah
+                </a>
+                <a class="dropdown-item {{ set_active(['checkingibadah/rekap']) }}" href="/checkingibadah/rekap">
+                    Rekap Ibadah
                 </a>
                 <a class="dropdown-item {{ set_active(['absensi/laporan']) }}" href="/absensi/laporan">
                     Absensi SDM
                 </a>
             </div>
 
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle href=" #navbar-extra" data-toggle="dropdown" role="button">
+                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/file-text -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                        <line x1="9" y1="9" x2="10" y2="9" />
+                        <line x1="9" y1="13" x2="15" y2="13" />
+                        <line x1="9" y1="17" x2="15" y2="17" />
+                    </svg>
+                </span>
+                <span class="nav-link-title">
+                    Lap. Penddiikan
+                </span>
+            </a>
+            <div class="dropdown-menu {{ set_show(['absensi/laporansiswa']) }}">
+                <a class="dropdown-item {{ set_active(['absensi/laporansiswa']) }}" href="/absensi/laporansiswa">
+                    Presensi Siswa
+                </a>
+            </div>
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle {{ request()->is(['laporanpembayaran',

@@ -54,13 +54,16 @@ Route::get('/absensi/karyawan', 'AbsensiController@absenkaryawan');
 Route::get('/absensi/karyawanlist', 'AbsensiController@absenkaryawanlist');
 Route::post('/loaddata/getabsensiharian', 'LoaddataController@getabsensiharian');
 Route::post('/loaddata/getabsensiharianall', 'LoaddataController@getabsensiharianall');
+Route::post('/loaddata/getchecklistibadahlist', 'LoaddataController@getchecklistibadahlist');
 Route::middleware(['auth:user', 'ceklevel:admin_unit,admin'])->group(function () {
 
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     //Absensi
 
     Route::get('/absensi/laporan', 'AbsensiController@laporan');
+    Route::get('/absensi/laporansiswa', 'AbsensiController@laporansiswa');
     Route::post('/absensi/cetak', 'AbsensiController@cetak');
+    Route::post('/absensi/cetaksiswa', 'AbsensiController@cetaksiswa');
     //Load Data
     Route::post('/loaddata/getabsensikaryawan', 'LoaddataController@getabsensikaryawan');
 
@@ -68,7 +71,7 @@ Route::middleware(['auth:user', 'ceklevel:admin_unit,admin'])->group(function ()
     //Ibadah Harian
     Route::get('/checkingibadah/laporan', 'CheckingibadahController@laporan');
     Route::post('/checkingibadah/cetak', 'CheckingibadahController@cetak');
-
+    Route::get('/checkingibadah/rekap', 'CheckingibadahController@rekap');
     //Pembayaran
 
     Route::get('/pembayaran', 'PembayaranController@index');
@@ -164,6 +167,8 @@ Route::middleware(['auth:user', 'ceklevel:admin'])->group(function () {
     Route::post('/tahunakademik', 'TahunakademikController@store');
     Route::get('/tahunakademik/{id}/edit', 'TahunakademikController@edit');
     Route::put('/tahunakademik/{id}', 'TahunakademikController@update');
+
+    Route::get('/checklistibadah/karyawanlist', 'CheckingibadahController@karyawanlist');
 });
 
 Route::middleware(['auth:karyawan', 'ceklevel:user'])->group(function () {

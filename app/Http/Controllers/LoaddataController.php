@@ -626,4 +626,45 @@ class LoaddataController extends Controller
             echo !empty($sisa) ?  number_format($sisa, '0', '', '.') : '0';
         }
     }
+
+
+    function getchecklistibadahlist(Request $request)
+    {
+        $tanggal = $request->tanggal;
+        $unit = 9;
+        // if($unit == "PST"){
+        //     $unit = "PESANTREN";
+        // }else{
+        //     $unit = $unit;
+        // }
+        if ($unit == 9) {
+            $checklistibadah = DB::table('checklist_ibadah')
+                ->selectRaw('DISTINCT(checklist_ibadah.npp),nama_lengkap')
+                ->leftjoin('karyawan', 'checklist_ibadah.npp', '=', 'karyawan.npp')
+                ->leftjoin('unit', 'karyawan.id_unit', '=', 'unit.id')
+                ->where('tanggal', $tanggal)
+                ->get();
+        } else {
+            $checklistibadah = DB::table('presence')
+                ->select('presence.*', 'nama_lengkap')
+                ->join('karyawan', 'presence.npp', '=', 'karyawan.npp')
+                ->join('unit', 'karyawan.id_unit', '=', 'unit.id')
+                ->where('presence_date', $tanggal)
+                ->where('karyawan.id_unit', $unit)
+                ->get();
+        }
+
+        $rekap = DB::table('checklist_ibadah')
+            ->select('nama_unit', DB::raw('COUNT(DISTINCT checklist_ibadah.npp) as jmlhadir'))
+            ->join('karyawan', 'checklist_ibadah.npp', '=', 'karyawan.npp')
+            ->join('unit', 'karyawan.id_unit', '=', 'unit.id')
+            ->where('tanggal', $tanggal)
+            ->groupBy('nama_unit')
+            ->orderBy('karyawan.id_unit', 'asc')
+            ->get();
+
+
+        //dd($rekap);
+        return view('loaddata.getcheclistibadahlist', compact('checklistibadah', 'rekap'));
+    }
 }
