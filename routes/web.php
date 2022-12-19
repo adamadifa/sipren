@@ -72,6 +72,7 @@ Route::middleware(['auth:user', 'ceklevel:admin_unit,admin'])->group(function ()
     Route::get('/checkingibadah/laporan', 'CheckingibadahController@laporan');
     Route::post('/checkingibadah/cetak', 'CheckingibadahController@cetak');
     Route::get('/checkingibadah/rekap', 'CheckingibadahController@rekap');
+    Route::post('/checkingibadah/rekap/cetak', 'CheckingibadahController@cetakrekap');
     //Pembayaran
 
     Route::get('/pembayaran', 'PembayaranController@index');

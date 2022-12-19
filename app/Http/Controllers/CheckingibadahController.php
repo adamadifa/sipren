@@ -142,4 +142,95 @@ class CheckingibadahController extends Controller
         $unit = DB::table('unit')->orderBy('id', 'asc')->get();
         return view('checkingibadah.rekap', compact('tahunmulai', 'namabulan', 'unit'));
     }
+
+    public function cetakrekap(Request $request)
+    {
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+        $tglawal = $tahun . "-" . $bulan . "-01";
+        $tglakhir = date('Y-m-t', strtotime($tglawal));
+        $namabulan = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        $bln = $namabulan[$bulan];
+        $checklist = DB::table("karyawan")
+            ->select(
+                'karyawan.npp',
+                'karyawan.nama_lengkap',
+                'tgl_1',
+                'tgl_2',
+                'tgl_3',
+                'tgl_4',
+                'tgl_5',
+                'tgl_6',
+                'tgl_7',
+                'tgl_8',
+                'tgl_9',
+                'tgl_10',
+                'tgl_11',
+                'tgl_12',
+                'tgl_13',
+                'tgl_14',
+                'tgl_15',
+                'tgl_16',
+                'tgl_17',
+                'tgl_18',
+                'tgl_19',
+                'tgl_20',
+                'tgl_21',
+                'tgl_22',
+                'tgl_23',
+                'tgl_24',
+                'tgl_25',
+                'tgl_26',
+                'tgl_27',
+                'tgl_28',
+                'tgl_29',
+                'tgl_30',
+                'tgl_31'
+            )
+            ->leftjoin(
+                DB::raw('(
+                    SELECT npp, IF(SUM(IF(DAY(tanggal) = 1,1,0)) > 0 ,1,0) as tgl_1,
+                    IF(SUM(IF(DAY(tanggal) = 2,1,0)) > 0 ,1,0) as tgl_2,
+                    IF(SUM(IF(DAY(tanggal) = 3,1,0)) > 0 ,1,0) as tgl_3,
+                    IF(SUM(IF(DAY(tanggal) = 4,1,0)) > 0 ,1,0) as tgl_4,
+                    IF(SUM(IF(DAY(tanggal) = 5,1,0)) > 0 ,1,0) as tgl_5,
+                    IF(SUM(IF(DAY(tanggal) = 6,1,0)) > 0 ,1,0) as tgl_6,
+                    IF(SUM(IF(DAY(tanggal) = 7,1,0)) > 0 ,1,0) as tgl_7,
+                    IF(SUM(IF(DAY(tanggal) = 8,1,0)) > 0 ,1,0) as tgl_8,
+                    IF(SUM(IF(DAY(tanggal) = 9,1,0)) > 0 ,1,0) as tgl_9,
+                    IF(SUM(IF(DAY(tanggal) = 10,1,0)) > 0 ,1,0) as tgl_10,
+                    IF(SUM(IF(DAY(tanggal) = 11,1,0)) > 0 ,1,0) as tgl_11,
+                    IF(SUM(IF(DAY(tanggal) = 12,1,0)) > 0 ,1,0) as tgl_12,
+                    IF(SUM(IF(DAY(tanggal) = 13,1,0)) > 0 ,1,0) as tgl_13,
+                    IF(SUM(IF(DAY(tanggal) = 14,1,0)) > 0 ,1,0) as tgl_14,
+                    IF(SUM(IF(DAY(tanggal) = 15,1,0)) > 0 ,1,0) as tgl_15,
+                    IF(SUM(IF(DAY(tanggal) = 16,1,0)) > 0 ,1,0) as tgl_16,
+                    IF(SUM(IF(DAY(tanggal) = 17,1,0)) > 0 ,1,0) as tgl_17,
+                    IF(SUM(IF(DAY(tanggal) = 18,1,0)) > 0 ,1,0) as tgl_18,
+                    IF(SUM(IF(DAY(tanggal) = 19,1,0)) > 0 ,1,0) as tgl_19,
+                    IF(SUM(IF(DAY(tanggal) = 20,1,0)) > 0 ,1,0) as tgl_20,
+                    IF(SUM(IF(DAY(tanggal) = 21,1,0)) > 0 ,1,0) as tgl_21,
+                    IF(SUM(IF(DAY(tanggal) = 22,1,0)) > 0 ,1,0) as tgl_22,
+                    IF(SUM(IF(DAY(tanggal) = 23,1,0)) > 0 ,1,0) as tgl_23,
+                    IF(SUM(IF(DAY(tanggal) = 24,1,0)) > 0 ,1,0) as tgl_24,
+                    IF(SUM(IF(DAY(tanggal) = 25,1,0)) > 0 ,1,0) as tgl_25,
+                    IF(SUM(IF(DAY(tanggal) = 26,1,0)) > 0 ,1,0) as tgl_26,
+                    IF(SUM(IF(DAY(tanggal) = 27,1,0)) > 0 ,1,0) as tgl_27,
+                    IF(SUM(IF(DAY(tanggal) = 28,1,0)) > 0 ,1,0) as tgl_28,
+                    IF(SUM(IF(DAY(tanggal) = 29,1,0)) > 0 ,1,0) as tgl_29,
+                    IF(SUM(IF(DAY(tanggal) = 30,1,0)) > 0 ,1,0) as tgl_30,
+                    IF(SUM(IF(DAY(tanggal) = 31,1,0)) > 0 ,1,0) as tgl_31
+                    FROM checklist_ibadah
+            WHERE  tanggal BETWEEN "' . $tglawal . '" AND "' . $tglakhir . '"
+            GROUP BY npp
+            ) checklist'),
+                function ($join) {
+                    $join->on('karyawan.npp', '=', 'checklist.npp');
+                }
+            )
+            ->orderBy('nama_lengkap', 'asc')
+            ->get();
+
+        return view("checkingibadah.cetakrekap", compact('checklist', 'bln', 'tahun'));
+    }
 }
