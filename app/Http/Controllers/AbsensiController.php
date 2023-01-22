@@ -343,7 +343,6 @@ class AbsensiController extends Controller
         $latitude = $request->latitude;
         $img = $request->image;
         $folderPath = "public/uploads/absensi/karyawan/";
-
         $image_parts = explode(";base64,", $img);
         $image_type_aux = explode("image/", $image_parts[0]);
         $image_type = $image_type_aux[1];
@@ -353,8 +352,6 @@ class AbsensiController extends Controller
 
         $file = $folderPath . $fileName;
         $time = date("H:i:s");
-
-        $file = $folderPath . $fileName;
         if ($cek == 0) {
             $data = [
                 'npp' => $npp,

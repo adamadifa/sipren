@@ -56,7 +56,6 @@ Route::post('/loaddata/getabsensiharian', 'LoaddataController@getabsensiharian')
 Route::post('/loaddata/getabsensiharianall', 'LoaddataController@getabsensiharianall');
 Route::post('/loaddata/getchecklistibadahlist', 'LoaddataController@getchecklistibadahlist');
 Route::middleware(['auth:user', 'ceklevel:admin_unit,admin'])->group(function () {
-
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     //Absensi
 

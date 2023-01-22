@@ -26,6 +26,7 @@ class LoginController extends Controller
         //     return redirect('/karyawan');
         // }
 
+
     }
 
     public function postloginmobile(Request $request)

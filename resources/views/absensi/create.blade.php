@@ -30,6 +30,7 @@
     </div>
 </div>
 
+
 <div class="row mb-2">
     <div class="col">
         @if ($cek >0)
@@ -56,13 +57,27 @@
 
 <script>
     $(document).ready(function() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        function onDeviceReady() {
+            window.plugins.mockgpschecker.check(successCallback, errorCallback);
+        }
+
+        function successCallback(result) {
+            console.log(result); // true - enabled, false - disabled
+            alert(result);
+        }
+
+        function errorCallback(error) {
+            console.log(error);
+            alert(error);
+        }
         var result = document.getElementById("latitude");
         var lokasi = document.getElementById("lokasi");
         var x = document.getElementById("myAudio");
         var y = document.getElementById("pulang");
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-
         } else {
             swal({
                 title: 'Oops!'
@@ -155,6 +170,7 @@
         Webcam.attach('.webcam-capture');
 
         $("#takeabsen").click(function() {
+
             Webcam.snap(function(data_uri) {
                 console.log(data_uri);
                 image = data_uri;
