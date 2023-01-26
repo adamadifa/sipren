@@ -147,48 +147,49 @@ class CheckingibadahController extends Controller
     {
         $bulan = $request->bulan;
         $tahun = $request->tahun;
+        $unit = $request->unit;
         $tglawal = $tahun . "-" . $bulan . "-01";
         $tglakhir = date('Y-m-t', strtotime($tglawal));
         $namabulan = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
         $bln = $namabulan[$bulan];
-        $checklist = DB::table("karyawan")
-            ->select(
-                'karyawan.npp',
-                'karyawan.nama_lengkap',
-                'tgl_1',
-                'tgl_2',
-                'tgl_3',
-                'tgl_4',
-                'tgl_5',
-                'tgl_6',
-                'tgl_7',
-                'tgl_8',
-                'tgl_9',
-                'tgl_10',
-                'tgl_11',
-                'tgl_12',
-                'tgl_13',
-                'tgl_14',
-                'tgl_15',
-                'tgl_16',
-                'tgl_17',
-                'tgl_18',
-                'tgl_19',
-                'tgl_20',
-                'tgl_21',
-                'tgl_22',
-                'tgl_23',
-                'tgl_24',
-                'tgl_25',
-                'tgl_26',
-                'tgl_27',
-                'tgl_28',
-                'tgl_29',
-                'tgl_30',
-                'tgl_31'
-            )
-            ->leftjoin(
-                DB::raw('(
+        $query = Karyawan::query();
+        $query->select(
+            'karyawan.npp',
+            'karyawan.nama_lengkap',
+            'tgl_1',
+            'tgl_2',
+            'tgl_3',
+            'tgl_4',
+            'tgl_5',
+            'tgl_6',
+            'tgl_7',
+            'tgl_8',
+            'tgl_9',
+            'tgl_10',
+            'tgl_11',
+            'tgl_12',
+            'tgl_13',
+            'tgl_14',
+            'tgl_15',
+            'tgl_16',
+            'tgl_17',
+            'tgl_18',
+            'tgl_19',
+            'tgl_20',
+            'tgl_21',
+            'tgl_22',
+            'tgl_23',
+            'tgl_24',
+            'tgl_25',
+            'tgl_26',
+            'tgl_27',
+            'tgl_28',
+            'tgl_29',
+            'tgl_30',
+            'tgl_31'
+        );
+        $query->leftjoin(
+            DB::raw('(
                     SELECT npp, IF(SUM(IF(DAY(tanggal) = 1,1,0)) > 0 ,1,0) as tgl_1,
                     IF(SUM(IF(DAY(tanggal) = 2,1,0)) > 0 ,1,0) as tgl_2,
                     IF(SUM(IF(DAY(tanggal) = 3,1,0)) > 0 ,1,0) as tgl_3,
@@ -224,12 +225,15 @@ class CheckingibadahController extends Controller
             WHERE  tanggal BETWEEN "' . $tglawal . '" AND "' . $tglakhir . '"
             GROUP BY npp
             ) checklist'),
-                function ($join) {
-                    $join->on('karyawan.npp', '=', 'checklist.npp');
-                }
-            )
-            ->orderBy('nama_lengkap', 'asc')
-            ->get();
+            function ($join) {
+                $join->on('karyawan.npp', '=', 'checklist.npp');
+            }
+        );
+        if (!empty($unit)) {
+            $query->where('id_unit', $unit);
+        }
+        $query->orderBy('nama_lengkap', 'asc');
+        $checklist = $query->get();
 
         return view("checkingibadah.cetakrekap", compact('checklist', 'bln', 'tahun'));
     }
