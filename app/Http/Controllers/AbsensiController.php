@@ -310,7 +310,7 @@ class AbsensiController extends Controller
                     $join->on('siswa.id_siswa', '=', 'absensi.id_siswa');
                 }
             )
-            ->orderBy('nama_lengkap', 'asc')
+            ->orderBy('id_siswa', 'asc')
             ->get();
         return view("absensi.cetaksiswa", compact('absensi', 'bln', 'tahun'));
     }
