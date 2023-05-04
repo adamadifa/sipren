@@ -32,7 +32,7 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        <h5 style="margin: 0;" align="left">LAPORAN PRESENSI SISWA</h5>
+                                        <h5 style="margin: 0;" align="left">LAPORAN AMALAN HARIAN SDM </h5>
                                         <h5 style="margin: 0;" align="left">PESANTREN PERSATUAN ISLAM 80 AL AMIN</h5>
                                         <h5 style="margin: 0;" align="left">SINDANGKASIH CIAMIS</h5>
                                         <h5 style="margin: 0;" align="left">BULAN : {{$bln}} {{$tahun}}</h5>
