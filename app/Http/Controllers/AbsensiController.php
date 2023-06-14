@@ -371,7 +371,7 @@ class AbsensiController extends Controller
                 $data = [
                     'api_key' => 'B2TSubtfeWwb3eDHdIyoa0qRXJVgq8',
                     'sender' => '6289670444321',
-                    'number' => '082218770017',
+                    'number' => $nohp_karyawan,
                     'message' => 'Terimakasih Telah Melakukan Absensi Masuk, NPP : ' . $npp . ' Nama Karyawan : ' . $nama_karyawan . ' Jam Masuk : ' . $time . ' Semangat Bekerja ^_^'
                 ];
 
@@ -411,7 +411,7 @@ class AbsensiController extends Controller
                 $data = [
                     'api_key' => 'B2TSubtfeWwb3eDHdIyoa0qRXJVgq8',
                     'sender' => '6289670444321',
-                    'number' => '082218770017',
+                    'number' => $nohp_karyawan,
                     'message' => 'Terimakasih Telah Melakukan Absensi Pulang, NPP : ' . $npp . ' Nama Karyawan : ' . $nama_karyawan . ' Jam Pulang : ' . $time . ' Hati Hati Dijalan ^_^'
                 ];
 
