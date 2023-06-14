@@ -369,9 +369,9 @@ class AbsensiController extends Controller
                 }
                 Storage::put($file, $image_base64);
                 $data = [
-                    'api_key' => 'NHoqE4TUf6YLQhJJQAGSUjj4wOMyzh',
+                    'api_key' => 'B2TSubtfeWwb3eDHdIyoa0qRXJVgq8',
                     'sender' => '6289670444321',
-                    'number' => $nohp_karyawan,
+                    'number' => '082218770017',
                     'message' => 'Terimakasih Telah Melakukan Absensi Masuk, NPP : ' . $npp . ' Nama Karyawan : ' . $nama_karyawan . ' Jam Masuk : ' . $time . ' Semangat Bekerja ^_^'
                 ];
 
@@ -409,9 +409,9 @@ class AbsensiController extends Controller
                 }
                 Storage::put($file, $image_base64);
                 $data = [
-                    'api_key' => 'NHoqE4TUf6YLQhJJQAGSUjj4wOMyzh',
+                    'api_key' => 'B2TSubtfeWwb3eDHdIyoa0qRXJVgq8',
                     'sender' => '6289670444321',
-                    'number' => $nohp_karyawan,
+                    'number' => '082218770017',
                     'message' => 'Terimakasih Telah Melakukan Absensi Pulang, NPP : ' . $npp . ' Nama Karyawan : ' . $nama_karyawan . ' Jam Pulang : ' . $time . ' Hati Hati Dijalan ^_^'
                 ];
 
