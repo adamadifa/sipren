@@ -35,7 +35,7 @@ class PendaftaranController extends Controller
         } else {
             $query = $query->where('tahunakademik', $ta['tahunakademik']);
         }
-        $query->select('no_pendaftaran', 'tgl_pendaftarand', 'nis', 'nisn', 'nama_lengkap', 'jenis_kelamin', 'tanggal_lahir');
+        $query->select('no_pendaftaran', 'tgl_pendaftaran', 'nis', 'nisn', 'nama_lengkap', 'jenis_kelamin', 'tanggal_lahir');
         $query->join('siswa', 'pendaftaran.id_siswa', '=', 'siswa.id_siswa');
         $query->where('pendaftaran.jenjang', $jenjang);
         $query->orderBy('no_pendaftaran', 'desc');
