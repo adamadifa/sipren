@@ -8,7 +8,9 @@ use App\Propinsi;
 use App\Tahunakademik;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use PDOException;
 
 class PendaftaranController extends Controller
@@ -495,7 +497,22 @@ class PendaftaranController extends Controller
             ->leftjoin('villages', 'siswa.id_kelurahan', '=', 'villages.id')
             ->where('no_pendaftaran', $no_pendaftaran)
             ->first();
-        return view('pendaftaran.show', compact('pendaftaran'));
+
+        $masterpersyaratan  = DB::table('master_persyaratan')
+            ->orderBy('kode_persyaratan', 'asc')
+            ->get();
+
+        $datapersyaratan = DB::table('master_persyaratan')
+            ->leftJoin(
+                DB::raw("(
+                SELECT * FROM pendaftaran_dokumen WHERE no_pendaftaran = '$no_pendaftaran'
+            ) pendaftaran_dok"),
+                function ($join) {
+                    $join->on('master_persyaratan.kode_persyaratan', '=', 'pendaftaran_dok.kode_persyaratan');
+                }
+            )
+            ->get();
+        return view('pendaftaran.show', compact('pendaftaran', 'masterpersyaratan', 'datapersyaratan'));
     }
 
 
@@ -505,5 +522,50 @@ class PendaftaranController extends Controller
         $pekerjaan = DB::table('pekerjaan')->orderBy('id', 'asc')->get();
         $propinsi = Propinsi::orderBy('prov_name', 'asc')->get();
         return view('pendaftaran.form-psb', compact('propinsi', 'pekerjaan', 'ta'));
+    }
+
+
+    function updatedokumen($no_pendaftaran, Request $request)
+    {
+        $no_pendaftaran = Crypt::decrypt($no_pendaftaran);
+        $kode_persyaratan = $request->kode_persyaratan;
+        $pendaftaran_dokumen = DB::table('pendaftaran_dokumen')->where('no_pendaftaran', $no_pendaftaran)->where('kode_persyaratan', $kode_persyaratan);
+        $dokumen = $pendaftaran_dokumen->first();
+        $request->validate([
+            'kode_persyaratan' => 'required',
+            'dokumen' => 'required|max:10000|mimes:pdf',
+        ]);
+
+        if ($request->hasFile('dokumen')) {
+            $nama_dokumen = $no_pendaftaran . $kode_persyaratan . "." . $request->file('dokumen')->getClientOriginalExtension();
+        } else {
+            $nama_dokumen = $dokumen->file;
+        }
+
+
+        try {
+            $cek = $pendaftaran_dokumen->count();
+            if ($cek > 0) {
+                if ($request->hasFile('dokumen')) {
+                    $folderPath = "public/uploads/dokumen_pendaftaran/";
+                    $request->file('dokumen')->storeAs($folderPath, $nama_dokumen);
+                }
+            } else {
+                DB::table('pendaftaran_dokumen')->insert([
+                    'no_pendaftaran' => $no_pendaftaran,
+                    'kode_persyaratan' => $kode_persyaratan,
+                    'file' => $nama_dokumen
+                ]);
+                if ($request->hasFile('dokumen')) {
+                    $folderPath = "public/uploads/dokumen_pendaftaran/";
+                    $request->file('dokumen')->storeAs($folderPath, $nama_dokumen);
+                }
+
+                return Redirect::back()->with(['success' => 'Dokumen Berhasil Di Upload']);
+            }
+        } catch (\Exception $e) {
+            dd($e);
+            return Redirect::back()->with(['warning' => 'Dokumen Gagal Di Upload']);
+        }
     }
 }

@@ -144,6 +144,7 @@ Route::middleware(['auth:user', 'ceklevel:admin_unit,admin'])->group(function ()
     Route::put('/pendaftaran/{no_pendaftaran}', 'PendaftaranController@update');
     Route::delete('/pendaftaran/{jenjang}/{no_pendaftaran}/delete', 'PendaftaranController@destroy');
     Route::get('/pendaftaran/{jenjang}/{no_pendaftaran}/show', 'PendaftaranController@show');
+    Route::post('/pendaftaran/{no_pendaftaran}/updatedokumen', 'PendaftaranController@updatedokumen');
 });
 Route::middleware(['auth:user', 'ceklevel:admin'])->group(function () {
     Route::get('/karyawan', 'KaryawanController@index')->name('karyawan');
