@@ -366,9 +366,48 @@
             </div>
 
         </li>
+
+
+        @elseif(Auth::guard('user')->user()->level=="admin_ppdb")
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle {{ request()->is(['pendaftaran/*']) ? 'show' : '' }}" href="#navbar-extra" data-toggle="dropdown" role="button" aria-expanded="{{ request()->is(['pendaftaran/*']) ? 'true' : '' }}">
+                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/database -->
+                    <!-- Download SVG icon from http://tabler-icons.io/i/user-check -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                        <path d="M16 11l2 2l4 -4" />
+                    </svg>
+                </span>
+                <span class="nav-link-title">
+                    Pendaftaran
+                </span>
+            </a>
+            <div class="dropdown-menu {{ request()->is(['pendaftaran/*']) ? 'show' : '' }}">
+                <a class="dropdown-item {{ request()->is(['pendaftaran/TK','pendaftaran/TK/*']) ? 'active' : '' }}" href="/pendaftaran/TK">
+                    TK
+                </a>
+                <a class="dropdown-item {{ request()->is(['pendaftaran/SDIT','pendaftaran/SDIT/*']) ? 'active' : '' }}" href="/pendaftaran/SDIT">
+                    SDIT
+                </a>
+                <a class="dropdown-item {{ request()->is(['pendaftaran/MDU','pendaftaran/MDU/*']) ? 'active' : '' }}" href="/pendaftaran/MDU">
+                    MDU
+                </a>
+                <a class="dropdown-item {{ request()->is(['pendaftaran/MTS','pendaftaran/MTS/*']) ? 'active' : '' }}" href="/pendaftaran/MTS">
+                    MTs
+                </a>
+                <a class="dropdown-item {{ request()->is(['pendaftaran/MA','pendaftaran/MA/*']) ? 'active' : '' }}" href="/pendaftaran/MA">
+                    MA
+                </a>
+                <a class="dropdown-item {{ request()->is(['pendaftaran/ASRAMA','pendaftaran/ASRAMA/*']) ? 'active' : '' }}" href="/pendaftaran/ASRAMA">
+                    ASRAMA
+                </a>
+            </div>
+
+        </li>
         @endif
-
-
 
         @elseif (!empty(Auth::guard('karyawan')->user()->level))
         @if (Auth::guard('karyawan')->user()->level=="user")

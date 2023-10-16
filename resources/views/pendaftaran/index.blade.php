@@ -83,7 +83,7 @@ Data Pendaftaran {{$jenjang}}
                             <td>{{$p->nis}}</td>
                             <td>{{$p->nama_lengkap}}</td>
                             <td>{{$p->jenis_kelamin}}</td>
-                            <td>{{!empty($d->tgl_lahir) ? date('d-m-Y',strtotime($p->tanggal_lahir)) : ''}}</td>
+                            <td>{{!empty($p->tanggal_lahir) ? date('d-m-Y',strtotime($p->tanggal_lahir)) : ''}}</td>
                             <td>
                                 <div class="grid-container">
                                     <div class="grid-item">
