@@ -390,7 +390,7 @@
 
                                     @php
                                         $sisa = $jmlbiaya - $d->jumlah_potongan - $d->totalbayar - $jmlmutasi;
-                                        $totaltagihan = $jmlbiaya + $d->jumlah_potongan;
+                                        $totaltagihan = $jmlbiaya - $d->jumlah_potongan;
                                         // $totalpotongan = $totalpotongan+= $d->jumlah_potongan;
                                         $totalbayar = $d->totalbayar + $jmlmutasi;
                                         // $totalsisa = $totalsisa+= $sisa;
@@ -468,7 +468,7 @@
                                         </td>
                                         <td class="text-right" style="font-weight:bold; color:red">
                                             @php
-                                                $totaltagihan = $jmlbiaya + $d->jumlah_potongan;
+                                                $totaltagihan = $jmlbiaya - $d->jumlah_potongan;
                                             @endphp
                                             {{ number_format($totaltagihan, '0', '', '.') }}
                                         </td>
