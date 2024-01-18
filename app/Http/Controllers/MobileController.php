@@ -148,4 +148,21 @@ class MobileController extends Controller
             ->where('no_rekening', $no_rekening)->first();
         return view('mobile.mutasitabungan', compact('tabungan'));
     }
+
+    public function pembiayaan(){
+        $pembiayaan = DB::table('koperasi_pembiayaan')
+            ->select('no_akad', 'nama_pembiayaan', 'tgl_permohonan', 'jumlah', 'koperasi_pembiayaan.persentase', 'jangka_waktu', 'jmlbayar')
+            ->join('koperasi_jenispembiayaan', 'koperasi_pembiayaan.kode_pembiayaan', '=', 'koperasi_jenispembiayaan.kode_pembiayaan')
+            ->join('koperasi_anggota', 'koperasi_pembiayaan.no_anggota', '=', 'koperasi_anggota.no_anggota')
+            ->leftJoin('karyawan', 'koperasi_anggota.npp', '=', 'karyawan.npp')
+            ->where('koperasi_anggota.npp', Auth::user()->npp)
+            ->get();
+        return view('mobile.pembiayaan',compact('pembiayaan'));
+    }
+
+    public  function ajukanpembiayaan(){
+       
+        $anggota = DB::table('koperasi_anggota')->where('npp',Auth::user()->npp)->first();
+        return view('mobile.ajukanpembiayaan',compact('anggota'));
+    }
 }

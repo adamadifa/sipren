@@ -41,6 +41,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/mobile/pembiayaan">
+                            <div class="avatar avatar-40 rounded icon"><i class="bi bi-currency-exchange"></i></div>
+                            <div class="col">Pembiayaan</div>
+                            <div class="arrow"><i class="bi bi-chevron-right"></i></div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/mobile/changepassword" tabindex="-1">
                             <div class="avatar avatar-40 rounded icon"><i class="bi bi-gear"></i></div>
                             <div class="col">Ubah Password</div>
