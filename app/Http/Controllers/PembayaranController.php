@@ -545,7 +545,7 @@ class PembayaranController extends Controller
             ->first();
         $detailbiaya = DB::table('detailbiaya')
             ->where('kodebiaya', $kodebiaya)
-            ->where('id_jenisbayar', 11)
+            ->where('id_jenisbayar', 7)
             ->first();
         $mulai_pembayaran = $detailbiaya->mulai_pembayaran;
         $tahunakademik = $cekbiaya->tahunakademik;
