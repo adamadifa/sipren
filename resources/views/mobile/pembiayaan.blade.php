@@ -2,7 +2,7 @@
 @section('content')
     <div class="row mb-4">
         <div class="col-12 ">
-            <a href="/mobile/ajukanpembiayaan" class="btn btn-default btn-lg shadow-sm w-100">
+            <a href="/mobile/ajukanpembiayaan/1" class="btn btn-default btn-lg shadow-sm w-100">
                 Ajukan Pembiayaan
             </a>
         </div>

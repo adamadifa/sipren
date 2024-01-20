@@ -188,9 +188,9 @@ Route::middleware(['auth:karyawan', 'ceklevel:user'])->group(function () {
     Route::post('/mobile/{npp}/updatepassword', [MobileController::class, 'updatepassword']);
     Route::get('/mobile/{no_rekening}/mutasitabungan', [MobileController::class, 'mutasitabungan']);
 
-    Route::get('/mobile/pembiayaan',[MobileController::class,'pembiayaan']);
-    Route::get('/mobile/ajukanpembiayaan',[MobileController::class,'ajukanpembiayaan']);
-
+    Route::get('/mobile/pembiayaan', [MobileController::class, 'pembiayaan']);
+    Route::get('/mobile/ajukanpembiayaan/{step}', [MobileController::class, 'ajukanpembiayaan']);
+    Route::post('/mobile/ajukanpembiayaan/{step}/store', [MobileController::class, 'storeajukanpembiayaan']);
 });
 
 
