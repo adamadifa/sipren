@@ -69,7 +69,7 @@ class PendaftaranController extends Controller
         $id_siswa = $request->id_siswa;
         $t = Tahunakademik::where('status', 1)->first();
         $ta = substr($t['tahunakademik'], 2, 2) . substr($t['tahunakademik'], 7, 2);
-
+        $ta_pendaftaran = substr($t['tahunakademik'], 2, 2);
         //Cek Pendaftaran Terakhir
         $cekpendaftaran = DB::table('pendaftaran')
             ->select('no_pendaftaran', 'nis')
@@ -94,7 +94,7 @@ class PendaftaranController extends Controller
         }
 
 
-        $no_pendaftaran = buatkode($no_pendaftaran_terakhir, $format . $ta, 3);
+        $no_pendaftaran = buatkode($no_pendaftaran_terakhir, $format . $ta_pendaftaran, 3);
         $nis = buatkode($nis_terakhir, $format_nis, 3);
 
         $cekbiaya = DB::table('biaya')

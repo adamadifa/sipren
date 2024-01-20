@@ -992,7 +992,8 @@
         function confirmation(ev) {
             ev.preventDefault();
             var urlToRedirect = ev.currentTarget.getAttribute(
-            'href'); //use currentTarget because the click may be on the nested i tag and not a tag causing the href to be empty
+                'href'
+                ); //use currentTarget because the click may be on the nested i tag and not a tag causing the href to be empty
             console.log(urlToRedirect); // verify if this is the right URL
             swal({
                     title: "Anda Yakin Untuk Menghapus Data Ini?",
