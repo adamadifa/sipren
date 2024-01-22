@@ -267,7 +267,7 @@ class PembayaranController extends Controller
         $id_jenisbayar = $request->id_jenisbayar;
         $jumlah_bayar = str_replace(".", "", $request->jumlah);
         $bulanspp = $request->bulanspp;
-        if ($id_jenisbayar == "11" || $id_jenisbayar == "39") {
+        if ($id_jenisbayar == "7" || $id_jenisbayar == "39") {
             $cek = 0;
             $ket = $bulanspp;
         } else {
