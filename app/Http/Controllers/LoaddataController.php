@@ -75,7 +75,7 @@ class LoaddataController extends Controller
             }
 
 
-            if ($d->id_jenisbayar == '11' || $d->id_jenisbayar == '1' || $d->jenisbayar == 'PAS' || $d->jenisbayar == 'PAT' || $d->id_jenisbayar == '25' || $d->id_jenisbayar == '39') {
+            if ($d->id_jenisbayar == '7' || $d->id_jenisbayar == '1' || $d->jenisbayar == 'PAS' || $d->jenisbayar == 'PAT' || $d->id_jenisbayar == '25' || $d->id_jenisbayar == '39') {
                 $value = $d->jenisbayar . " " . $jenjang . " " . $d->tahunakademik;
             } else {
                 $value = $d->jenisbayar;
@@ -211,7 +211,7 @@ class LoaddataController extends Controller
     // Menampilkan Bulan Tunggakan
     function getoptionbulan(Request $request)
     {
-        $namabulan = ["", "Januari", "Februaru", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        $namabulan = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
         $mulaispp = $request->mulaispp;
         $no_pendaftaran = $request->no_pendaftaran;
         $kodebiaya = $request->kodebiaya;
@@ -244,7 +244,7 @@ class LoaddataController extends Controller
 
             ->where('tmp_bayar.no_pendaftaran', $no_pendaftaran)
             ->where('tmp_bayar.kodebiaya', $kodebiaya)
-            ->where('id_jenisbayar', '11')
+            ->where('id_jenisbayar', '7')
             ->groupBy('tmp_bayar.no_pendaftaran', 'tmp_bayar.kodebiaya', 'tmp_bayar.ket', 'totalrencana', 'totalhb')
             ->havingRaw('(IFNULL(SUM(jumlah_bayar),0) + IFNULL(totalhb,0)) = totalrencana ')
             ->get();
@@ -264,7 +264,7 @@ class LoaddataController extends Controller
             )
             ->where('historibayar.no_pendaftaran', $no_pendaftaran)
             ->where('historibayar_detail.kodebiaya', $kodebiaya)
-            ->where('id_jenisbayar', '11')
+            ->where('id_jenisbayar', '7')
             ->groupBy('historibayar.no_pendaftaran', 'historibayar_detail.kodebiaya', 'historibayar_detail.ket', 'totalrencana')
             ->havingRaw('SUM(jumlah_bayar) = totalrencana ')
             ->get();
