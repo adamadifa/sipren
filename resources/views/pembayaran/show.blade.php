@@ -993,7 +993,7 @@
             ev.preventDefault();
             var urlToRedirect = ev.currentTarget.getAttribute(
                 'href'
-                ); //use currentTarget because the click may be on the nested i tag and not a tag causing the href to be empty
+            ); //use currentTarget because the click may be on the nested i tag and not a tag causing the href to be empty
             console.log(urlToRedirect); // verify if this is the right URL
             swal({
                     title: "Anda Yakin Untuk Menghapus Data Ini?",
@@ -1151,7 +1151,7 @@
 
             $("#bulanspp").change(function() {
                 var id_jenisbayar = $("#id_jenisbayar").val();
-                if (id_jenisbayar == 11) {
+                if (id_jenisbayar == 7) {
                     loadrencanaspp();
                 } else {
                     loadrencanaum();
@@ -1346,7 +1346,7 @@
                         console.log(respond);
                         $("#kodebiaya").val(kodebiaya);
                         $("#mulaispp").val(mulaispp);
-                        if (id_jenisbayar == 11) {
+                        if (id_jenisbayar == 7) {
                             $("#jumlah_spp").focus();
                             loadbulanspp();
 
@@ -1485,7 +1485,7 @@
                 var no_rencana_spp = $(this).attr("data-norencanaspp");
                 var no_rencana_um = $(this).attr("data-norencanaum");
 
-                if (id_jenisbayar == 11) {
+                if (id_jenisbayar == 7) {
                     if (no_rencana_spp == "") {
                         alert("Oops", "Silahkan Generate SPP Terlebih Dahulu", "warning");
                     } else {
@@ -1555,7 +1555,7 @@
                 var jumlah_mutasi = $(this).attr("data-jumlahmutasi");
                 var no_rencana_spp = $(this).attr("data-norencanaspp");
                 var no_rencana_um = $(this).attr("data-norencanaum");
-                if (id_jenisbayar == 11) {
+                if (id_jenisbayar == 7) {
                     if (no_rencana_spp == "") {
                         alert("Oops", "Silahkan Generate SPP Terlebih Dahulu", "warning");
                     } else {
