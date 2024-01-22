@@ -1120,7 +1120,7 @@
             function loadbayar() {
                 var id_jenisbayar = $("#id_jenisbayar").val();
                 //alert(id_jenisbayar);
-                if (id_jenisbayar == "11" || id_jenisbayar == "39") {
+                if (id_jenisbayar == "7" || id_jenisbayar == "39") {
                     $("#ppdb").hide();
                     $("#spp").show();
                 } else {
@@ -1382,7 +1382,7 @@
                 var bulanspp = $("#bulanspp").val();
                 var wajib_bayar = $("#wajib_bayar").val();
                 var jumlah = 0;
-                if (id_jenisbayar == "11" || id_jenisbayar == "39") {
+                if (id_jenisbayar == "7" || id_jenisbayar == "39") {
                     jumlah = jumlah_spp;
                 } else {
                     jumlah = jumlah_bayar;
@@ -1400,7 +1400,7 @@
                     swal("Oops", "Pilih Dulu Jenis Biaya !", "warning");
                 } else if (jumlah == "" || jumlah == 0) {
                     swal("Oops", "Jumlah Bayar Harus Diisi !", "warning");
-                } else if (id_jenisbayar != "11" && parseInt(jml) > parseInt(wb)) {
+                } else if (id_jenisbayar != "7" && parseInt(jml) > parseInt(wb)) {
                     swal("Oops", "Pembayaran Melebihi Wajib Bayar ! Sisa Yang Harus Dibayarkan Sebesar " +
                         wb, "warning");
                 } else {
@@ -1420,7 +1420,7 @@
                             if (respond == 2) {
                                 swal("Oops", "Data Sudah diinputkan !", "warning");
                             }
-                            if (id_jenisbayar == "11") {
+                            if (id_jenisbayar == "7") {
                                 loadbulanspp();
                             } else if (id_jenisbayar == "39") {
                                 loadbulanum();
