@@ -65,7 +65,8 @@ class PendaftaranController extends Controller
 
     function store(Request $request)
     {
-        $jenjang = $request->jenjang == "ASRAMA" ? "ASR" : $request->jenjang;
+        $jenjang = $request->jenjang;
+        $tingkat = $request->jenjang == "ASRAMA" ? "ASR" : $request->jenjang;
         $id_siswa = $request->id_siswa;
         $t = Tahunakademik::where('status', 1)->first();
         $ta = substr($t['tahunakademik'], 2, 2) . substr($t['tahunakademik'], 7, 2);
@@ -77,7 +78,7 @@ class PendaftaranController extends Controller
             ->where('jenjang', $jenjang)
             ->orderBy('no_pendaftaran', 'desc')
             ->first();
-        $format = "REG" . $jenjang;
+        $format = "REG" . $tingkat;
         $format_nis = $ta . "." . "7.";
 
 
