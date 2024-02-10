@@ -125,7 +125,7 @@ class PembayaranController extends Controller
         $databiaya = DB::table('detailbiaya as db')
             ->select(
                 'rincian_biaya_siswa.no_pendaftaran',
-                'db.kodebiayad',
+                'db.kodebiaya',
                 'db.id_jenisbayar',
                 'jenisbayar',
                 'tahunakademik',
