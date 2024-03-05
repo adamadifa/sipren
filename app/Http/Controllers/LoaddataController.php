@@ -464,7 +464,7 @@ class LoaddataController extends Controller
     function getabsensiharian(Request $request)
     {
         $tanggal = $request->tanggal;
-        $unit = Auth::guard('user')->user()->id_unit == NULL ? 9 : Auth::guard('user')->user()->id_unit;
+        $unit = 9;
         // if($unit == "PST"){
         //     $unit = "PESANTREN";
         // }else{
