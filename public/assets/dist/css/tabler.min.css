@@ -12222,7 +12222,7 @@ body .content :hover::-webkit-scrollbar-thumb {
 }
 
 .navbar-dark {
-    background: #004c2d;
+    background: #450d1b;
     color: rgba(255, 255, 255, .7)
 }
 
@@ -17501,7 +17501,7 @@ a.step-item:hover {
 .markdown>table .thead-dark th,
 .table .thead-dark th {
     color: #fff;
-    background-color: #004c2d;
+    background-color: #450d1b;
     border-color: #656f83;
     font-size: 12px;
 }

@@ -609,7 +609,7 @@ ul.notifications>li>.more:focus {
  * TYPOGRAPHY
  ********************/
 .text-success {
-    color: #41B314;
+    color: #460e18;
 }
 
 .text-warning {
@@ -842,14 +842,14 @@ ul.list-justify>li span {
 }
 
 .btn-success {
-    background-color: #41B314;
-    border-color: #3ca512;
+    background-color: #460e18;
+    border-color: #460e18;
 }
 
 .btn-success:hover,
 .btn-success:focus {
-    background-color: #3ca512;
-    border-color: #3ca512;
+    background-color: #460e18;
+    border-color: #460e18;
 }
 
 .btn.disabled,
@@ -1102,7 +1102,7 @@ ul.activity-list>li .timestamp {
 }
 
 .progress-bar-success {
-    background-color: #41B314;
+    background-color: #460e18;
 }
 
 .progress-bar-warning {
@@ -1238,7 +1238,7 @@ ul.activity-list>li .timestamp {
 }
 
 .toast-success {
-    background-color: #41B314;
+    background-color: #460e18;
 }
 
 .toast-warning {
@@ -1461,7 +1461,7 @@ ul.activity-list>li .timestamp {
     display: block;
     width: 100%;
     height: 100%;
-    background: rgba(1, 113, 54, 0.92);
+    background: #460e18;
 }
 
 .auth-box .header {
@@ -1566,7 +1566,7 @@ ul.activity-list>li .timestamp {
  * HELPERS
  ********************/
 .bg-success {
-    background-color: #41B314;
+    background-color: #460e18;
 }
 
 .bg-warning {
@@ -1688,7 +1688,7 @@ ul.activity-list>li .timestamp {
 }
 
 .profile-header .online-status.status-available:before {
-    background-color: #41B314;
+    background-color: #460e18;
 }
 
 .profile-header .profile-stat {

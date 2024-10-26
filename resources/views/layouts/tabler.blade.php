@@ -25,7 +25,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <a href="." class="navbar-brand navbar-brand-autodark">
-                <img src="{{asset('assets/static/logo-persis.png')}}" alt="Tabler">
+                <img src="{{ asset('/klorofil/img/logowhite.png') }}" alt="Tabler">
             </a>
             @include('layouts.header')
             @include('layouts.navbar')
