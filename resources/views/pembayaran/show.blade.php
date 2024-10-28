@@ -16,11 +16,10 @@
                     </div>
                 </div>
                 <div class="d-flex">
-                    <a href="#" class="card-btn" style="background-color:#09482f; color:white">
+                    <a href="#" class="card-btn bg-primary text-white">
                         <!-- Download SVG icon from http://tabler-icons.io/i/camera -->
-                        <svg xmlns='http://www.w3.org/2000/svg' class='icon me-2' width='24' height='24'
-                            viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round'
-                            stroke-linejoin='round'>
+                        <svg xmlns='http://www.w3.org/2000/svg' class='icon me-2' width='24' height='24' viewBox='0 0 24 24' stroke-width='2'
+                            stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'>
                             <path stroke='none' d='M0 0h24v24H0z' fill='none' />
                             <path
                                 d='M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2' />
@@ -28,13 +27,12 @@
                         </svg>
                         Ganti Foto
                     </a>
-                    <a href="/pendaftaran/{{ $pembayaran->jenjang }}/{{ $pembayaran->no_pendaftaran }}/edit"
-                        class="card-btn" style="background-color: #ffb500; color:white ">
+                    <a href="/pendaftaran/{{ $pembayaran->jenjang }}/{{ $pembayaran->no_pendaftaran }}/edit" class="card-btn"
+                        style="background-color: #ffb500; color:white ">
                         <!-- Download SVG icon from http://tabler-icons.io/i/phone -->
                         <!-- Download SVG icon from http://tabler-icons.io/i/pencil -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24" height="24"
-                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
                             <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
@@ -51,9 +49,8 @@
                         <li class="nav-item">
                             <a href="#tabs-profile-16" class="nav-link active" data-bs-toggle="tab">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/user -->
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24" height="24"
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                    stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24" height="24" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                     <circle cx="12" cy="7" r="4"></circle>
                                     <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
@@ -64,9 +61,8 @@
                         <li class="nav-item">
                             <a href="#tabs-activity-16" class="nav-link" data-bs-toggle="tab">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/users -->
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                    stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                     <circle cx="9" cy="7" r="4" />
                                     <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
@@ -79,9 +75,8 @@
                         <li class="nav-item">
                             <a href="#tabs-pendaftaran-16" class="nav-link" data-bs-toggle="tab">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/file-text -->
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                    stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                     <path d="M14 3v4a1 1 0 0 0 1 1h4" />
                                     <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
@@ -270,8 +265,8 @@
                         <div class="form-group">
                             <select name="tahunakademik" id="tahunakademik" class="form-select">
                                 @foreach ($tahunakademik as $t)
-                                    <option @if ($t->tahunakademik == $ta_aktif->tahunakademik) selected @endif
-                                        value="{{ $t->tahunakademik }}">{{ $t->tahunakademik }}</option>
+                                    <option @if ($t->tahunakademik == $ta_aktif->tahunakademik) selected @endif value="{{ $t->tahunakademik }}">{{ $t->tahunakademik }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -432,8 +427,7 @@
                                             @if (!empty($d->jumlah_potongan))
                                                 <a href="#" class="editpotongan"
                                                     data-jenisbiaya="{{ $d->jenisbayar }} {{ $jenjang }} {{ $ta }}"
-                                                    data-kodebiaya="{{ $d->kodebiaya }}"
-                                                    data-idjenisbayar="{{ $d->id_jenisbayar }}"
+                                                    data-kodebiaya="{{ $d->kodebiaya }}" data-idjenisbayar="{{ $d->id_jenisbayar }}"
                                                     data-jumlahpotongan="
                                         {{ number_format($d->jumlah_potongan, '0', '', '.') }}">{{ number_format($d->jumlah_potongan, '0', '', '.') }}</a>
                                             @else
@@ -459,8 +453,7 @@
                                                 @else
                                                     <a href="#" class="btn btn-sm btn-danger tambahpotongan"
                                                         data-jenisbiaya="{{ $d->jenisbayar }} {{ $jenjang }} {{ $ta }}"
-                                                        data-kodebiaya="{{ $d->kodebiaya }}"
-                                                        data-idjenisbayar="{{ $d->id_jenisbayar }}"><i
+                                                        data-kodebiaya="{{ $d->kodebiaya }}" data-idjenisbayar="{{ $d->id_jenisbayar }}"><i
                                                             class="fa fa-gears"></i></a>
                                                 @endif
                                             @endif
@@ -476,8 +469,7 @@
                                             @if (!empty($jmlmutasi))
                                                 <a href="#" class="editmutasi"
                                                     data-jenisbiaya="{{ $d->jenisbayar }} {{ $jenjang }} {{ $ta }}"
-                                                    data-kodebiaya="{{ $d->kodebiaya }}"
-                                                    data-idjenisbayar="{{ $d->id_jenisbayar }}"
+                                                    data-kodebiaya="{{ $d->kodebiaya }}" data-idjenisbayar="{{ $d->id_jenisbayar }}"
                                                     data-jumlahmutasi="
                                         {{ number_format($jmlmutasi, '0', '', '.') }}"
                                                     data-norencanaspp="{{ $d->no_rencana_spp }}"
@@ -485,10 +477,8 @@
                                             @else
                                                 <a href=" #" class="btn btn-sm btn-primary inputmutasi"
                                                     data-jenisbiaya="{{ $d->jenisbayar }} {{ $jenjang }} {{ $ta }}"
-                                                    data-kodebiaya="{{ $d->kodebiaya }}"
-                                                    data-idjenisbayar="{{ $d->id_jenisbayar }}"
-                                                    data-norencanaspp="{{ $d->no_rencana_spp }}"
-                                                    data-norencanaum="{{ $d->no_rencana_um }}"><i
+                                                    data-kodebiaya="{{ $d->kodebiaya }}" data-idjenisbayar="{{ $d->id_jenisbayar }}"
+                                                    data-norencanaspp="{{ $d->no_rencana_spp }}" data-norencanaum="{{ $d->no_rencana_um }}"><i
                                                         class=" fa fa-book"></i></a>
                                             @endif
                                         </td>
@@ -614,7 +604,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <table class="table table-striped table-hover mb-3" style="font-size:11px">
                                     <thead class="thead-dark">
                                         <tr>
@@ -632,7 +622,7 @@
                                 </table>
 
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <table class="table table-striped table-hover mb-3" style="font-size:11px">
                                     <thead class="thead-dark">
                                         <tr>
@@ -647,7 +637,7 @@
                                     </thead>
                                     <tbody id="loadsppasrama"></tbody>
                                 </table>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -655,7 +645,7 @@
                                     <thead class="thead-dark">
                                         <tr>
                                             <th colspan="4">Histori Pembayaran</th>
-                                            <th><a href="#" style="float: right;" class="btn btn-primary bayar"><i
+                                            <th><a href="#" style="float: right;" class="btn btn-warning bayar"><i
                                                         class="fa fa-money mr-3"></i>Bayar</a>
                                             </th>
                                         </tr>
@@ -678,11 +668,10 @@
                                                 <td>{{ $d->name }}</td>
 
                                                 <td>
-                                                    <a href="/cetakkwitansi/{{ $d->no_transaksi }}" target="_blank"
-                                                        class="btn btn-sm btn-primary"><i class="fa fa-print"></i></a>
+                                                    <a href="/cetakkwitansi/{{ $d->no_transaksi }}" target="_blank" class="btn btn-sm btn-primary"><i
+                                                            class="fa fa-print"></i></a>
                                                     <a href="/pembayaran/{{ $d->no_transaksi }}/{{ $pembayaran->no_pendaftaran }}/hapus"
-                                                        class="btn btn-sm btn-danger" onclick="confirmation(event)"><i
-                                                            class="fa fa-trash-o"></i></a>
+                                                        class="btn btn-sm btn-danger" onclick="confirmation(event)"><i class="fa fa-trash-o"></i></a>
                                                     <a href="#" class="btn btn-success btn-sm detail"
                                                         data-notransaksi="{{ $d->no_transaksi }}">Detail</a>
                                                 </td>
@@ -712,17 +701,15 @@
                         @csrf
                         <input type="hidden" name="kodebiaya" id="kodebiaya">
                         <input type="hidden" name="cekdata" id="cekdata">
-                        <input type="hidden" name="no_pendaftaran" id="no_pendaftaran"
-                            value="{{ $pembayaran->no_pendaftaran }}">
+                        <input type="hidden" name="no_pendaftaran" id="no_pendaftaran" value="{{ $pembayaran->no_pendaftaran }}">
                         <input type="hidden" name="mulaispp" id="mulaispp">
                         <div class="row mb-3">
                             <div class="col-md-12">
                                 <div class="input-icon">
                                     <span class="input-icon-addon">
                                         <!-- Download SVG icon from http://tabler-icons.io/i/calendar -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                             <rect x="4" y="5" width="16" height="16" rx="2" />
                                             <line x1="16" y1="3" x2="16" y2="7" />
@@ -732,9 +719,8 @@
                                             <line x1="12" y1="15" x2="12" y2="18" />
                                         </svg>
                                     </span>
-                                    <input type="text" name="tgl_transaksi" id="tgl_transaksi"
-                                        value="{{ date(' Y-m-d') }}" placeholder="Tanggal Transaksi"
-                                        class="form-control" readonly>
+                                    <input type="text" name="tgl_transaksi" id="tgl_transaksi" value="{{ date(' Y-m-d') }}"
+                                        placeholder="Tanggal Transaksi" class="form-control" readonly>
                                 </div>
                             </div>
                         </div>
@@ -745,13 +731,10 @@
                                     <select name="id_jenisbayar" id="id_jenisbayar" class="form-select">
                                         <option value="">Pilih Jenis Biaya</option>
                                     </select>
-                                    <input type="hidden" name="sudah_bayar" id="sudah_bayar" value="" readonly
-                                        class="form-control">
-                                    <input type="hidden" name="wajib_bayar" id="wajib_bayar" value="" readonly
-                                        class="form-control">
+                                    <input type="hidden" name="sudah_bayar" id="sudah_bayar" value="" readonly class="form-control">
+                                    <input type="hidden" name="wajib_bayar" id="wajib_bayar" value="" readonly class="form-control">
 
-                                    <input type="hidden" name="sisa_bayar" id="sisa_bayar" value="" readonly
-                                        class="form-control">
+                                    <input type="hidden" name="sisa_bayar" id="sisa_bayar" value="" readonly class="form-control">
 
                                 </div>
                             </div>
@@ -760,19 +743,17 @@
                                 <div class="input-icon">
                                     <span class="input-icon-addon">
                                         <!-- Download SVG icon from http://tabler-icons.io/i/report-money -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path
-                                                d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
+                                            <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
                                             <rect x="9" y="3" width="6" height="4" rx="2" />
                                             <path d="M14 11h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5" />
                                             <path d="M12 17v1m0 -8v1" />
                                         </svg>
                                     </span>
-                                    <input type="text" name="jumlah_bayar" id="jumlah_bayar" value=""
-                                        style="text-align: right" class="form-control">
+                                    <input type="text" name="jumlah_bayar" id="jumlah_bayar" value="" style="text-align: right"
+                                        class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6" id="spp">
@@ -788,20 +769,18 @@
                                         <div class="input-icon">
                                             <span class="input-icon-addon">
                                                 <!-- Download SVG icon from http://tabler-icons.io/i/report-money -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                                                     stroke-linejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path
-                                                        d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
+                                                    <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
                                                     <rect x="9" y="3" width="6" height="4" rx="2" />
                                                     <path d="M14 11h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5" />
                                                     <path d="M12 17v1m0 -8v1" />
                                                 </svg>
                                             </span>
-                                            <input type="text" name="jumlah_spp" id="jumlah_spp" value=""
-                                                style="text-align: right" class="form-control">
+                                            <input type="text" name="jumlah_spp" id="jumlah_spp" value="" style="text-align: right"
+                                                class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -812,9 +791,8 @@
                                 <div class="form-group">
                                     <a href="#" class="btn btn-primary" id="tambah_bayar">
                                         <!-- Download SVG icon from http://tabler-icons.io/i/layout-grid-add -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                             <rect x="4" y="4" width="6" height="6" rx="1" />
                                             <rect x="14" y="4" width="6" height="6" rx="1" />
@@ -845,8 +823,7 @@
                                 <input class="form-check-input" name="statustransaksi" type="checkbox" value="1">
                                 <span class="form-check-label">Transaksi Pindahan Manual</span>
                             </label>
-                            <button type="submit" class="btn btn-primary w-100"
-                                style="background-color:#09482f; color:white"><i class="fa fa-send mr-2"></i>
+                            <button type="submit" class="btn btn-primary w-100"><i class="fa fa-send mr-2"></i>
                                 Simpan</button>
                         </div>
                     </form>
@@ -870,8 +847,8 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><span style="font-weight: bold" id="inputedit"></span> <span
-                            style="font-weight:bold" id="jenisbiayapotongan"></span>
+                    <h5 class="modal-title"><span style="font-weight: bold" id="inputedit"></span> <span style="font-weight:bold"
+                            id="jenisbiayapotongan"></span>
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -880,24 +857,21 @@
                         @csrf
                         <input type="hidden" id="kodebiayapotongan" name="kodebiaya">
                         <input type="hidden" id="id_jenisbayarpotongan" name="id_jenisbayar">
-                        <input type="hidden" id="no_pendaftaranpotongan" name="no_pendaftaran"
-                            value="{{ $pembayaran->no_pendaftaran }}">
+                        <input type="hidden" id="no_pendaftaranpotongan" name="no_pendaftaran" value="{{ $pembayaran->no_pendaftaran }}">
                         <div class="input-icon mb-3">
                             <span class="input-icon-addon">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/report-money -->
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                    stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
+                                    <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
                                     <rect x="9" y="3" width="6" height="4" rx="2" />
                                     <path d="M14 11h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5" />
                                     <path d="M12 17v1m0 -8v1" />
                                 </svg>
                             </span>
-                            <input type="text" name="jumlah_potongan" placeholder="Jumlah Penyesuaian"
-                                id="jumlah_potongan" autocomplete="off" style="text-align: right" class="form-control">
+                            <input type="text" name="jumlah_potongan" placeholder="Jumlah Penyesuaian" id="jumlah_potongan" autocomplete="off"
+                                style="text-align: right" class="form-control">
                         </div>
                         <button type="submit" name="submit" class="btn btn-primary w-100">Simpan</button>
                     </form>
@@ -910,8 +884,8 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><span style="font-weight: bold" id="inputeditmutasi"></span> <span
-                            style="font-weight:bold" id="jenisbiayamutasi"></span>
+                    <h5 class="modal-title"><span style="font-weight: bold" id="inputeditmutasi"></span> <span style="font-weight:bold"
+                            id="jenisbiayamutasi"></span>
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -920,24 +894,21 @@
                         @csrf
                         <input type="hidden" id="kodebiayamutasi" name="kodebiaya">
                         <input type="hidden" id="id_jenisbayarmutasi" name="id_jenisbayar">
-                        <input type="hidden" id="no_pendaftaranmutasi" name="no_pendaftaran"
-                            value="{{ $pembayaran->no_pendaftaran }}">
+                        <input type="hidden" id="no_pendaftaranmutasi" name="no_pendaftaran" value="{{ $pembayaran->no_pendaftaran }}">
                         <div class="input-icon mb-3">
                             <span class="input-icon-addon">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/report-money -->
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                    stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
+                                    <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
                                     <rect x="9" y="3" width="6" height="4" rx="2" />
                                     <path d="M14 11h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5" />
                                     <path d="M12 17v1m0 -8v1" />
                                 </svg>
                             </span>
-                            <input type="text" name="jumlah_mutasi" placeholder="Jumlah Mutasi Manual"
-                                id="jumlah_mutasi" autocomplete="off" style="text-align: right" class="form-control">
+                            <input type="text" name="jumlah_mutasi" placeholder="Jumlah Mutasi Manual" id="jumlah_mutasi" autocomplete="off"
+                                style="text-align: right" class="form-control">
                         </div>
                         <button type="submit" name="submit" class="btn btn-primary w-100">Simpan</button>
                     </form>
@@ -950,8 +921,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Edit SPP </h5>
-                    <button type="button" class="btn-close" id="close-spp" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close" id="close-spp" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="loadeditspp">
                 </div>
@@ -963,8 +933,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Edit Uang Lauk </h5>
-                    <button type="button" class="btn-close" id="close-spp" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close" id="close-spp" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="loadeditum">
                 </div>
@@ -977,8 +946,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Input Mutasi</h5>
-                    <button type="button" class="btn-close" id="close-spp" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close" id="close-spp" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="loadinputmutasispp">
                 </div>

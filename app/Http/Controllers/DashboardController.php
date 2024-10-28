@@ -34,8 +34,9 @@ class DashboardController extends Controller
                 ->get();
 
             $jmlkaryawan = DB::table('karyawan')->count();
+            $jmlsiswa = DB::table('siswa')->count();
 
-            return view('dashboard.index', compact('jmlkaryawan', 'jk', 'goldar', 'sk', 'unit'));
+            return view('dashboard.index', compact('jmlkaryawan', 'jk', 'goldar', 'sk', 'unit', 'jmlsiswa'));
         }
     }
 }

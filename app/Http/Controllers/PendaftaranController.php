@@ -67,7 +67,7 @@ class PendaftaranController extends Controller
     {
         $jenjang = $request->jenjang;
         $tingkat = $request->jenjang == "ASRAMA" ? "ASR" : $request->jenjang;
-        $id_siswa = $request->id_siswa;
+        $id_siswa = isset($request->id_siswa) ? $request->id_siswa : '';
         $t = Tahunakademik::where('status', 1)->first();
         $ta = substr($t['tahunakademik'], 2, 2) . substr($t['tahunakademik'], 7, 2);
         $ta_pendaftaran = substr($t['tahunakademik'], 2, 2);
@@ -110,7 +110,7 @@ class PendaftaranController extends Controller
                 ->select('id_siswa')
                 ->orderBy('id_siswa', 'desc')
                 ->first();
-            $idterakhir = $ceksiswa->id_siswa;
+            $idterakhir = $ceksiswa != null ? $ceksiswa->id_siswa : '';
             $id_siswa = buatkode($idterakhir, $ta, 3);
 
             if ($jenjang != 'TK') {

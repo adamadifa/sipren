@@ -9,19 +9,18 @@
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-toggle="dropdown">
 
                     @if (!empty(Auth::guard('karyawan')->user()->level))
-                    <?php $path = Storage::url('foto/'.Auth::guard('karyawan')->user()->foto); ?>
-                    <span class="avatar avatar"
-                        style="margin-right:20px !important; background-image: url({{url($path)}}"></span>
+                        <?php $path = Storage::url('foto/' . Auth::guard('karyawan')->user()->foto); ?>
+                        <span class="avatar avatar"
+                            style="margin-right:20px !important; background-image: url({{ asset('assets/static/avatars/000f.jpg') }}"></span>
                     @else
-
                     @endif
                     <div class="d-none d-xl-block pl-2 ml-3">
                         <div style="color:white">
 
                             @if (!empty(Auth::guard('user')->user()->name))
-                            {{Auth::guard('user')->user()->name}}
+                                {{ Auth::guard('user')->user()->name }}
                             @elseif(!empty(Auth::guard('karyawan')->user()->nama_lengkap))
-                            {{Auth::guard('karyawan')->user()->nama_lengkap}}
+                                {{ Auth::guard('karyawan')->user()->nama_lengkap }}
                             @endif
 
                         </div>

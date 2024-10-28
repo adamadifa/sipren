@@ -1,24 +1,24 @@
-<link rel="stylesheet" href="{{asset('assets/mycss/table.css')}}">
+<link rel="stylesheet" href="{{ asset('assets/mycss/table.css') }}">
 <div class="page">
     <div class="subpage">
         <table border="0" width="100%" style="text-align: left;">
             <thead>
                 <tr>
                     <th align="center" width="13%">
-                        <img src="{{asset('assets/static/logopersis.png')}}" alt=""
-                            style="width:auto; height:auto; max-width:70px; max-height:70px; display:block;"></th>
+                        <img src="{{ asset('klorofil/img/logoaja.png') }}" alt=""
+                            style="width:auto; height:auto; max-width:100px; max-height:100px; display:block;">
+                    </th>
                     <th>
                         <table border="0">
                             <thead>
                                 <tr>
                                     <th>
                                         <h5 style="margin: 0;" align="left">LAPORAN PENERIMAAN PEMBAYARAN </h5>
-                                        <h5 style="margin: 0;" align="left">PESANTREN PERSATUAN ISLAM 80 AL AMIN</h5>
-                                        <h5 style="margin: 0;" align="left">SINDANGKASIH CIAMIS</h5>
-                                        <h5 style="margin: 0;" align="left">PERIODE {{date('d-m-Y',strtotime($dari))}}
-                                            s/d {{date('d-m-Y',strtotime($sampai))}}</h5>
+                                        <h5 style="margin: 0;" align="left">PESANTREN NURUL IMAN</h5>
+                                        <h5 style="margin: 0;" align="left">PERIODE {{ date('d-m-Y', strtotime($dari)) }}
+                                            s/d {{ date('d-m-Y', strtotime($sampai)) }}</h5>
                                         @if (!empty($jb))
-                                        <h5 style="margin: 0;" align="left">JENIS BIAYA : {{$jb}}</h5>
+                                            <h5 style="margin: 0;" align="left">JENIS BIAYA : {{ $jb }}</h5>
                                         @endif
                                     </th>
                                 </tr>
@@ -43,52 +43,52 @@
             </thead>
             <tbody style="font-size: 14px; text-align:center">
                 @php
-                $total = 0;
+                    $total = 0;
                 @endphp
                 @foreach ($historibayar as $d)
-                @php
-                $total = $total += $d->jumlah_bayar;
-                @endphp
-                <tr>
-                    <td>{{$loop->iteration}}</td>
-                    <td>{{$d->no_transaksi}}</td>
-                    <td>{{$d->tgl_transaksi}}</td>
-                    <td>{{$d->nis}}</td>
-                    <td style="text-align:left">{{$d->nama_lengkap}}</td>
-                    <td>{{$d->jenjang}}</td>
-                    <td style="text-align:left">
-                        @if ($d->id_jenisbayar=="1" || $d->id_jenisbayar=="11")
-                        @php
-                        $ta = $d->tahunakademik;
-                        $jenjangbiaya = $d->jenjangbiaya;
-                        @endphp
-                        @else
-                        @php
-                        $ta = "";
-                        $jenjangbiaya = "";
-                        @endphp
-                        @endif
+                    @php
+                        $total = $total += $d->jumlah_bayar;
+                    @endphp
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $d->no_transaksi }}</td>
+                        <td>{{ $d->tgl_transaksi }}</td>
+                        <td>{{ $d->nis }}</td>
+                        <td style="text-align:left">{{ $d->nama_lengkap }}</td>
+                        <td>{{ $d->jenjang }}</td>
+                        <td style="text-align:left">
+                            @if ($d->id_jenisbayar == '1' || $d->id_jenisbayar == '11')
+                                @php
+                                    $ta = $d->tahunakademik;
+                                    $jenjangbiaya = $d->jenjangbiaya;
+                                @endphp
+                            @else
+                                @php
+                                    $ta = '';
+                                    $jenjangbiaya = '';
+                                @endphp
+                            @endif
 
-                        @if ($d->id_jenisbayar =="11")
-                        @php
-                        $bulan = "Bulan ". $namabulan[$d->ket];
-                        @endphp
-                        @else
-                        @php
-                        $bulan ="";
-                        @endphp
-                        @endif
-                        {{$d->jenisbayar}} {{$jenjangbiaya}} {{$bulan}} {{$ta}}
-                    </td>
-                    <td style="text-align: right">
-                        {{ number_format($d->jumlah_bayar,'0','','.')}}
-                    </td>
-                </tr>
+                            @if ($d->id_jenisbayar == '11')
+                                @php
+                                    $bulan = 'Bulan ' . $namabulan[$d->ket];
+                                @endphp
+                            @else
+                                @php
+                                    $bulan = '';
+                                @endphp
+                            @endif
+                            {{ $d->jenisbayar }} {{ $jenjangbiaya }} {{ $bulan }} {{ $ta }}
+                        </td>
+                        <td style="text-align: right">
+                            {{ number_format($d->jumlah_bayar, '0', '', '.') }}
+                        </td>
+                    </tr>
                 @endforeach
                 <tr>
                     <th colspan="7">TOTAL</th>
                     <th style="text-align: right">
-                        {{ number_format($total,'0','','.')}}
+                        {{ number_format($total, '0', '', '.') }}
                     </th>
                 </tr>
             </tbody>
