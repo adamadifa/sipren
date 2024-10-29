@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Biaya;
 use App\Historibayar_detail;
 use App\Jenisbayar;
 use App\Pembayaran;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Redis;
 
 class PembayaranController extends Controller
@@ -57,7 +59,20 @@ class PembayaranController extends Controller
         $query->where('biaya.jenjang', '!=', 'ASRAMA');
 
         //dd($request);
-        $query->select('rincian_biaya_siswa.no_pendaftaran', 'tgl_pendaftaran', 'nis', 'nisn', 'nama_lengkap', 'jenis_kelamin', 'tanggal_lahir', 'biaya.jenjang', 'biaya.tahunakademik', 'nama_ayah');
+        $query->select(
+            'rincian_biaya_siswa.no_pendaftaran',
+            'tgl_pendaftaran',
+            'nis',
+            'nisn',
+            'nama_lengkap',
+            'jenis_kelamin',
+            'tanggal_lahir',
+            'biaya.jenjang',
+            'biaya.tahunakademik',
+            'nama_ayah',
+            'rincian_biaya_siswa.kodebiaya',
+            'rincian_biaya_siswa.status as status_naikkelas'
+        );
         $query->join('pendaftaran', 'rincian_biaya_siswa.no_pendaftaran', '=', 'pendaftaran.no_pendaftaran');
         $query->join('siswa', 'pendaftaran.id_siswa', '=', 'siswa.id_siswa');
         $query->join('biaya', 'rincian_biaya_siswa.kodebiaya', '=', 'biaya.kodebiaya');
@@ -775,5 +790,69 @@ class PembayaranController extends Controller
             ->get();
         $namabulan = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
         return view('pembayaran.inputmutasium', compact('rencanaum', 'namabulan'));
+    }
+
+
+    public function prosesnaikkelas(Request $request)
+    {
+        $ta = Tahunakademik::where('status', 1)->first();
+        $no_pendaftaran = Crypt::decrypt($request->no_pendaftaran);
+        $kodebiaya = Crypt::decrypt($request->kodebiaya);
+        $biaya = Biaya::where('kodebiaya', $kodebiaya)->first();
+        $tingkat = $biaya->tingkat;
+        $nextingkat = $tingkat + 1;
+
+        $cekbiayanextingkat = Biaya::where('tingkat', $nextingkat)->where('jenjang', $biaya->jenjang)->where('tahunakademik', $ta->tahunakademik)->first();
+        DB::beginTransaction();
+        try {
+            if ($cekbiayanextingkat == null) {
+                return Redirect::back()->with(['warning' => 'Biaya Tingkat ' . $nextingkat . ' Jenjang ' . $biaya->jenjang . ' Tahun Ajaran ' . $ta->tahunakademik . ' Belum Ada']);
+            } else {
+                DB::table('rincian_biaya_siswa')->insert([
+                    'no_pendaftaran' => $no_pendaftaran,
+                    'kodebiaya' => $cekbiayanextingkat->kodebiaya
+                ]);
+
+                DB::table('rincian_biaya_siswa')->where('no_pendaftaran', $no_pendaftaran)->where('kodebiaya', $kodebiaya)->update([
+                    'status' => 1
+                ]);
+
+                DB::commit();
+                return Redirect::back()->with(['success' => 'Proses Naik Kelas Berhasil']);
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return Redirect::back()->with(['warning' => 'Proses Naik Kelas Gagal']);
+        }
+    }
+
+
+    public function batalkannaikkelas(Request $request)
+    {
+
+        $ta = Tahunakademik::where('status', 1)->first();
+        $no_pendaftaran = Crypt::decrypt($request->no_pendaftaran);
+        $kodebiaya = Crypt::decrypt($request->kodebiaya);
+        $biaya = Biaya::where('kodebiaya', $kodebiaya)->first();
+        $tingkat = $biaya->tingkat;
+        $nextingkat = $tingkat + 1;
+
+        $cekbiayanextingkat = Rincianbiaya::join('biaya', 'rincian_biaya_siswa.kodebiaya', '=', 'biaya.kodebiaya')
+            ->where('tingkat', $nextingkat)
+            ->where('jenjang', $biaya->jenjang)
+            ->first();
+        DB::beginTransaction();
+        try {
+            //code...
+            DB::table('rincian_biaya_siswa')->where('no_pendaftaran', $no_pendaftaran)->where('kodebiaya', $cekbiayanextingkat->kodebiaya)->delete();
+            DB::table('rincian_biaya_siswa')->where('no_pendaftaran', $no_pendaftaran)->where('kodebiaya', $kodebiaya)->update([
+                'status' => 0
+            ]);
+            DB::commit();
+            return Redirect::back()->with(['success' => 'Proses Naik Kelas Berhasil Dibatalkan']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return Redirect::back()->with(['warning' => $e->getMessage()]);
+        }
     }
 }

@@ -20,8 +20,9 @@
                                                 <thead>
                                                     <tr>
                                                         <th align="left">
-                                                            <h5 style="margin: 0;">PESANTREN PERSATUAN ISLAM
-                                                                80<br>SINDANGKASIH-CIAMIS</h5>
+                                                            <h5 style="margin: 0;">PESANTREN NURUL IMAN
+                                                                <br>CIGALONTANG KAB. TASIKMALAYA
+                                                            </h5>
                                                         </th>
                                                     </tr>
                                                 </thead>
@@ -30,8 +31,7 @@
                                                     <tr>
                                                         <td>
                                                             <h6 style="margin: 0;">
-                                                                Jl. Raya Sindangkasih, Ancol, Kec. Sindangkasih,<br>
-                                                                Kabupaten Ciamis, Jawa Barat 46268
+                                                                Kp. Parakanpanjang Rt 001 Rw 002 Sukamanah Cigalontang
                                                             </h6>
                                                         </td>
                                                     </tr>
@@ -49,8 +49,7 @@
                     </thead>
                 </table>
                 </td>
-                <td id="invoice" width="35%"
-                    style=" font-size: 250%;font-weight:bold; letter-spacing: 10px;padding-bottom:10px;" align="right"
+                <td id="invoice" width="35%" style=" font-size: 250%;font-weight:bold; letter-spacing: 10px;padding-bottom:10px;" align="right"
                     valign="bottom">
                     KUITANSI </td>
                 </tr>
@@ -66,15 +65,15 @@
                             <table width="100%" style="font-size: 68%;font-weight:normal;" border="0" cellspacing="0">
                                 <tr>
                                     <td width="17%" style="vertical-align: top; font-weight:bold;">NIS</td>
-                                    <td style="vertical-align: top;">: {{$bayar->nis}} </td>
+                                    <td style="vertical-align: top;">: {{ $bayar->nis }} </td>
                                 </tr>
                                 <tr>
                                     <td width="17%" style="vertical-align: top; font-weight:bold;">Nama Santri</td>
-                                    <td style="vertical-align: top;">: {{$bayar->nama_lengkap}}</td>
+                                    <td style="vertical-align: top;">: {{ $bayar->nama_lengkap }}</td>
                                 </tr>
                                 <tr>
                                     <td width="17%" style="vertical-align: top; font-weight:bold; ">Tingkat</td>
-                                    <td style="vertical-align: top;">: {{$bayar->jenjang}}</td>
+                                    <td style="vertical-align: top;">: {{ $bayar->jenjang }}</td>
                                 </tr>
                             </table>
                         </td>
@@ -82,17 +81,17 @@
                             <table width="100%" style="font-size: 68%;font-weight:normal;" border="0" cellspacing="0">
                                 <tr>
                                     <td width="30%" style="vertical-align: top; font-weight:bold;">Kasir</td>
-                                    <td style="vertical-align: top;">: {{$bayar->name}} </td>
+                                    <td style="vertical-align: top;">: {{ $bayar->name }} </td>
                                 </tr>
                                 <tr>
                                     <td width="30%" style="vertical-align: top; font-weight:bold;">Tanggal</td>
                                     <td style="vertical-align: top;">:
-                                        {{date("d-m-Y",strtotime($bayar->tgl_transaksi))}}
+                                        {{ date('d-m-Y', strtotime($bayar->tgl_transaksi)) }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td width="30%" style="vertical-align: top; font-weight:bold;">No. Kuitansi</td>
-                                    <td style="vertical-align: top;">: {{$bayar->no_transaksi}}</td>
+                                    <td style="vertical-align: top;">: {{ $bayar->no_transaksi }}</td>
                                 </tr>
 
                                 <tr>
@@ -108,8 +107,7 @@
                     </tr>
                 </table>
             </div><br />
-            <table width="100%" border="0"
-                style="font-size: 100%; vertical-align: top; font-weight:normal;border-collapse: collapse;">
+            <table width="100%" border="0" style="font-size: 100%; vertical-align: top; font-weight:normal;border-collapse: collapse;">
 
                 <thead>
                     <tr>
@@ -125,27 +123,27 @@
                     </tr>
                 </thead>
                 @php
-                $total = 0;
+                    $total = 0;
                 @endphp
                 @foreach ($detail as $d)
-                @php
-                $total += $d->jumlah_bayar;
-                @endphp
+                    @php
+                        $total += $d->jumlah_bayar;
+                    @endphp
 
-                <tr>
-                    <td width="5%" align="center" style="border-left: 1px solid black;">
-                        {{$loop->iteration}}
-                    </td>
-                    <td style="border-left: 1px solid black; padding-left: 5px;">
-                        {{$d->jenisbayar}} @if ($d->jenisbayar=="SPP")
-                        ({{$namabulan[$d->ket]}})
-                        @endif <b>{{$d->jenjang}} {{ $d->tahunakademik}}</b>
-                    </td>
-                    <td width="5%" align="right" style="border-right: 1px solid black; border-left: 1px solid black;">
-                        {{number_format($d->jumlah_bayar,'0','','.')}}
-                    </td>
+                    <tr>
+                        <td width="5%" align="center" style="border-left: 1px solid black;">
+                            {{ $loop->iteration }}
+                        </td>
+                        <td style="border-left: 1px solid black; padding-left: 5px;">
+                            {{ $d->jenisbayar }} @if ($d->jenisbayar == 'SPP')
+                                ({{ $namabulan[$d->ket] }})
+                            @endif <b>{{ $d->jenjang }} {{ $d->tahunakademik }}</b>
+                        </td>
+                        <td width="5%" align="right" style="border-right: 1px solid black; border-left: 1px solid black;">
+                            {{ number_format($d->jumlah_bayar, '0', '', '.') }}
+                        </td>
 
-                </tr>
+                    </tr>
                 @endforeach
 
                 <tr>
@@ -162,13 +160,13 @@
 
                     <td align="right" colspan="2" style="padding-right: 5px; border: 1px solid black;">Total :</td>
                     <td align="right" style=" border: 1px solid black;padding-right: 5px;">
-                        {{number_format($total,'0','','.')}}</td>
+                        {{ number_format($total, '0', '', '.') }}</td>
                 </tr>
                 <tr>
                     <td colspan="3" style="font-size:150%">
                         <br>
                         <br>
-                        Terbilang : <b><i>{{ ucwords(terbilang($total))}} Rupiah</i></b>
+                        Terbilang : <b><i>{{ ucwords(terbilang($total)) }} Rupiah</i></b>
                     </td>
                 </tr>
                 <tr>
@@ -187,7 +185,7 @@
                             </tr>
                             <tr>
                                 <td align="center"></td>
-                                <td align="center">{{$bayar->name}}</td>
+                                <td align="center">{{ $bayar->name }}</td>
                             </tr>
                         </table>
                     </td>
@@ -375,9 +373,9 @@
     @media print {
 
         /*html, body {
-			width: 210mm;
-			height: 148.5mm;
-		}*/
+   width: 210mm;
+   height: 148.5mm;
+  }*/
         .page {
             margin: 0;
             border: initial;
@@ -392,7 +390,7 @@
 </style>
 <script type="text/javascript">
     function myFunction() {
-		    window.print();
-		}
-		window.onload = myFunction;
+        window.print();
+    }
+    window.onload = myFunction;
 </script>

@@ -79,6 +79,9 @@ Route::middleware(['auth:user', 'ceklevel:admin_unit,admin,admin_ppdb'])->group(
     Route::post('/pembayaran/store_bayartemp', 'PembayaranController@store_bayartemp');
     Route::post('/pembayaran/hapus_bayartemp', 'PembayaranController@hapus_bayartemp');
     Route::post('/pembayaran', 'PembayaranController@store');
+    Route::get('/pembayaran/{no_pendaftaran}/{kodebiaya}/prosesnaikkelas', 'PembayaranController@prosesnaikkelas');
+    Route::get('/pembayaran/{no_pendaftaran}/{kodebiaya}/batalkannaikkelas', 'PembayaranController@batalkannaikkelas');
+
     Route::get('/cetakkwitansi/{no_transaksi}', 'PembayaranController@cetakkwitansi');
     Route::get('/pembayaran/{no_transaksi}/{no_pendaftaran}/hapus', 'PembayaranController@hapus');
     Route::post('/simpanpotongan', 'PembayaranController@simpanpotongan');
@@ -145,6 +148,8 @@ Route::middleware(['auth:user', 'ceklevel:admin_unit,admin,admin_ppdb'])->group(
     Route::delete('/pendaftaran/{jenjang}/{no_pendaftaran}/delete', 'PendaftaranController@destroy');
     Route::get('/pendaftaran/{jenjang}/{no_pendaftaran}/show', 'PendaftaranController@show');
     Route::post('/pendaftaran/{no_pendaftaran}/updatedokumen', 'PendaftaranController@updatedokumen');
+
+    Route::get('/pendaftaranonline', 'PendaftaranonlineController@index');
 });
 Route::middleware(['auth:user', 'ceklevel:admin'])->group(function () {
     Route::get('/karyawan', 'KaryawanController@index')->name('karyawan');

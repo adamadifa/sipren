@@ -1,42 +1,35 @@
 @extends('layouts.tabler')
-@section('title', 'Data Pembayaran Siswa')
-@section('page-pretitle', 'Data Pembayaran Siswa')
-@section('page-title', 'Data Pembayaran Siswa')
+@section('title', 'Data Pendaftaran Online')
+@section('page-pretitle', 'Data Pendaftaran Online')
+@section('page-title', 'Data Pendaftaran Online')
 @section('content')
     <div class="card mt-2">
         <div class="card-body">
             <form action="#" method="GET">
                 <div class="row">
                     <div class="col-md-2">
-                        <label for="" class="form-label">NIS</label>
-                        <div class="form-group">
-                            <input type="text" name="nis" class="form-control" placeholder="NIS" value="{{ Request::get('nis') }}">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <label for="" class="form-label">Nama Siswa</label>
+                        <label for="" class="form-label">Nama Pendaftar</label>
                         <div class="form-group">
                             <input type="text" name="nama_lengkap" class="form-control" placeholder="Nama Siswa"
                                 value="{{ Request::get('nama_lengkap') }}">
                         </div>
                     </div>
-                    @if ($id_unit != 9)
-                        <input type="hidden" data-tingkat = "{{ $unit->jumlah_tingkat }}" id="jenjang" name="jenjang" value="{{ $unit->nama_unit }}">
-                    @else
-                        <div class="col-md-2">
-                            <label for="" class="form-label">Jenjang</label>
-                            <div class="form-group">
-                                <select name="jenjang" id="jenjang" class="form-select">
-                                    <option value="">Jenjang</option>
-                                    @foreach ($jenjang as $j)
-                                        <option @if (Request::get('jenjang') == $j->nama_unit) selected @endif data-tingkat={{ $j->jumlah_tingkat }}
-                                            value="{{ $j->nama_unit }}">
-                                            {{ $j->nama_unit }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+
+                    {{-- <input type="hidden" data-tingkat = "{{ $unit->jumlah_tingkat }}" id="jenjang" name="jenjang" value="{{ $unit->nama_unit }}"> --}}
+
+                    <div class="col-md-2">
+                        <label for="" class="form-label">Jenjang</label>
+                        <div class="form-group">
+                            <select name="jenjang" id="jenjang" class="form-select">
+                                <option value="">Jenjang</option>
+                                @foreach ($jenjang as $j)
+                                    <option @if (Request::get('jenjang') == $j->nama_unit) selected @endif data-tingkat={{ $j->jumlah_tingkat }}
+                                        value="{{ $j->nama_unit }}">
+                                        {{ $j->nama_unit }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                    @endif
+                    </div>
 
                     <div class="col-md-2">
                         <label for="" class="form-label">Tingkat</label>
@@ -50,7 +43,7 @@
                         <label for="" class="form-label">Tahun Akademik</label>
                         <div class="form-group">
                             <select name="tahunakademik" id="tahunakademik" class="form-select">
-                                @foreach ($takademik as $t)
+                                @foreach ($tahunakademik as $t)
                                     <option
                                         @if (!empty(Request('tahunakademik'))) @if ($t['tahunakademik'] == Request('tahunakademik'))
                                                 selected @endif
@@ -88,55 +81,34 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>#</th>
-                                    <th>No. Registrasi</th>
-                                    <th>NISN</th>
-                                    <th>NIS</th>
+                                    <th>No. Pendaftar</th>
                                     <th>Nama Lengkap</th>
                                     <th>Jenis Kelamin</th>
-                                    <th>Tanggal Lahir</th>
+                                    <th>Tgl Lahir</th>
                                     <th>Jenjang</th>
-                                    <th>Nama Ayah</th>
-                                    <th>Tahun Masuk</th>
+                                    <th>Tahun Ajaran</th>
+                                    <th>Jumlah</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($pendaftaran as $p)
                                     <tr>
-                                        <td>{{ $loop->iteration + $pendaftaran->firstItem() - 1 }}</td>
-                                        <td><b>{{ $p->no_pendaftaran }}</b></td>
-                                        <td>{{ $p->nisn }}</td>
-                                        <td>{{ $p->nis }}</td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $p->no_pendaftaran }}</td>
                                         <td>{{ $p->nama_lengkap }}</td>
                                         <td>{{ $p->jenis_kelamin }}</td>
                                         <td>{{ date('d-m-Y', strtotime($p->tanggal_lahir)) }}</td>
                                         <td>{{ $p->jenjang }}</td>
-                                        <td>{{ $p->nama_ayah }}</td>
                                         <td>{{ $p->tahunakademik }}</td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <a href="/pembayaran/{{ \Crypt::encrypt($p->no_pendaftaran) }}/show" class="btn btn-primary btn-sm me-2">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                                @if ($p->tahunakademik != $ta['tahunakademik'])
-                                                    @if ($p->status_naikkelas == 0)
-                                                        <a href="/pembayaran/{{ \Crypt::encrypt($p->no_pendaftaran) }}/{{ Crypt::encrypt($p->kodebiaya) }}/prosesnaikkelas"
-                                                            class="btn btn-warning btn-sm">Proses Naik Kelas</a>
-                                                    @else
-                                                        <a href="/pembayaran/{{ \Crypt::encrypt($p->no_pendaftaran) }}/{{ Crypt::encrypt($p->kodebiaya) }}/batalkannaikkelas"
-                                                            class="btn btn-danger btn-sm">Batalkan</a>
-                                                    @endif
-                                                @endif
-                                            </div>
-
-
-                                        </td>
+                                        <td style="text-align: right">{{ number_format($p->biaya_pendaftaran, 0, ',', '.') }}</td>
+                                        <td></td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
 
-                        <div class="mt-4" style="float:right">{{ $pendaftaran->links() }}</div>
+                        {{-- <div class="mt-4" style="float:right">{{ $pendaftaran->links() }}</div> --}}
                     </div>
                 </div>
             </div>

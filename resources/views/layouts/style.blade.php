@@ -1,13 +1,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="{{asset('assets/dist/css/bootstrap.css')}}" rel="stylesheet" />
+<link href="{{ asset('assets/dist/css/bootstrap.css') }}" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
-<link href="{{asset('assets/dist/libs/flatpickr/dist/flatpickr.min.css')}}" rel="stylesheet" />
-<link href="{{asset('assets/dist/libs/jqvmap/dist/jqvmap.min.css')}}" rel="stylesheet" />
-<link href="{{asset('assets/dist/css/tabler.min.css')}}" rel="stylesheet" />
-<link href="{{asset('assets/dist/css/tabler-flags.min.css')}}" rel="stylesheet" />
-<link href="{{asset('assets/dist/css/tabler-payments.min.css')}}" rel="stylesheet" />
-<link href="{{asset('assets/dist/css/tabler-vendors.min.css')}}" rel="stylesheet" />
-<link href="{{asset('assets/dist/css/demo.min.css')}}" rel="stylesheet" />
+<link href="{{ asset('assets/dist/libs/flatpickr/dist/flatpickr.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/dist/libs/jqvmap/dist/jqvmap.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/dist/css/tabler.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/dist/css/tabler-flags.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/dist/css/tabler-payments.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/dist/css/tabler-vendors.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/dist/css/demo.min.css') }}" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.css">
 
 
@@ -48,5 +48,9 @@
     .warnaputih {
         color: white;
     }
-
+</style>
+<style>
+    .form-group {
+        margin-bottom: 10px;
+    }
 </style>
