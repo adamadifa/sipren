@@ -32,7 +32,7 @@ Route::get('/daftar', function () {
 
 Route::middleware(['guest:karyawan'])->group(function () {
     Route::get('/', function () {
-        return view('mobile.login');
+        return view('Auth.login');
     });
     Route::get('/mobile', [MobileController::class, 'index']);
 });
