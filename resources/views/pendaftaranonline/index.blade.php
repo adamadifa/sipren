@@ -21,21 +21,12 @@
                         <label for="" class="form-label">Jenjang</label>
                         <div class="form-group">
                             <select name="jenjang" id="jenjang" class="form-select">
-                                <option value="">Jenjang</option>
+                                <option value=""> Semua Jenjang</option>
                                 @foreach ($jenjang as $j)
                                     <option @if (Request::get('jenjang') == $j->nama_unit) selected @endif data-tingkat={{ $j->jumlah_tingkat }}
                                         value="{{ $j->nama_unit }}">
                                         {{ $j->nama_unit }}</option>
                                 @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <label for="" class="form-label">Tingkat</label>
-                        <div class="form-group">
-                            <select name="tingkat" id="tingkat" class="form-select">
-                                <option value="">Tingkat</option>
                             </select>
                         </div>
                     </div>
@@ -77,7 +68,7 @@
                 <div class="col-md-12">
                     @include('layouts.notification')
                     <div class="table-responsive">
-                        <table class="table bordered table-striped">
+                        <table class="table bordered table-striped table-bordered">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>#</th>
@@ -88,7 +79,9 @@
                                     <th>Jenjang</th>
                                     <th>Tahun Ajaran</th>
                                     <th>Jumlah</th>
-                                    <th></th>
+                                    <th>Bukti</th>
+                                    <th>Status</th>
+                                    <th>#</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -102,7 +95,25 @@
                                         <td>{{ $p->jenjang }}</td>
                                         <td>{{ $p->tahunakademik }}</td>
                                         <td style="text-align: right">{{ number_format($p->biaya_pendaftaran, 0, ',', '.') }}</td>
-                                        <td></td>
+                                        <td>
+                                            <a href="{{ asset('storage/' . $p->no_pendaftaran . '.jpg') }}" target="_blank">Lihat Bukti</a>
+                                        </td>
+                                        <td>
+                                            @if (!empty($p->no_pendaftaran_online))
+                                                <span class="badge bg-success">Diterima</span>
+                                            @else
+                                                <span class="badge bg-danger">Belum Diterima</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if (!empty($p->no_pendaftaran_online))
+                                                <a href="#" class="btn btn-danger btn-sm">Batalkan</a>
+                                            @else
+                                                <a href="/pendaftaranonline/{{ Crypt::encrypt($p->no_pendaftaran) }}/proses"
+                                                    class="btn btn-success btn-sm"><i class="fa fa-external-link mr-2"></i> Proses
+                                                    Terima</a>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
