@@ -49,6 +49,15 @@
                                             <th>#</th>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                        @foreach ($kelassiswa as $d)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $d->no_pendaftaran }}</td>
+                                                <td>{{ $d->nama_lengkap }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

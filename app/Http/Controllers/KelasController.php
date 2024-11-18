@@ -87,6 +87,13 @@ class KelasController extends Controller
     {
         $kode_kelas = Crypt::decrypt($kode_kelas);
         $kelas = Kelas::where('kode_kelas', $kode_kelas)->first();
+        $kelassiswa = DB::table('kelas_siswa')
+            ->join('pendaftaran', 'kelas_siswa.no_pendaftaran', '=', 'pendaftaran.no_pendaftaran')
+            ->join('siswa', 'pendaftaran.id_siswa', '=', 'siswa.id_siswa')
+            ->where('kelas_siswa.kode_kelas', $kode_kelas)
+            ->get();
+
+        $data['kelassiswa'] = $kelassiswa;
         $data['kelas'] = $kelas;
         return view('kelas.setkelas', $data);
     }
