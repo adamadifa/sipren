@@ -19,8 +19,9 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle {{ set_show(['karyawan', 'karyawan/create', 'unit']) }}" href="#navbar-extra"
-                        data-toggle="dropdown" role="button" aria-expanded="{{ set_true(['karyawan', 'karyawan/create', 'unit']) }}">
+                    <a class="nav-link dropdown-toggle {{ set_show(['karyawan', 'karyawan/create', 'unit', 'kelas', 'kelas/*']) }}"
+                        href="#navbar-extra" data-toggle="dropdown" role="button"
+                        aria-expanded="{{ set_true(['karyawan', 'karyawan/create', 'unit', 'kelas', 'kelas/*']) }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/database -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
@@ -36,13 +37,16 @@
                         </span>
                     </a>
                     <div
-                        class="dropdown-menu  {{ request()->is(['siswa', 'siswa/*', 'jenisbayar', 'jenisbayar/*', 'karyawan', 'karyawan/*']) ? 'show' : '' }}">
+                        class="dropdown-menu  {{ request()->is(['siswa', 'siswa/*', 'jenisbayar', 'jenisbayar/*', 'karyawan', 'karyawan/*', 'kelas', 'kelas/*']) ? 'show' : '' }}">
                         <a class="dropdown-item  {{ request()->is(['karyawan', 'karyawan/*']) ? 'active' : '' }}" href="/karyawan">
                             Karyawan
                         </a>
                         <a class="dropdown-item {{ set_active(['siswa', 'siswa/create', 'siswa/cari']) }} {{ request()->is('siswa/*') ? 'active' : '' }}"
                             href="/siswa">
                             Siswa
+                        </a>
+                        <a class="dropdown-item {{ set_active(['kelas', 'kelas/*']) }} {{ request()->is('kelas/*') ? 'active' : '' }}" href="/kelas">
+                            Kelas
                         </a>
                         {{-- <a class="dropdown-item {{ set_active('unit') }}" href="/unit">
                     Unit

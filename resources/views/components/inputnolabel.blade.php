@@ -1,4 +1,3 @@
-<label class="form-label">{{ $label }}</label>
 <div class="input-icon @error($field) is-invalid @enderror">
     <span class="input-icon-addon">
         {!! $icon !!}

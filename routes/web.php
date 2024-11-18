@@ -176,6 +176,14 @@ Route::middleware(['auth:user', 'ceklevel:admin'])->group(function () {
     Route::put('/tahunakademik/{id}', 'TahunakademikController@update');
 
     Route::get('/checklistibadah/karyawanlist', 'CheckingibadahController@karyawanlist');
+
+    Route::get('/kelas', 'KelasController@index');
+    Route::get('/kelas/create', 'KelasController@create');
+    Route::post('/kelas/store', 'KelasController@store');
+    Route::delete('/kelas/{kode_delete}/delete', 'KelasController@destroy');
+    Route::get('/kelas/{kode_kelas}/setkelas', 'KelasController@setkelas');
+    Route::post('/kelas/addsiswa', 'KelasController@addkelas');
+    Route::post('/kelas/{kode_kelas}/storesiswa', 'KelasController@storesiswa');
 });
 
 Route::middleware(['auth:karyawan', 'ceklevel:user'])->group(function () {
