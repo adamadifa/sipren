@@ -19,9 +19,9 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle {{ set_show(['karyawan', 'karyawan/create', 'unit', 'kelas', 'kelas/*']) }}"
+                    <a class="nav-link dropdown-toggle {{ set_show(['karyawan', 'karyawan/create', 'unit', 'kelas', 'kelas/*', 'guru', 'guru/*', 'matepelajaran', 'matapelajaran/*', 'jadwalpelajaran', 'jadwalpelajaran/*']) }}"
                         href="#navbar-extra" data-toggle="dropdown" role="button"
-                        aria-expanded="{{ set_true(['karyawan', 'karyawan/create', 'unit', 'kelas', 'kelas/*']) }}">
+                        aria-expanded="{{ set_true(['karyawan', 'karyawan/create', 'unit', 'kelas', 'kelas/*', 'guru', 'guru/*', 'matepelajaran', 'matapelajaran/*', 'jadwalpelajaran', 'jadwalpelajaran/*']) }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/database -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
@@ -37,7 +37,7 @@
                         </span>
                     </a>
                     <div
-                        class="dropdown-menu  {{ request()->is(['siswa', 'siswa/*', 'jenisbayar', 'jenisbayar/*', 'karyawan', 'karyawan/*', 'kelas', 'kelas/*']) ? 'show' : '' }}">
+                        class="dropdown-menu  {{ request()->is(['siswa', 'siswa/*', 'jenisbayar', 'jenisbayar/*', 'karyawan', 'karyawan/*', 'kelas', 'kelas/*', 'guru', 'guru/*', 'matapelajaran', 'matapelajaran/*', 'jadwalpelajaran', 'jadwalpelajaran/*']) ? 'show' : '' }}">
                         <a class="dropdown-item  {{ request()->is(['karyawan', 'karyawan/*']) ? 'active' : '' }}" href="/karyawan">
                             Karyawan
                         </a>
@@ -45,8 +45,20 @@
                             href="/siswa">
                             Siswa
                         </a>
-                        <a class="dropdown-item {{ set_active(['kelas', 'kelas/*']) }} {{ request()->is('kelas/*') ? 'active' : '' }}" href="/kelas">
+                        <a class="dropdown-item {{ set_active(['guru', 'guru/*']) }} {{ request()->is('guru/*') ? 'active' : '' }}" href="/guru">
+                            Guru
+                        </a>
+                        <a class="dropdown-item {{ set_active(['kelas', 'kelas/*']) }} {{ request()->is('kelas/*') ? 'active' : '' }}"
+                            href="/kelas">
                             Kelas
+                        </a>
+                        <a class="dropdown-item {{ set_active(['matapelajaran', 'matapelajaran/*']) }} {{ request()->is('matapelajaran/*') ? 'active' : '' }}"
+                            href="/matapelajaran">
+                            Mata Pelajaran
+                        </a>
+                        <a class="dropdown-item {{ set_active(['jadwalpelajaran', 'jadwalpelajaran/*']) }} {{ request()->is('jadwalpelajaran/*') ? 'active' : '' }}"
+                            href="/jadwalpelajaran">
+                            Jadwal Pelajaran
                         </a>
                         {{-- <a class="dropdown-item {{ set_active('unit') }}" href="/unit">
                     Unit
@@ -138,7 +150,7 @@
 
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle {{ request()->is(['checklistibadah/*']) ? 'show' : '' }}" href="#navbar-extra"
+                    {{-- <a class="nav-link dropdown-toggle {{ request()->is(['checklistibadah/*']) ? 'show' : '' }}" href="#navbar-extra"
                         data-toggle="dropdown" role="button" aria-expanded="{{ request()->is(['checklistibadah/*']) ? 'true' : '' }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/database -->
@@ -154,7 +166,7 @@
                         <span class="nav-link-title">
                             Checklist Ibadah
                         </span>
-                    </a>
+                    </a> --}}
                     <div class="dropdown-menu {{ request()->is(['checklistibadah/*']) ? 'show' : '' }}">
                         <a class="dropdown-item {{ request()->is(['checklistibadah/karyawanlist', 'checklistibadah/karyawan/*']) ? 'active' : '' }}"
                             href="/checklistibadah/karyawanlist">
@@ -183,19 +195,19 @@
                         </span>
                     </a>
                     <div class="dropdown-menu {{ set_show(['checkingibadah/laporan', 'absensi/laporan', 'checkingibadah/rekap']) }}">
-                        <a class="dropdown-item {{ set_active(['checkingibadah/laporan']) }}" href="/checkingibadah/laporan">
+                        {{-- <a class="dropdown-item {{ set_active(['checkingibadah/laporan']) }}" href="/checkingibadah/laporan">
                             Checklist Ibadah
                         </a>
                         <a class="dropdown-item {{ set_active(['checkingibadah/rekap']) }}" href="/checkingibadah/rekap">
                             Rekap Ibadah
-                        </a>
+                        </a> --}}
                         <a class="dropdown-item {{ set_active(['absensi/laporan']) }}" href="/absensi/laporan">
                             Absensi SDM
                         </a>
                     </div>
 
                 </li>
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle href=" #navbar-extra" data-toggle="dropdown" role="button">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/file-text -->
@@ -218,7 +230,7 @@
                             Presensi Siswa
                         </a>
                     </div>
-                </li>
+                </li> --}}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {{ request()->is(['laporanpembayaran']) ? 'show' : '' }}" href="#navbar-extra"
                         data-toggle="dropdown" role="button" aria-expanded="">

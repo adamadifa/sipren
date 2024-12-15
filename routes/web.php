@@ -180,10 +180,34 @@ Route::middleware(['auth:user', 'ceklevel:admin'])->group(function () {
     Route::get('/kelas', 'KelasController@index');
     Route::get('/kelas/create', 'KelasController@create');
     Route::post('/kelas/store', 'KelasController@store');
-    Route::delete('/kelas/{kode_delete}/delete', 'KelasController@destroy');
+    Route::delete('/kelas/{kode_kelas}/delete', 'KelasController@destroy');
     Route::get('/kelas/{kode_kelas}/setkelas', 'KelasController@setkelas');
     Route::post('/kelas/addsiswa', 'KelasController@addkelas');
     Route::post('/kelas/{kode_kelas}/storesiswa', 'KelasController@storesiswa');
+    Route::delete('/kelas/{no_pendaftaran}/{kode_kelas}/deletesiswa', 'KelasController@destroysiswa');
+    Route::get('/kelas/getkelas', 'KelasController@getkelas')->name('getkelas');
+
+    Route::get('/guru', 'GuruController@index');
+    Route::get('/guru/create', 'GuruController@create');
+    Route::post('/guru/store', 'GuruController@store');
+    Route::get('/guru/{kode_guru}/edit', 'GuruController@edit');
+    Route::put('/guru/{kode_guru}/update', 'GuruController@update');
+    Route::delete('/guru/{kode_guru}/delete', 'GuruController@destroy');
+
+    Route::get('/matapelajaran', 'MatapelajaranController@index');
+    Route::get('/matapelajaran/create', 'MatapelajaranController@create');
+    Route::post('/matapelajaran/store', 'MatapelajaranController@store');
+    Route::get('/matapelajaran/{kode_matpel}/edit', 'MatapelajaranController@edit');
+    Route::put('/matapelajaran/{kode_matpel}/update', 'MatapelajaranController@update');
+    Route::delete('/matapelajaran/{kode_matpel}/delete', 'MatapelajaranController@destroy');
+
+    Route::get('/jadwalpelajaran', 'JadwalpelajaranController@index');
+    Route::get('/jadwalpelajaran/create', 'JadwalpelajaranController@create');
+    Route::post('/jadwalpelajaran/store', 'JadwalpelajaranController@store');
+
+    Route::get('/presensisiswa/{kode_jadwal}/create', 'PresensisiswaController@create');
+    Route::get('/presensisiswa/{kode_jadwal}/cetak', 'PresensisiswaController@cetak');
+    Route::post('/presensisiswa/{kode_jadwal}/store', 'PresensisiswaController@store')->name('presensisiswa.store');
 });
 
 Route::middleware(['auth:karyawan', 'ceklevel:user'])->group(function () {

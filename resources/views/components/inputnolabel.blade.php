@@ -5,7 +5,8 @@
     <input type="text" name="{{ $field }}" id="{{ $field }}"
         @isset($value) value="{{ old($field) ? old($field) : $value }}"
     @else value="{{ old($field) }}" @endisset
-        class="form-control uppercase @error($field) is-invalid @enderror" placeholder="{{ $placeholder }}">
+        class="form-control uppercase @error($field) is-invalid @enderror" placeholder="{{ $placeholder }}"
+        @isset($disabled) disabled @endisset>
 </div>
 @error($field)
     <div class="mb-2 mt-2 invalid-feedback">{{ ucwords($message) }}</div>

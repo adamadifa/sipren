@@ -112,6 +112,7 @@ class KelasController extends Controller
             ->where('biaya.tahunakademik', $tahunakademik)
             ->where('biaya.jenjang', $jenjang)
             ->where('biaya.tingkat', $tingkat)
+            ->whereNotIn('rincian_biaya_siswa.no_pendaftaran', DB::table('kelas_siswa')->where('kode_kelas', $request->kode_kelas)->pluck('no_pendaftaran'))
             ->get();
 
         $data['listsiswa'] = $listsiswa;
@@ -138,5 +139,28 @@ class KelasController extends Controller
             return redirect('/kelas')->with('failed', 'Data gagal disimpan' . $e->getMessage());
             //throw $th;
         }
+    }
+
+    public function destroysiswa($no_pendaftaran, $kode_kelas)
+    {
+        $no_pendaftaran = Crypt::decrypt($no_pendaftaran);
+        $kode_kelas = Crypt::decrypt($kode_kelas);
+        DB::beginTransaction();
+        try {
+            DB::table('kelas_siswa')->where('no_pendaftaran', $no_pendaftaran)->where('kode_kelas', $kode_kelas)->delete();
+            DB::commit();
+            return redirect()->back()->with('success', 'Data berhasil dihapus');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with('failed', 'Data gagal dihapus: ' . $e->getMessage());
+        }
+    }
+
+    public function getkelas(Request $request)
+    {
+        $tahunakademik = $request->tahunakademik;
+        $jenjang = $request->jenjang;
+        $kelas = Kelas::where('tahunakademik', $tahunakademik)->where('jenjang', $jenjang)->get();
+        return response()->json($kelas);
     }
 }
