@@ -108,20 +108,22 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($siswa_kelas as $d)
-                                            <td style="vertical-align: middle">{{ $loop->iteration }}</td>
-                                            <td style="vertical-align: middle">{{ $d->nis }}</td>
-                                            <td style="vertical-align: middle">{{ $d->nama_lengkap }}</td>
-                                            <td>
-                                                <div class="form-group mb-0">
-                                                    <input type="hidden" name="no_pendaftaran[]" value="{{ $d->no_pendaftaran }}">
-                                                    <select name="status[]" class="form-select p-1">
-                                                        <option value="Hadir">Hadir</option>
-                                                        <option value="Izin">Izin</option>
-                                                        <option value="Sakit">Sakit</option>
-                                                        <option value="Alpa">Alpa</option>
-                                                    </select>
-                                                </div>
-                                            </td>
+                                            <tr>
+                                                <td style="vertical-align: middle">{{ $loop->iteration }}</td>
+                                                <td style="vertical-align: middle">{{ $d->nis }}</td>
+                                                <td style="vertical-align: middle">{{ $d->nama_lengkap }}</td>
+                                                <td>
+                                                    <div class="form-group mb-0">
+                                                        <input type="hidden" name="no_pendaftaran[]" value="{{ $d->no_pendaftaran }}">
+                                                        <select name="status[]" class="form-select p-1">
+                                                            <option value="Hadir">Hadir</option>
+                                                            <option value="Izin">Izin</option>
+                                                            <option value="Sakit">Sakit</option>
+                                                            <option value="Alpa">Alpa</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
