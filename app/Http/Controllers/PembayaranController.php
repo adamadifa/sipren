@@ -68,6 +68,7 @@ class PembayaranController extends Controller
             'jenis_kelamin',
             'tanggal_lahir',
             'biaya.jenjang',
+            'biaya.tingkat',
             'biaya.tahunakademik',
             'nama_ayah',
             'rincian_biaya_siswa.kodebiaya',

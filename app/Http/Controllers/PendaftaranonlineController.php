@@ -137,14 +137,39 @@ class PendaftaranonlineController extends Controller
                 'jenjang' => $jenjang,
                 'tahunakademik' => $t['tahunakademik'],
                 'id_user' => Auth::guard('user')->user()->id,
+                'no_pendaftaran_online' => $pendaftaran->no_pendaftaran
             ]);
-
+            if (empty($cekbiaya)) {
+                DB::rollBack();
+                return redirect('/pendaftaranonline')->with(['failed' => 'Biaya Belum Di Set']);
+            } else {
+                DB::table('rincian_biaya_siswa')->insert([
+                    'no_pendaftaran' => $no_pendaftaran,
+                    'kodebiaya' => $cekbiaya->kodebiaya
+                ]);
+            }
             DB::commit();
             return redirect('/pendaftaranonline')->with(['success' => 'Data Berhasil di simpan']);
         } catch (\Exception $e) {
             DB::rollBack();
             dd($e);
             return redirect('/pendaftaranonline')->with(['failed' => 'Data Gagal di simpan']);
+        }
+    }
+
+    public function batalkan($no_pendaftaran)
+    {
+        $no_pendaftaran = Crypt::decrypt($no_pendaftaran);
+        try {
+            //code...
+            DB::table('pendaftaran')->where('no_pendaftaran_online', $no_pendaftaran)->delete();
+            DB::table('pendaftaran_online')->where('no_pendaftaran', $no_pendaftaran)->update([
+                'status' => 0
+            ]);
+            return redirect('/pendaftaranonline')->with(['success' => 'Data Berhasil di Batalkan']);
+        } catch (\Exception $e) {
+            //throw $th;
+            return redirect('/pendaftaranonline')->with(['failed' => 'Data Gagal di Batalkan']);
         }
     }
 }

@@ -151,6 +151,7 @@ Route::middleware(['auth:user', 'ceklevel:admin_unit,admin,admin_ppdb'])->group(
 
     Route::get('/pendaftaranonline', 'PendaftaranonlineController@index');
     Route::get('/pendaftaranonline/{no_pendaftaran}/proses', 'PendaftaranonlineController@proses');
+    Route::get('/pendaftaranonline/{no_pendaftaran}/batalkan', 'PendaftaranonlineController@batalkan');
 });
 Route::middleware(['auth:user', 'ceklevel:admin'])->group(function () {
     Route::get('/karyawan', 'KaryawanController@index')->name('karyawan');

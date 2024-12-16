@@ -107,7 +107,8 @@
                                         </td>
                                         <td>
                                             @if (!empty($p->no_pendaftaran_online))
-                                                <a href="#" class="btn btn-danger btn-sm">Batalkan</a>
+                                                <a href="/pendaftaranonline/{{ Crypt::encrypt($p->no_pendaftaran) }}/batalkan"
+                                                    class="btn btn-danger btn-sm">Batalkan</a>
                                             @else
                                                 <a href="/pendaftaranonline/{{ Crypt::encrypt($p->no_pendaftaran) }}/proses"
                                                     class="btn btn-success btn-sm"><i class="fa fa-external-link mr-2"></i> Proses

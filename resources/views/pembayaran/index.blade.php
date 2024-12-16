@@ -95,6 +95,7 @@
                                     <th>Jenis Kelamin</th>
                                     <th>Tanggal Lahir</th>
                                     <th>Jenjang</th>
+                                    <th>Tingkat</th>
                                     <th>Nama Ayah</th>
                                     <th>Tahun Masuk</th>
                                     <th></th>
@@ -111,6 +112,7 @@
                                         <td>{{ $p->jenis_kelamin }}</td>
                                         <td>{{ date('d-m-Y', strtotime($p->tanggal_lahir)) }}</td>
                                         <td>{{ $p->jenjang }}</td>
+                                        <td>{{ $p->tingkat }}</td>
                                         <td>{{ $p->nama_ayah }}</td>
                                         <td>{{ $p->tahunakademik }}</td>
                                         <td>
