@@ -56,6 +56,11 @@ return [
             'driver' => 'session',
             'provider' => 'karyawans',
         ],
+
+        'guru' => [
+            'driver' => 'session',
+            'provider' => 'gurus',
+        ],
     ],
 
     /*
@@ -84,6 +89,11 @@ return [
         'karyawans' => [
             'driver' => 'eloquent',
             'model' => App\Karyawan::class,
+        ],
+
+        'gurus' => [
+            'driver' => 'eloquent',
+            'model' => App\Guru::class,
         ],
 
         // 'users' => [

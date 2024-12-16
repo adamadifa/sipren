@@ -19,8 +19,10 @@ class LoginController extends Controller
         } else if ((Auth::guard('karyawan')->attempt(['npp' => $request->email, 'password' => $request->password]))) {
             //dd(Str::length(Auth::guard('user')->user()));
             return redirect('/karyawan/' . $request->email);
+        } else if ((Auth::guard('guru')->attempt(['kode_guru' => $request->email, 'password' => $request->password]))) {
+            return redirect('/dashboardguru');
         } else {
-            return redirect('login');
+            //return redirect('login');
         }
         // if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
         //     return redirect('/karyawan');

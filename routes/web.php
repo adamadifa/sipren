@@ -210,6 +210,14 @@ Route::middleware(['auth:user', 'ceklevel:admin'])->group(function () {
     Route::post('/presensisiswa/{kode_jadwal}/store', 'PresensisiswaController@store')->name('presensisiswa.store');
 });
 
+
+Route::middleware(['auth:guru', 'ceklevel:guru'])->group(function () {
+    Route::get('/dashboardguru', 'DashboardController@guru')->name('dashboardguru');
+    Route::get('/presensisiswa/{kode_jadwal}/create', 'PresensisiswaController@create');
+    Route::get('/presensisiswa/{kode_jadwal}/cetak', 'PresensisiswaController@cetak');
+    Route::post('/presensisiswa/{kode_jadwal}/store', 'PresensisiswaController@store')->name('presensisiswa.store');
+});
+
 Route::middleware(['auth:karyawan', 'ceklevel:user'])->group(function () {
     Route::get('/checkingibadah', 'CheckingibadahController@checkingibadah');
     Route::post('/loadchecklistibadah', 'CheckingibadahController@loadchecklistibadah');
