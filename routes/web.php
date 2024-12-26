@@ -175,6 +175,7 @@ Route::middleware(['auth:user', 'ceklevel:admin'])->group(function () {
     Route::post('/tahunakademik', 'TahunakademikController@store');
     Route::get('/tahunakademik/{id}/edit', 'TahunakademikController@edit');
     Route::put('/tahunakademik/{id}', 'TahunakademikController@update');
+    Route::get('/tahunakademik/{id}/setactive', 'TahunakademikController@setactive');
 
     Route::get('/checklistibadah/karyawanlist', 'CheckingibadahController@karyawanlist');
 

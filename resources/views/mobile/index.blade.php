@@ -31,8 +31,7 @@
     </div>
     <div class="row mb-3">
         <div class="col-12 px-0">
-            <div
-                class="swiper-container cardswiper swiper-container-initialized swiper-container-horizontal swiper-container-ios">
+            <div class="swiper-container cardswiper swiper-container-initialized swiper-container-horizontal swiper-container-ios">
                 <div class="swiper-wrapper" id="swiper-wrapper-e7c52537e6cf4732" aria-live="polite"
                     style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
                     <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 3">
@@ -206,12 +205,12 @@
     </div>
     <ul class="nav nav-pills nav-justified tabs mb-3" id="assetstabs" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#cards" type="button"
-                role="tab" aria-controls="cards" aria-selected="true">Presensi</button>
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#cards" type="button" role="tab"
+                aria-controls="cards" aria-selected="true">Presensi</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="currency-tab" data-bs-toggle="tab" data-bs-target="#currency" type="button"
-                role="tab" aria-controls="currency" aria-selected="false">Pembiayaan</button>
+            <button class="nav-link" id="currency-tab" data-bs-toggle="tab" data-bs-target="#currency" type="button" role="tab"
+                aria-controls="currency" aria-selected="false">Pembiayaan</button>
         </li>
     </ul>
     <div class="tab-content" id="assetstabsContent">

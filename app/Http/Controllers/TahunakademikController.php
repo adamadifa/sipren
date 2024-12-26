@@ -44,4 +44,18 @@ class TahunakademikController extends Controller
             }
         }
     }
+
+    public function setactive($id)
+    {
+        DB::beginTransaction();
+        try {
+            Tahunakademik::where('status', 1)->update(['status' => 0]);
+            Tahunakademik::where('id', $id)->update(['status' => 1]);
+            DB::commit();
+            return redirect('/tahunakademik/')->with(['success' => 'Data Berhasil Disimpan']);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/tahunakademik/')->with(['failed' => 'Data Gagal Disimpan']);
+        }
+    }
 }
