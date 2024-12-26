@@ -7,7 +7,7 @@
         </div>
         <div class="col align-self-center text-center">
             <div class="logo-small">
-                <img src="{{ asset('assets-mobile/img/logo.png') }}" alt="">
+                <img src="{{ asset('assets-mobile/img/logo.png') }}" alt="" class="img-fluid">
                 <h5>SIP Al Amin</h5>
             </div>
         </div>
