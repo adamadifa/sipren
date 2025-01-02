@@ -8,6 +8,7 @@ use App\Kelas;
 use App\Matapelajaran;
 use App\Tahunakademik;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 
 class JadwalpelajaranController extends Controller
@@ -82,6 +83,17 @@ class JadwalpelajaranController extends Controller
             return redirect('/jadwalpelajaran')->with('success', 'Data berhasil disimpan');
         } catch (\Exception $e) {
             return redirect('/jadwalpelajaran')->with('failed', 'Data gagal disimpan' . $e->getMessage());
+        }
+    }
+
+    public function destroy($kode_jadwal)
+    {
+        $kode_jadwal = Crypt::decrypt($kode_jadwal);
+        try {
+            Jadwalpelajaran::where('kode_jadwal', $kode_jadwal)->delete();
+            return redirect('/jadwalpelajaran')->with('success', 'Jadal Pelajaran berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect('/jadwalpelajaran')->with('failed', 'Jadwal Pelajaran gagal dihapus' . $e->getMessage());
         }
     }
 }

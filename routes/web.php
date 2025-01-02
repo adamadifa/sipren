@@ -206,6 +206,7 @@ Route::middleware(['auth:user', 'ceklevel:admin'])->group(function () {
     Route::get('/jadwalpelajaran', 'JadwalpelajaranController@index');
     Route::get('/jadwalpelajaran/create', 'JadwalpelajaranController@create');
     Route::post('/jadwalpelajaran/store', 'JadwalpelajaranController@store');
+    Route::post('/jadwalpelajaran/{kode_jadwal}/delete', 'JadwalpelajaranController@delete');
 
     Route::get('/presensisiswa/{kode_jadwal}/create', 'PresensisiswaController@create');
     Route::get('/presensisiswa/{kode_jadwal}/cetak', 'PresensisiswaController@cetak');

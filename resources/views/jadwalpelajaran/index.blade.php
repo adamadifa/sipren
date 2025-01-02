@@ -173,10 +173,10 @@
                                                     class="btn btn-sm btn-info mr-2"><i class="fa fa-list"></i></a>
                                                 <a href="/presensisiswa/{{ Crypt::encrypt($d->kode_jadwal) }}/cetak"
                                                     class="btn btn-sm btn-success mr-2" target="_blank"><i class="fa fa-print"></i></a>
-                                                <form action="/jadwalpelajaran/{{ $d->kode_jadwal }}/delete" method="post">
+                                                <form action="/kelas/{{ Crypt::encrypt($d->kode_jadwal) }}/delete" method="post">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                                    <button class="btn btn-danger btn-sm delete-confirm"><i class="fa fa-trash-o"></i></button>
                                                 </form>
                                             </div>
 
