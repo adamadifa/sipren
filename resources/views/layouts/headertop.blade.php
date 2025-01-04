@@ -21,7 +21,7 @@
                                 {{ Auth::guard('user')->user()->name }}
                             @elseif(!empty(Auth::guard('karyawan')->user()->nama_lengkap))
                                 {{ Auth::guard('karyawan')->user()->nama_lengkap }}
-                            @elseif(!empty(Auth::guard('guru')->user()->nama_lengkap))
+                            @elseif(!empty(Auth::guard('guru')->user()->nama_guru))
                                 {{ Auth::guard('guru')->user()->nama_guru }}
                             @endif
 

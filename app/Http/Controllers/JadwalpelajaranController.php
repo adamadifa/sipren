@@ -8,6 +8,7 @@ use App\Kelas;
 use App\Matapelajaran;
 use App\Tahunakademik;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 
@@ -36,6 +37,10 @@ class JadwalpelajaranController extends Controller
 
         if (!empty($request->kode_guru)) {
             $query->where('jadwal_pelajaran.kode_guru', $request->kode_guru);
+        }
+
+        if (Auth::guard('guru')->check()) {
+            $query->where('jadwal_pelajaran.kode_guru', Auth::guard('guru')->user()->kode_guru);
         }
         $jadwal = $query->get();
         $data['jadwal'] = $jadwal;
