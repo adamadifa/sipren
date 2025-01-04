@@ -16,6 +16,7 @@ class JadwalpelajaranController extends Controller
 {
     public function index(Request $request)
     {
+        dd(Auth::guard('guru')->check());
         $ta_aktif = Tahunakademik::where('status', 1)->first();
         $query = Jadwalpelajaran::query();
         $query->join('kelas', 'jadwal_pelajaran.kode_kelas', '=', 'kelas.kode_kelas');
