@@ -7,6 +7,7 @@ use App\Jadwalpelajaran;
 use App\Kelassiswa;
 use App\Presensisiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 
@@ -53,9 +54,15 @@ class PresensisiswaController extends Controller
                 ]);
             }
             DB::commit();
+            if (Auth::guard('guru')->check()) {
+                return redirect('/dashboardguru')->with('success', 'Data berhasil disimpan');
+            }
             return redirect('/jadwalpelajaran')->with('success', 'Data berhasil disimpan');
         } catch (\Exception $e) {
             DB::rollback();
+            if (Auth::guard('guru')->check()) {
+                return redirect('/dashboardguru')->with('success', 'Data berhasil disimpan');
+            }
             return redirect('/jadwalpelajaran')->with('failed', 'Data gagal disimpan' . $e->getMessage());
         }
     }
