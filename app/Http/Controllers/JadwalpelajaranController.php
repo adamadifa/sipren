@@ -16,7 +16,7 @@ class JadwalpelajaranController extends Controller
 {
     public function index(Request $request)
     {
-        dd(Auth::guard('guru')->check());
+
         $ta_aktif = Tahunakademik::where('status', 1)->first();
         $query = Jadwalpelajaran::query();
         $query->join('kelas', 'jadwal_pelajaran.kode_kelas', '=', 'kelas.kode_kelas');
@@ -40,9 +40,7 @@ class JadwalpelajaranController extends Controller
             $query->where('jadwal_pelajaran.kode_guru', $request->kode_guru);
         }
 
-        if (!empty(Auth::guard('guru')->user()->kode_guru)) {
-            $query->where('jadwal_pelajaran.kode_guru', Auth::guard('guru')->user()->kode_guru);
-        }
+
         $jadwal = $query->get();
         $data['jadwal'] = $jadwal;
         $data['takademik'] = Tahunakademik::all();
