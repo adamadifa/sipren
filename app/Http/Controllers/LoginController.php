@@ -61,6 +61,9 @@ class LoginController extends Controller
         } else  if (Auth::guard('karyawan')->check()) {
             Auth::guard('karyawan')->logout();
             return redirect('mobile');
+        } else  if (Auth::guard('guru')->check()) {
+            Auth::guard('guru')->logout();
+            return redirect('login');
         }
     }
 
