@@ -39,7 +39,7 @@ class JadwalpelajaranController extends Controller
             $query->where('jadwal_pelajaran.kode_guru', $request->kode_guru);
         }
 
-        if (Auth::guard('guru')->check()) {
+        if (!empty(Auth::guard('guru')->user()->kode_guru)) {
             $query->where('jadwal_pelajaran.kode_guru', Auth::guard('guru')->user()->kode_guru);
         }
         $jadwal = $query->get();
