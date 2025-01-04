@@ -208,9 +208,9 @@ Route::middleware(['auth:user', 'ceklevel:admin'])->group(function () {
     Route::post('/jadwalpelajaran/store', 'JadwalpelajaranController@store');
     Route::delete('/jadwalpelajaran/{kode_jadwal}/delete', 'JadwalpelajaranController@destroy');
 
-    Route::get('/presensisiswa/{kode_jadwal}/create', 'PresensisiswaController@create');
-    Route::get('/presensisiswa/{kode_jadwal}/cetak', 'PresensisiswaController@cetak');
-    Route::post('/presensisiswa/{kode_jadwal}/store', 'PresensisiswaController@store')->name('presensisiswa.store');
+    // Route::get('/presensisiswa/{kode_jadwal}/create', 'PresensisiswaController@create');
+    // Route::get('/presensisiswa/{kode_jadwal}/cetak', 'PresensisiswaController@cetak');
+    // Route::post('/presensisiswa/{kode_jadwal}/store', 'PresensisiswaController@store')->name('presensisiswa.store');
 });
 
 
