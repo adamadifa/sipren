@@ -241,7 +241,11 @@ Route::middleware(['auth:karyawan', 'ceklevel:user'])->group(function () {
     Route::get('/mobile/ajukanpembiayaan/{step}', [MobileController::class, 'ajukanpembiayaan']);
     Route::post('/mobile/ajukanpembiayaan/{step}/store', [MobileController::class, 'storeajukanpembiayaan']);
 });
-
+Route::middleware(['auth:user,karyawan', 'ceklevel:admin,guru'])->group(function () {
+    Route::get('/presensisiswa/{kode_jadwal}/create', 'PresensisiswaController@create');
+    Route::get('/presensisiswa/{kode_jadwal}/cetak', 'PresensisiswaController@cetak');
+    Route::post('/presensisiswa/{kode_jadwal}/store', 'PresensisiswaController@store')->name('presensisiswa.store');
+});
 
 Route::middleware(['auth:user,karyawan', 'ceklevel:admin,user'])->group(function () {
     Route::get('/karyawan/{npp}/edit', 'KaryawanController@edit');
